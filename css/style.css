@@ -1,0 +1,21 @@
+.app-container { /*Instead of body here - this should be another container div that you can inject Styles into*/
+  margin: 0 auto;
+  max-width: 1200px;
+  min-width: 400px;
+  overflow: hidden;
+}
+
+.tablify {
+  display: table;
+  position: absolute;
+  width: 100%; height: 100%;
+}
+
+.tablify__child {
+  display: table-cell;
+}
+
+.tablify__child-vertical-center {
+  text-align: center;
+  vertical-align: middle;
+}

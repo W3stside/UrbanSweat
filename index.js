@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-//import { createStore } from 'redux'
-import Examples from './components/Examples'
-import UrbanSweatLogo from './components/UrbanSweatLogo'
-//import store from './redux/store/config'
-//import style from './css/bootstrap.css'
+import Home from './components/Home'
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-xs-12">
-            <UrbanSweatLogo />
-            <Examples />
-          </div>
-        </div>
+      <div className={styles.topContainer}>
+        <Home />
       </div>
-    )
+    );
   }
 }
+
+var styles = {
+  topContainer: {
+    margin: '0 auto',
+    maxWidth: 1200,
+    minWidth: 400,
+    overflow: 'hidden'
+  }
+};
 
 ReactDOM.render(<App />, document.getElementById('root'))

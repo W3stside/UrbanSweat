@@ -35,10 +35,12 @@ class Links extends React.Component {
 class Home extends React.Component {
 
   render () {
-
+    var homeBGP = 'https://lh4.googleusercontent.com/CGtzklIGGG1buxfsn0BLKxNkY_H78_RDAUb4vOvlB9rOuuSaM6ziDJ9LtNQEcFxqNxVDsWHwUY5JHD4=w3201-h1584-rw';
+    var logo = 'https://lh3.googleusercontent.com/vJ2abCtwujqpa9aXjQl6pE7O7JvcX6fW0CuyBhAeF2GFNEypykUdNnjHxEUP2WnJH7LWQMr9AM4s18c=w3201-h1584-rw';
+    
     return (
-     <div className="app-container">
-      <BackgroundPic image= "https://img0.etsystatic.com/011/1/6520973/il_fullxfull.448682676_2yrk.jpg"/>
+     <div>
+      <BackgroundPic image= "https://lh4.googleusercontent.com/CGtzklIGGG1buxfsn0BLKxNkY_H78_RDAUb4vOvlB9rOuuSaM6ziDJ9LtNQEcFxqNxVDsWHwUY5JHD4=w3201-h1584-rw"/>
         <div className="container-fluid">
           <div className="row text-center">
             <div className="col-xs-12">
