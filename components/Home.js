@@ -7,14 +7,15 @@ import Logo from './Logo'
 export default class Home extends React.Component {
 
   render () {
-    var logo = 'https://lh6.googleusercontent.com/tOWw2ItInzzOOVDZfXyvQ-1R-uZujXYtxzcVfzldVzWxQKuwycgP0dp61iT5APipPZO1grouIbwPdKQ=w3201-h1584-rw';
+    var logo = require("url-loader?mimetype=image/png!../img/logo.png");
+    var bgPic = require("url-loader?mimetype=image/png!../img/grey-berlin-arch.jpg");
     return (
      <div>
-      <BackgroundPic image={require("url-loader?mimetype=image/png!../img/grey-berlin-arch.jpg")}/>
+      <BackgroundPic image={bgPic}/>
         <div className="container-fluid">
           <div className="row text-center">
             <div className="col-xs-12">
-               <Logo logo={require("url-loader?mimetype=image/png!../img/logo.png")}/>
+               <Logo logo={logo}/>
              </div>
           </div>
           <div className="row text-center">
