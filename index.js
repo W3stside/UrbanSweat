@@ -1,24 +1,23 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
+import { Router, Route, hashHistory } from 'react-router'
 import Home from './components/Home'
+import CityChooser from './components/CityChooser'
 
 class App extends Component {
   render() {
     return (
-      <div className={styles.topContainer}>
+      <div>
         <Home />
       </div>
     );
   }
 }
 
-var styles = {
-  topContainer: {
-    margin: '0 auto',
-    maxWidth: 1200,
-    minWidth: 400,
-    overflow: 'hidden'
-  }
-};
-
-ReactDOM.render(<App />, document.getElementById('root'))
+render((
+  <Router history={hashHistory}>
+    <Route path="/" component={App}/>
+    {/* add the routes here */}
+    <Route path="/CityChooser" component={CityChooser}/>
+  </Router>
+), document.getElementById('root'))

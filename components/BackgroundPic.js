@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 
 export default class BackgroundPic extends React.Component {
 
+  static propTypes () {
+    image: React.PropTypes.string.isrequired
+  }
+
   render () {
     const style = {
       minWidth: '100%',
@@ -13,4 +17,8 @@ export default class BackgroundPic extends React.Component {
     }
     return <img src={this.props.image} style={style}/>;
   }
+}
+
+BackgroundPic.defaultProps = {
+  image: require("../img/grey-berlin-arch.jpg")
 }

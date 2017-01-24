@@ -7,11 +7,11 @@ import Logo from './Logo'
 export default class Home extends React.Component {
 
   render () {
-    var logo = require("url-loader?mimetype=image/png!../img/logo.png");
-    var bgPic = require("url-loader?mimetype=image/png!../img/grey-berlin-arch.jpg");
+    var bgPic = require("../img/grey-berlin-arch.jpg");
+    var logo = require("../img/logo.png");
     return (
-     <div>
-      <BackgroundPic image={bgPic}/>
+     <div style={{width: '100%'}}>
+      <BackgroundPic image={bgPic} />
         <div className="container-fluid">
           <div className="row text-center">
             <div className="col-xs-12">
@@ -20,13 +20,13 @@ export default class Home extends React.Component {
           </div>
           <div className="row text-center">
              <div className="col-sm-4">
-              <Links name="ENTER" url="#"/>
+              <Links name="ENTER" url="/CityChooser" />
              </div>
              <div className="col-sm-4">
-              <Links name="ABOUT" url="#"/>
+              <Links name="ABOUT" url="/About"/>
              </div>
              <div className="col-sm-4">
-              <Links name="CONTACT" url="#"/>
+              <Links name="CONTACT" url="/Contact"/>
              </div>
            </div>
         </div>

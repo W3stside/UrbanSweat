@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 export default class Links extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ export default class Links extends React.Component {
     }
     return (
         <span>
-          <a href={this.props.url} onMouseOver={this.onMouseEnterHandler} onMouseLeave={this.onMouseLeaveHandler} style={hoverColor}>{this.props.name}</a>
+          <Link to={this.props.url} onMouseOver={this.onMouseEnterHandler} onMouseLeave={this.onMouseLeaveHandler} style={hoverColor}>{this.props.name}</Link>
         </span>
     );
   }
