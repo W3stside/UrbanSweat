@@ -1,21 +1,11 @@
-.app-container { /*Instead of body here - this should be another container div that you can inject Styles into*/
-  margin: 0 auto;
-  max-width: 1200px;
-  min-width: 400px;
-  overflow: hidden;
+p {
+  color: ghostwhite;
+  font: 'Helvetica';
+  font-style: italic;
+  font-weight: 400;
+  /*text-shadow: 0px 0px 3px ghostwhite;*/
 }
 
-.tablify {
-  display: table;
-  position: absolute;
-  width: 100%; height: 100%;
-}
-
-.tablify__child {
-  display: table-cell;
-}
-
-.tablify__child-vertical-center {
-  text-align: center;
-  vertical-align: middle;
+.col-xs-4, .col-sm-4, .col-xs-12 {
+  padding: 0 !important;
 }

@@ -12,5 +12,5 @@ export default class Logo extends React.Component {
 }
 
 Logo.defaultProps = {
-  logo: require("../img/logo.png")
+  logo: require("../img/logo2.png")
 }

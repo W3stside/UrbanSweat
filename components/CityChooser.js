@@ -4,7 +4,7 @@ import Logo from './Logo'
 export default class CityChooser extends React.Component {
 
   render () {
-    var logo = require("../img/logo.png");
+    var logo = require("../img/logo2.png");
 
     return (
       <div>
@@ -15,6 +15,32 @@ export default class CityChooser extends React.Component {
             </div>
           </div>
         </div>
+
+        <div className="container-fluid">
+          <div className="row text-center">
+            <div className="col-sm-4">
+              Temp Content
+            </div>
+            <div className="col-sm-4">
+              Temp Content
+            </div>
+            <div className="col-sm-4">
+              Temp Content
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-4">
+              Temp Content
+            </div>
+            <div className="col-sm-4">
+              Temp Content
+            </div>
+            <div className="col-sm-4">
+              Temp Content
+            </div>
+          </div>
+        </div>
+
       </div>
     );
   }

@@ -8,7 +8,7 @@ export default class Home extends React.Component {
 
   render () {
     var bgPic = require("../img/grey-berlin-arch.jpg");
-    var logo = require("../img/logo.png");
+    var logo = require("../img/logo2.png");
     return (
      <div style={{width: '100%'}}>
       <BackgroundPic image={bgPic} />
