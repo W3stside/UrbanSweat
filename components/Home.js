@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+import { StyleSheet, css } from 'aphrodite'
 import Links from './Links'
 import BackgroundPic from './BackgroundPic'
 import Logo from './Logo'
@@ -20,13 +21,13 @@ export default class Home extends React.Component {
           </div>
           <div className="row text-center">
              <div className="col-sm-4">
-              <Links name="ENTER" url="/CityChooser" />
+              <Links name="ENTER" url="/CityChooser" className={css(styles.linkStyle)}/>
              </div>
              <div className="col-sm-4">
-              <Links name="ABOUT" url="/About"/>
+              <Links name="ABOUT" url="/About" className={css(styles.linkStyle)}/>
              </div>
              <div className="col-sm-4">
-              <Links name="CONTACT" url="/Contact"/>
+              <Links name="CONTACT" url="/Contact" className={css(styles.linkStyle)}/>
              </div>
            </div>
         </div>
@@ -34,3 +35,19 @@ export default class Home extends React.Component {
     );
   }
 }
+
+var styles = StyleSheet.create({
+  linkStyle: {
+      ':hover': {
+        color: 'rgba(94,255,178, 1)',
+        textShadow: '1px 0 20px black'
+      },
+      color: 'black',
+      fontWeight: 700,
+      fontSize: '112%',
+      fontStyle: 'italic',
+      textDecoration: 'none',
+
+      transition: 'all 0.24s ease-in-out'
+    }
+});
