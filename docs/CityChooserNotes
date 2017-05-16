@@ -1,0 +1,5 @@
+
+
+//Dynamically build components from JSON list of cities
+
+forEach city in Gyms data array, build a component ...

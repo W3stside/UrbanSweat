@@ -1,0 +1,20 @@
+/*
+* Notes on Urban Sweat Project
+* Read carefully
+* Update often
+*/
+
+<html>, <body>, #root <div> are ALL:
+width: 100%
+height: 100%
+
+CSS is all done with aphrodite .. example of how that works below:
+
+// aphrodite example: INLINE styles =>
+// -----------------------------------
+//  const styles = StyleSheet.create({
+//    flexContainer: {
+//      display: "flex",
+//      display: "-webkit-flex"
+//    }
+//  })

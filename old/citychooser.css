@@ -1,0 +1,142 @@
+p {
+  color: ghostwhite;
+  font: 'Helvetica';
+  font-style: italic;
+  font-weight: 400;
+  /*text-shadow: 0px 0px 3px ghostwhite;*/
+}
+
+.col-xs-4, .col-xs-12, .col-sm-4, .col-md-4, .col-md-6, .col-md-12 {
+  padding: 0 !important;
+}
+
+.strikethrough:hover {
+  text-decoration: line-through;
+  text-shadow: 0 0 2px #10FF8C;
+}
+
+.hideLi_0, .hideLi_1, .hideLi_2, .hideLi_3, .hideLi_4, .hideLi_5 {
+  opacity: 0;
+}
+
+.hideLi_0 {
+  -webkit-transition: all 1.2s linear;
+  -moz-transition: all 1.2s linear;
+  -o-transition: all 1.2s linear;
+  transition: all 1.2s linear;
+}
+
+.hideLi_1 {
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.hideLi_2 {
+  -webkit-transition: all 0.4s linear;
+  -moz-transition: all 0.4s linear;
+  -o-transition: all 0.4s linear;
+  transition: all 0.4s linear;
+}
+
+.hideLi_3 {
+  -webkit-transition: all 0.6s linear;
+  -moz-transition: all 0.6s linear;
+  -o-transition: all 0.6s linear;
+  transition: all 0.6s linear;
+}
+
+.hideLi_4 {
+  -webkit-transition: all 0.8s linear;
+  -moz-transition: all 0.8s linear;
+  -o-transition: all 0.8s linear;
+  transition: all 0.8s linear;
+}
+
+.hideLi_5 {
+  -webkit-transition: all 1s linear;
+  -moz-transition: all 1s linear;
+  -o-transition: all 1s linear;
+  transition: all 1s linear;
+}
+
+.showLi_0 {
+  animation: showLi_0 1.2s ease-in;
+}
+
+.showLi_1 {
+  animation: showLi_1 0.2s ease-in;
+}
+
+.showLi_2 {
+  animation: showLi_2 0.4s ease-in;
+}
+
+.showLi_3 {
+  animation: showLi_3 0.6s ease-in;
+}
+
+.showLi_4 {
+  animation: showLi_4 0.8s ease-in;
+}
+
+.showLi_5 {
+  animation: showLi_5 1s ease-in;
+}
+
+@keyframes showLi_0 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes showLi_1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes showLi_2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes showLi_3 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes showLi_4 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes showLi_5 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.hiddenList {
+  display: none;
+}
+
+.showList {
+  display: block;
+}

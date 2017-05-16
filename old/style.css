@@ -1,0 +1,11 @@
+p {
+  color: ghostwhite;
+  font: 'Helvetica';
+  font-style: italic;
+  font-weight: 400;
+  /*text-shadow: 0px 0px 3px ghostwhite;*/
+}
+
+.col-xs-4, .col-sm-4, .col-xs-12 {
+  padding: 0 !important;
+}

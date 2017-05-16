@@ -1,0 +1,83 @@
+//DEV CSS Rules
+
+.border {
+  border: 5px solid black;
+  margin: 5px;
+}
+
+//END DEV Rules
+
+@mixin display ($type) {
+  display: -webkit- + $type;
+  display: -moz- + $type;
+  display: -o- + $type;
+  display: $type;
+}
+
+@mixin align-items ($type) {
+  -webkit-align-items: $type;
+     -moz-align-items: $type;
+       -o-align-items: $type;
+          align-items: $type;
+}
+
+@mixin justify-content ($type) {
+  -webkit-justify-content: $type;
+     -moz-justify-content: $type;
+       -o-justify-content: $type;
+          justify-content: $type;
+}
+
+@mixin flex-flow ($type) {
+  -webkit-flex-flow: $type;
+     -moz-flex-flow: $type;
+       -o-flex-flow: $type;
+          flex-flow: $type;
+}
+
+@mixin flex ($type) {
+  -webkit-flex: $type;
+     -moz-flex: $type;
+       -o-flex: $type;
+          flex: $type;
+}
+
+@mixin transition ($type) {
+  -webkit-transition: $type;
+     -moz-transition: $type;
+       -o-transition: $type;
+          transition: $type;
+}
+
+.flex-container {
+  @include display (flex);
+}
+
+.inline-flex-container {
+  @include display (inline-flex);
+}
+
+.flex-flow-row-wrap {
+  @include flex-flow(row wrap);
+}
+
+.align-children-center {
+  @include align-items (center);
+}
+
+.justify-center {
+  @include justify-content (center);
+}
+
+.flex-1 {
+  @include flex (1);
+}
+
+.full-width-height {
+   height: 100%;
+   width: 100%;
+}
+
+.flex-item-full-width {
+  width: 100%;
+}
