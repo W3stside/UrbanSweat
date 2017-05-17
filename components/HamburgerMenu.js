@@ -59,7 +59,7 @@ var styles = StyleSheet.create({
     cursor: 'pointer',
     display: "flex", flexDirection: "column", justifyContent: "space-around", alignItems: "center",
     position: "absolute",
-    left: 15, top: 15, width: 50, height: 50
+    left: 23, top: 23, width: 50, height: 50
   },
 
   hmCont: {
@@ -78,9 +78,9 @@ var styles = StyleSheet.create({
   sideMenu: {
     backgroundColor: /*'#505050'*/ 'white',
     display: 'flex', justifyContent: 'center', alignItems: 'center',
-    opacity: 0.6,
+    opacity: 1,
     overflow: 'hidden',
-    position: 'absolute', left: 80, top: 0, height: 200,
+    position: 'absolute', left: 100, top: 0, height: 200,
     '@media (max-width: 850px)': {
       justifyContent: 'flex-start',
       height: 97

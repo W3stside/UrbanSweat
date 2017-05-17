@@ -21,7 +21,7 @@ export default class Home extends React.Component {
           </div>
           <div className="row text-center">
              <div className="col-sm-4">
-              <Links name="ENTER" url="/CityChooser" className={css(styles.linkStyle)}/>
+              <Links name="ENTER" url="/FindYourSpot" className={css(styles.linkStyle)}/>
              </div>
              <div className="col-sm-4">
               <Links name="ABOUT" url="/About" className={css(styles.linkStyle)}/>

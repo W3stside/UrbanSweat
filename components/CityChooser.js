@@ -26,20 +26,19 @@ const styles = StyleSheet.create({
     ':focus': {
       boxShadow: '0px 0px 45px -7px #10FF8C'
     },
-    font: 'italic 100% Helvetica',
-    border: '5px solid ghostwhite',
+    border: '2px solid ghostwhite',
     borderRadius: 18,
-    padding: 5,
     boxShadow: '0px 0px 45px -7px black',
-    outline: 'none !important'
+    font: '175% Helvetica',
+    margin: '15px 0 11px 0',
+    padding: 3,
+    outline: 'none !important',
+    textAlign: 'center',
+    textTransform: 'lowercase'
   },
   fullWidth: {
     textAlign: 'center',
     width: '100%'
-  },
-  logoStyle: {
-    margin : '8%',
-    width : '30vh'
   },
   cityChooserHeader: {
     fontSize: '120%',
@@ -47,6 +46,14 @@ const styles = StyleSheet.create({
     zIndex: '1',
     color: 'black',
     margin: '0 0 40px 0'
+  },
+  threeQuarters: {
+    height: '45vh',
+    overflow: 'hidden',
+    '@media (max-width: 850px)': {
+      marginTop: 60
+    },
+    transition: 'all 0.5s linear'
   }
 });
 
@@ -63,7 +70,9 @@ export default class CityChooser extends Component {
 
             <div className={css(styles.padding_0)}>
                <HamburgerMenu />
-               <Logo style={styles.logoStyle}/>
+               <Logo
+                className={css(styles.threeQuarters)}
+               />
             </div>
 
           </div>
@@ -72,16 +81,12 @@ export default class CityChooser extends Component {
         <div className="citychooser">
           <div className={css(styles.fullWidth)}>
 
-            <div className={css(styles.padding_0)}>
-              <Header name="Choose Your City" style={styles.cityChooserHeader}/>
-            </div>
-
             <SearchBar
               dataToFilter={Gyms}
               placeholder='Find your spot'
               className={css(styles.searchBar)}
              >
-              <CitySquares />
+              <CitySquares linkTo={"/"}/>
             </SearchBar>
 
           </div>

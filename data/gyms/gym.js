@@ -1,9 +1,4 @@
-//gym json
-
-//Gyms[0].cities[0].Paris[0].categories[0].Fitness[0].Gym.description.image_urls ===> gets gym1 name printed
-
 import React, {Component} from 'react'
-
 import HoverStateContainer from '../../components/HoverStateContainer'
 import Header from '../../components/Header'
 import MovingOptions from '../../components/MovingOptions'
@@ -51,6 +46,7 @@ export const Gyms = [
          </HoverStateContainer>
        )
      },
+     "url": "/",
       "categories": [
         {
           "category": "STRENGTH",

@@ -28,7 +28,7 @@ render((
     <Router history={hashHistory}>
       <Route path="/" component={App}/>
       {/* add the routes here */}
-      <Route path="/CityChooser" component={CityChooser}/>
+      <Route path="/FindYourSpot" component={CityChooser}/>
       <Route path="/GymViewerPage" component={GymViewerPage}/>
     </Router>
   </ Provider>
