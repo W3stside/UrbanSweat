@@ -80,11 +80,17 @@ var styles = StyleSheet.create({
     display: 'flex', justifyContent: 'center', alignItems: 'center',
     opacity: 0.6,
     overflow: 'hidden',
-    position: 'absolute', left: 80, top: 0, height: 200
+    position: 'absolute', left: 80, top: 0, height: 200,
+    '@media (max-width: 850px)': {
+      justifyContent: 'flex-start',
+      height: 97
+    }
   },
   openMenu: {
     width: '18%',
-
+    '@media (max-width: 850px)': {
+      width: '60%'
+    },
     transition: 'all 0.3s linear'
   },
   closedMenu: {
@@ -94,12 +100,21 @@ var styles = StyleSheet.create({
   },
   menuLiCont: {
     display: 'flex', flexFlow: 'row wrap', justifyContent: 'center', alignItems: 'center', textAlign: 'left',
-    font: '400 italic 3vw Helvetica'
+    font: '400 italic 3vw Helvetica',
+    '@media (max-width: 850px)': {
+      flexFlow: 'row nowrap', justifyContent: 'space-around',
+      font: '400 italic 4vw Helvetica',
+      width: '100%'
+    }
   },
   menuLi: {
     cursor: 'pointer',
     marginLeft: '5%',
     width: '100%',
+    '@media (max-width: 850px)': {
+      marginLeft: 0,
+      width: 'auto'
+    }
   },
   linkStyle: {
       ':hover': {
