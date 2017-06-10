@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import {browserHistory, Link} from 'react-router'
+import React, {Component} from 'react'
+import {browserHistory} from 'react-router'
 import { StyleSheet, css } from 'aphrodite';
 
 import HoverStateContainer from './HoverStateContainer'
@@ -11,12 +11,9 @@ const styles = StyleSheet.create({
   hideList: {
     display: 'flex', flex: 1,
     height: '0',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   showList: {
-    ':hover': {
-      backgroundColor: 'rgba(0,0,0,0.4)'
-    },
     display: 'flex', flex: 1,
     height: '100%', minWidth: '33.33%',
     '@media (max-width: 850px)': {
@@ -25,8 +22,8 @@ const styles = StyleSheet.create({
     '@media (max-width: 550px)': {
       minWidth: '100%'
     },
-    transition: 'background-color 0.47s linear'
   },
+
   //citysquares
   smallCityChooserHeader: {
     color: 'ghostwhite',
@@ -37,7 +34,7 @@ const styles = StyleSheet.create({
   },
   citySquareContainerStyle: {
     display: 'flex', justifyContent: 'center', alignItems: 'center', flexFlow: 'column nowrap',
-    height: 'auto', width: '100%',
+    height: 'auto', width: '100%', minHeight: 300,
     position: 'relative',
     overflow: 'hidden',
     padding: '10% 0'
@@ -51,18 +48,18 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     lineHeight: '1'
   }
+
 });
 
-export default class CitySquares extends Component {
+export default class GymSquares extends Component {
 
   handleClick (name, id) {
     //window.alert('/FindYourGym/' + id + '?' + name)
-    browserHistory.push('/FindYourGym/' + name.toLowerCase() + '/' + id + '/categories');
+    browserHistory.push(this.props.location.pathname + '/' + name.toLowerCase() + '/' + id);
   }
-  //Data passed in via dataToFilter prop MUST be pointing at the correct slices of data before getting HERE
+
   render () {
-    console.log("CitySquares props = ", this.props.dataToFilter);
-    let filteredData = this.props.dataToFilter.filter(
+    let filteredData = this.props.Data[0].cities[this.props.cityIndex].categories.filter(
       (item) => {
         if (this.props.dataInput.toLowerCase() === "all") {
           return item["name"];
@@ -70,35 +67,30 @@ export default class CitySquares extends Component {
         return item["name"].toLowerCase().indexOf(this.props.dataInput.toLowerCase()) !== -1;
       }
     );
+
     var hideShowList = css(this.props.dataInput ? styles.showList : styles.hideList);
 
     return (
         <div style={{marginTop: 40, display: 'flex', flexFlow:'row wrap', justifyContent:'center', alignItems:'center', width:'100%'}}>
           {filteredData.map(
-          (item, index) =>
+          (item, index) => {
+
+            return (
               <div className={hideShowList} key={index}>
                 <div
                 style={{width: '100%', cursor: 'pointer'}}
                 onClick={this.handleClick.bind(this, item.name, item.id)}>
-                  {/*this.props.handleClick(this.props.click);*/}
-
-                    <HoverStateContainer style={styles.citySquareContainerStyle}>
-                     <BackgroundPic image={item.bgImageURL}/>
-                     <Header name={item.name.toUpperCase()} style={styles.smallCityChooserHeader}/>
-                     <MovingOptions index={index} categories={ item.categories } style={styles.movingOptionsStyle}/>
-                   </HoverStateContainer>
-
+                  <HoverStateContainer style={styles.citySquareContainerStyle}>
+                   <BackgroundPic image={item.bgImg}/>
+                   <Header name={item.name.toUpperCase()} style={styles.smallCityChooserHeader}/>
+                   {/*<MovingOptions index={index} categories={ '' } style={styles.movingOptionsStyle}/>*/}
+                 </HoverStateContainer>
                 </div>
               </div>
+            )
+            }
           )}
         </div>
     )
   }
 }
-
-CitySquares.propTypes = {
-  Data: PropTypes.array || PropTypes.object,
-  dataInput: PropTypes.string
-}
-
-//{ !this.props.click && city.name && city.component ? city.component() : hashHistory.push(city.url) }

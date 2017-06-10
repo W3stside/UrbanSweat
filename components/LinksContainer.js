@@ -7,9 +7,7 @@ export default function LinksContainer (props) {
   }
   return (
     <div style={defaultStyle}>
-      <Link
-      style={defaultStyle}
-      to={props.linkTo}>
+      <Link style={defaultStyle} to={props.linkTo}>
         {props.children}
       </Link>
     </div>

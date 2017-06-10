@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux'
+import { bindActionCreators } from 'redux'
 import * as Actions from '../actions/Actions'
 
 import Links from './Links'
@@ -20,10 +20,8 @@ export class HamburgerMenu extends Component {
     return (
       <div>
         <div
-          onMouseEnter={ () => {this.props.handleMouseOver()} }
-          onMouseLeave={ () => {this.props.handleMouseLeave()} }
-          onClick={ () => {this.props.handleClick(this.props.onClick)}}
-          className={css(styles.hmProto, this.props.onMouseEnter || this.props.onClick ? styles.isHovered : styles.hmCont)}>
+          onClick={ () => {this.props.handleMenuClick(this.props.onClick)}}
+          className={css(styles.hmProto, this.props.onClick ? styles.isClicked : styles.hmCont)}>
             <div className={css(styles.hmLines)}></div>
             <div className={css(styles.hmLines)}></div>
             <div className={css(styles.hmLines)}></div>
@@ -32,8 +30,10 @@ export class HamburgerMenu extends Component {
         <div className={css(styles.sideMenu, this.props.onClick ? styles.openMenu : styles.closedMenu)}>
           <div className={css(styles.menuLiCont)}>
             <div className={css(styles.menuLi)}><Links name={'HOME'} url={"/"} className={css(styles.linkStyle)}/></div>
-            <div className={css(styles.menuLi)}><Links name={'SEARCH'} url={"/CityChooser"} className={css(styles.linkStyle)}/></div>
+            <div className={css(styles.menuLi)}><Links name={'CITIES'} url={"/FindYourSpot"} className={css(styles.linkStyle)}/></div>
+            <div className={css(styles.menuLi)}><Links name={'GYMS'} url={"/FindYourGym"} className={css(styles.linkStyle)}/></div>
             <div className={css(styles.menuLi)}><Links name={'PROFILE'} className={css(styles.linkStyle)}/></div>
+
           </div>
         </div>
       </div>
@@ -43,9 +43,7 @@ export class HamburgerMenu extends Component {
 
 function mapStateToProps (state) {
   return {
-    onMouseEnter: state.hover,
-    onMouseLeave: state.hover,
-    onClick: state.click
+    onClick: state.hamburgerMenu.menuClick
   }
 }
 
@@ -55,6 +53,10 @@ function mapActionCreatorsToProps (dispatch) {
 
 var styles = StyleSheet.create({
   hmProto: {
+    ':hover': {
+      backgroundColor: 'rgba(94,255,178, 1)',
+      transition: 'all 0.3s linear',
+    },
     border: "4px solid black",
     cursor: 'pointer',
     display: "flex", flexDirection: "column", justifyContent: "space-around", alignItems: "center",
@@ -71,16 +73,16 @@ var styles = StyleSheet.create({
     font: "bold 100% Helvetica",
     height: 5, width: '80%'
   },
-  isHovered: {
+  isClicked: {
     backgroundColor: 'rgba(94,255,178, 1)',
     transition: 'all 0.3s linear'
   },
   sideMenu: {
-    backgroundColor: /*'#505050'*/ 'white',
+    backgroundColor: /*'#505050'*/ 'rgba(255,255,255,0.2)',
     display: 'flex', justifyContent: 'center', alignItems: 'center',
     opacity: 1,
     overflow: 'hidden',
-    position: 'absolute', left: 100, top: 0, height: 200,
+    position: 'absolute', left: 100, top: 20, height: 'auto',
     '@media (max-width: 850px)': {
       justifyContent: 'flex-start',
       height: 97
@@ -90,6 +92,9 @@ var styles = StyleSheet.create({
     width: '18%',
     '@media (max-width: 850px)': {
       width: '60%'
+    },
+    '@media (max-width: 550px)': {
+      width: '66%'
     },
     transition: 'all 0.3s linear'
   },

@@ -1,14 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router'
 
-export default class Links extends React.Component {
+const Links = ( {url = "/", className, name} ) => (
+  <span>
+    <Link to={url} className={className}>{name}</Link>
+  </span>
+);
 
-  render () {
-
-    return (
-        <span>
-          <Link to={this.props.url} className={this.props.className}>{this.props.name}</Link>
-        </span>
-    );
-  }
-};
+export default Links;

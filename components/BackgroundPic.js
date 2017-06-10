@@ -1,30 +1,33 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {StyleSheet,css} from 'aphrodite';
 
-export default class BackgroundPic extends React.Component {
+const BackgroundPic = ({image, styleBG}) => (
+  <div className={css(styles.bgPicContainer)}>
+    <img src={image} className={css(styles.bgPic)} style={styleBG}/>
+  </div>
+);
 
-  static propTypes () {
-    image: React.PropTypes.string.isrequired
-  }
-
-  render () {
-
-    return (
-      <div style={{position: 'absolute', width: '100%', height: '100%', left: 0, overflow: 'hidden', zIndex: '-99999'}}>
-        <img src={this.props.image} style={this.props.styleBG}/>
-      </div>
-    );
-  }
+BackgroundPic.propType = {
+  image: React.PropTypes.string.isrequired
 }
-
-var styleBG = {
-  minWidth: '100%',
-  height: 'auto',
-  //left: 0, right: 0, top: 0, bottom: 0,
-  filter: 'brightness(70%)'
-  //transform: 'translate(0%,-50%)'
-}
-
 BackgroundPic.defaultProps = {
-  image: require("../img/grey-berlin-arch.jpg"),
-  styleBG: styleBG
+  image: require("../img/berlin-stadion-min.jpg")
 }
+
+const styles = StyleSheet.create({
+  bgPicContainer: {
+    position: 'absolute',
+    width: '100%', height: '100%', left: 0,
+    overflow: 'hidden',
+    zIndex: '-99999'
+  },
+  bgPic: {
+    minWidth: '100%', height: 'auto',
+    filter: 'brightness(80%)',
+    '@media (max-width: 550px)': {
+      height: '100%'
+    }
+  }
+})
+
+export default BackgroundPic;

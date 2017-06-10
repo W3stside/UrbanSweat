@@ -1,21 +1,99 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
-import Logo from './Logo'
-import BackgroundPic from './BackgroundPic'
-import HamburgerMenu from './HamburgerMenu'
-import SearchBar from './SearchBar'
-import Header from './Header'
-import CitySquares from './CitySquares'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as cityActions from '../actions/cityActions'
+
+import {Link} from 'react-router';
+
+import FlexColumnContainer from './FlexColumnContainer';
+import Logo from './Logo';
+import HamburgerMenu from './HamburgerMenu';
+import SearchBar from './SearchBar';
+import CitySquares from './CitySquares';
 
 //data
-import { Gyms } from '../data/gyms/gym'
+//import { Gyms } from '../data/gyms/gym'
+class CityChooser extends Component {
+
+  componentDidMount() {
+    setTimeout( () => {this.props.fetchCity()}, 3000)
+  }
+
+  render () {
+    const {cities} = this.props;
+    console.info(cities)
+
+    const citySquares = cities.length
+    ? <SearchBar
+        dataToFilter={cities}
+        placeholder='find your new gym'
+        className={css(styles.searchBar)}
+      >
+        <CitySquares/>
+      </SearchBar>
+    : <h1>LOADING...</h1>;
+
+    return (
+      <FlexColumnContainer>
+
+        <div className={css(styles.fullWidth)}>
+          <div className={css(styles.fullWidth)}>
+            {/*Top half content: Logo and Hamburger Menus*/}
+            <div className={css(styles.padding_0)}>
+               <HamburgerMenu />
+               <Logo
+                className={css(styles.threeQuarters)}
+               />
+            </div>
+          </div>
+        </div>
+        {/* below can be refactored as a component passed as children in index.js under routes
+          * For example: <Route path="/CityChooser" component={CityChooser}>
+                            <IndexRoute component={CitySearchBarContent}/>
+                            <Route path="/GymChooser" component={GymSearchBarContent}/>
+                        </Route>
+          * then pass {this.props.children} in place of below
+          */}
+        <div className={css(styles.mtAuto, styles.fullWidth)}>
+          <div className={css(styles.fullWidth)}>
+            {citySquares}
+          </div>
+        </div>
+
+      </FlexColumnContainer>
+    );
+  }
+}
+
+/*<SearchBar
+  dataToFilter={cities && cities.length ? cities : null}
+  placeholder='find your new gym'
+  className={css(styles.searchBar)}
+ >
+    <CitySquares/>
+</SearchBar>*/
+
+////////////////////////////////
+//State and Action Mapping
+///////////////////////////////
+
+function mapStateToProps (state) {
+  return {
+    cities: state.cities.cities,
+  }
+}
+
+function mapActionCreatorsToProps (dispatch) {
+  return bindActionCreators(cityActions, dispatch);
+}
 
 ////////////////////////////////////////
 // Styling - Aphrodite
 ///////////////////////////////////////
-
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
 
   padding_0: {
     padding: '0',
@@ -40,6 +118,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: '100%'
   },
+  mtAuto: {
+    marginTop: 'auto'
+  },
   cityChooserHeader: {
     fontSize: '120%',
     position: 'static',
@@ -57,41 +138,4 @@ const styles = StyleSheet.create({
   }
 });
 
-////////////////////////////////////////
-// End of Styling - Aphrodite
-///////////////////////////////////////
-
-export default class CityChooser extends Component {
-  render () {
-    return (
-      <div style={{display: 'flex', flexFlow: 'column wrap'}}>
-        <div>
-          <div className={css(styles.fullWidth)}>
-
-            <div className={css(styles.padding_0)}>
-               <HamburgerMenu />
-               <Logo
-                className={css(styles.threeQuarters)}
-               />
-            </div>
-
-          </div>
-        </div>
-
-        <div className="citychooser">
-          <div className={css(styles.fullWidth)}>
-
-            <SearchBar
-              dataToFilter={Gyms}
-              placeholder='Find your spot'
-              className={css(styles.searchBar)}
-             >
-              <CitySquares linkTo={"/"}/>
-            </SearchBar>
-
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+export default connect( mapStateToProps, mapActionCreatorsToProps )(CityChooser);

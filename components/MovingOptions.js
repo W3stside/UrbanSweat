@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     }
   },
   opacity_0: {
-    opacity: '0'
+    opacity: '0',
+    transition: 'all 0.3s linear'
   },
   movingOptionsStyle: {
     listStyle: 'none',
@@ -58,7 +59,7 @@ export default function MovingOptions (props) {
     (activity, index) =>
       <li className={props.hoverState ? css(animationStyles.movingOptionsKeyFrames) : css(styles.opacity_0)} key={index}>
         <a className={css(styles.strikethroughHover)} href={'#'} style={{color: 'white'}}>
-          {activity['category']}
+          {activity}
         </a>
       </li>
     )

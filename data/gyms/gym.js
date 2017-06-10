@@ -1,55 +1,16 @@
-import React, {Component} from 'react'
-import HoverStateContainer from '../../components/HoverStateContainer'
-import Header from '../../components/Header'
-import MovingOptions from '../../components/MovingOptions'
-import BackgroundPic from '../../components/BackgroundPic'
-import { StyleSheet, css } from 'aphrodite';
-
-const styles = StyleSheet.create({
-
-  smallCityChooserHeader: {
-    color: 'ghostwhite',
-    font: 'italic bold 250% "Helvetica"',
-    margin: '0 0 12px 0',
-    position: 'static',
-    zIndex: '5'
-  },
-  citySquareContainerStyle: {
-    display: 'flex', justifyContent: 'center', alignItems: 'center', flexFlow: 'column nowrap',
-    height: 'auto', width: '100%',
-    position: 'relative',
-    overflow: 'hidden',
-    padding: '10% 0'
-  },
-  movingOptionsStyle: {
-    listStyle: 'none',
-    color: 'white',
-    paddingLeft: '0',
-    margin: '0',
-    fontSize: '140%',
-    fontStyle: 'italic',
-    lineHeight: '1'
- }
-});
-
 export const Gyms = [
   {"cities": [
     {
       "name": "paris",
-      component () {
-        var currObj = this;
-        return (
-          <HoverStateContainer style={styles.citySquareContainerStyle}>
-           <BackgroundPic image={"https://s-media-cache-ak0.pinimg.com/736x/12/0b/d5/120bd5a09bb9991811f382ee0eba70ca.jpg"}/>
-           <Header name={this.name.toUpperCase()} style={styles.smallCityChooserHeader}/>
-           <MovingOptions index={0} categories={ currObj.categories } style={styles.movingOptionsStyle}/>
-         </HoverStateContainer>
-       )
-     },
-     "url": "/",
+      "id": 0,
+      "url": function () {
+ 	      return "/GymViewerPage:" + this.name;
+      },
+      "bgImageURL": "https://s-media-cache-ak0.pinimg.com/736x/12/0b/d5/120bd5a09bb9991811f382ee0eba70ca.jpg",
       "categories": [
         {
-          "category": "STRENGTH",
+          "name": "STRENGTH",
+          "bgImg": "http://ww1.prweb.com/prfiles/2013/02/21/10454818/208%20FR%203.png",
           "gyms": [
             {
               "name": "Max-Out FITNESS",
@@ -77,59 +38,69 @@ export const Gyms = [
                   "pTwo": "Every day playing sport is quite difficult for every peoples, for FITNESS you can spend at least half an hour in gym by doing some cardio exercise like treadmill, elliptical etc.. even you can work it out in home itself without any help. This will keep you active."
                 }
               } //end descrip
+            },
+            {
+              "name": "Git'r Dun"
+            },
+            {
+              "name": "Sweaty Buddha"
             }
         ]}, //end FITNESS
         {
-          "category": "CARDIO-DANCE",
+          "name": "CARDIO-DANCE",
+          "bgImg": "http://sweat.burnthis.com/wp-content/uploads/2013/07/yftpbvTk7tXYJbdqoMT9gFkiEPPiauPzULRhaXHBzgM-960x525-1374767927.jpeg",
           "gyms": [
             {
-              "name": null,
+              "name": "Dance ALL Nacht",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "BOXING",
+          "name": "BOXING",
+          "bgImg": "http://cdn.wallpapersafari.com/33/7/8NuLJ2.jpg",
           "gyms": [
             {
-              "name": null,
+              "name": "SQUARE OFF",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "JIU JITSU",
+          "name": "JIU JITSU",
+          "bgImg": "https://www.jiujitsutimes.com/wp-content/uploads/time-off.jpg",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "X-FIT",
+          "name": "X-FIT",
+          "bgImg": "http://www.garage-gyms.com/wp-content/uploads/2013/12/crossfit-babe1.jpg",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
@@ -139,19 +110,14 @@ export const Gyms = [
     }, //end City object
     {
       "name": "Berlin",
-      component () {
-        var currObj = this;
-        return (
-          <HoverStateContainer style={styles.citySquareContainerStyle}>
-           <BackgroundPic image={"https://mir-s3-cdn-cf.behance.net/project_modules/1400/f8c8c845227921.5829f6ff5a2f0.jpg"} />
-           <Header name={this.name.toUpperCase()} style={styles.smallCityChooserHeader}/>
-           <MovingOptions index={1} categories={ currObj.categories } style={styles.movingOptionsStyle}/>
-         </HoverStateContainer>
-         )
-       },
+      "id": 1,
+      "url": function () {
+ 	      return "/GymViewerPage:" + this.name;
+      },
+      "bgImageURL": "https://stampsy-eu-1.s3.amazonaws.com/uploads/11/22/2015/user/43150/ecae7092-d01e-493c-960f-e859bd98bdc2.jpg",
       "categories": [
         {
-          "category": "FITNESS",
+          "name": "FITNESS",
           "gyms": [
             {
               "name": "Mitte FITNESS",
@@ -182,56 +148,56 @@ export const Gyms = [
             }
         ]}, //end FITNESS
         {
-          "category": "CARDIO-DANCE",
+          "name": "CARDIO-DANCE",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "BOXING",
+          "name": "BOXING",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "JIU JITSU",
+          "name": "JIU JITSU",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "X-FIT",
+          "name": "X-FIT",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
@@ -241,19 +207,15 @@ export const Gyms = [
     }, //end City object
     {
       "name": "London",
-      component () {
-        var currObj = this;
-        return (
-          <HoverStateContainer style={styles.citySquareContainerStyle}>
-           <BackgroundPic image={"https://static1.squarespace.com/static/55c5a739e4b0d93b6174fb9e/573ac25d2b8dde95f0ee1a40/573b9c7907eaa096db954ede/1463524544831/DSCF9868-Edit-1-3.jpg"}/>
-           <Header name={this.name.toUpperCase()} style={styles.smallCityChooserHeader}/>
-           <MovingOptions index={2} categories={ currObj.categories } style={styles.movingOptionsStyle}/>
-         </HoverStateContainer>
-       )
-     },
+      "id": 2,
+      "url": function () {
+ 	      return "/GymViewerPage:" + this.name;
+      },
+      "bgImageURL": "http://dannyenglander.photo/sites/default/files/styles/next_story/public/blog-hero/p1150214.jpg?itok=FZ7WAz6M",
       "categories": [
         {
-          "category": "FITNESS",
+          "name": "FITNESS",
+          "bgImg": "http://ww1.prweb.com/prfiles/2013/02/21/10454818/208%20FR%203.png",
           "gyms": [
             {
               "name": "Mitte FITNESS",
@@ -284,56 +246,60 @@ export const Gyms = [
             }
         ]}, //end FITNESS
         {
-          "category": "CARDIO-DANCE",
+          "name": "CARDIO-DANCE",
+          "bgImg": "http://sweat.burnthis.com/wp-content/uploads/2013/07/yftpbvTk7tXYJbdqoMT9gFkiEPPiauPzULRhaXHBzgM-960x525-1374767927.jpeg",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "BOXING",
+          "name": "BOXING",
+          "bgImg": "http://cdn.wallpapersafari.com/33/7/8NuLJ2.jpg",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "JIU JITSU",
+          "name": "JIU JITSU",
+          "bgImg": "https://www.jiujitsutimes.com/wp-content/uploads/time-off.jpg",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "X-FIT",
+          "name": "X-FIT",
+          "bgImg": "http://feelgrafix.com/data_images/out/28/1001346-crossfit.jpg",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
@@ -343,19 +309,14 @@ export const Gyms = [
     }, //end City object
     {
       "name": "COPENHAGEN",
-      component () {
-        var currObj = this;
-        return (
-        <HoverStateContainer style={styles.citySquareContainerStyle}>
-         <BackgroundPic image={"https://static.dezeen.com/uploads/2015/11/Rigshospitalet_3XN_Copenhagen_hospital-carpark_dezeen_936_4.jpg"}/>
-         <Header name={this.name.toUpperCase()} style={styles.smallCityChooserHeader}/>
-         <MovingOptions index={3} categories={ currObj.categories } style={styles.movingOptionsStyle}/>
-        </HoverStateContainer>
-        )
+      "id": 3,
+      "url": function () {
+ 	      return "/GymViewerPage:" + this.name;
       },
+      "bgImageURL": "https://images.divisare.com/images/dpr_1.0,f_auto,q_auto,w_800/gvswdu2msemsvs9melre/arcgency-rasmus-hjortshoj-unionkul-stack-i-copenhagen-denmark.jpg",
       "categories": [
         {
-          "category": "FITNESS",
+          "name": "FITNESS",
           "gyms": [
             {
               "name": "Mitte FITNESS",
@@ -386,56 +347,56 @@ export const Gyms = [
             }
         ]}, //end FITNESS
         {
-          "category": "CARDIO-DANCE",
+          "name": "CARDIO-DANCE",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "BOXING",
+          "name": "BOXING",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "JIU JITSU",
+          "name": "JIU JITSU",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "X-FIT",
+          "name": "X-FIT",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
@@ -445,19 +406,14 @@ export const Gyms = [
     }, //end City object
     {
       "name": "AMSTERDAM",
-      component () {
-        var currObj = this;
-        return (
-        <HoverStateContainer style={styles.citySquareContainerStyle}>
-         <BackgroundPic image={"http://www.bocadolobo.com/en/inspiration-and-ideas/wp-content/uploads/2015/09/inspiration-StudioAA-Amsterdam.jpg"} />
-         <Header name={this.name.toUpperCase()} style={styles.smallCityChooserHeader}/>
-         <MovingOptions index={4} categories={ currObj.categories } style={styles.movingOptionsStyle}/>
-        </HoverStateContainer>
-        )
+      "id": 4,
+      "url": function () {
+ 	      return "/GymViewerPage:" + this.name;
       },
+      "bgImageURL": "https://www.e-architect.co.uk/images/jpgs/amsterdam/home-06-singel-i210513-i3.jpg",
       "categories": [
         {
-          "category": "FITNESS",
+          "name": "FITNESS",
           "gyms": [
             {
               "name": "Mitte FITNESS",
@@ -488,56 +444,56 @@ export const Gyms = [
             }
         ]}, //end FITNESS
         {
-          "category": "CARDIO-DANCE",
+          "name": "CARDIO-DANCE",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "BOXING",
+          "name": "BOXING",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "JIU JITSU",
+          "name": "JIU JITSU",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "X-FIT",
+          "name": "X-FIT",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
@@ -547,19 +503,14 @@ export const Gyms = [
     }, //end City object
     {
       "name": "BRUSSELS",
-      component () {
-        var currObj = this;
-        return (
-        <HoverStateContainer style={styles.citySquareContainerStyle}>
-         <BackgroundPic image={"https://images.divisare.com/image/upload/c_fit,f_jpg,q_80,w_1200/v1/project_images/2822394/02_MDW_LeLorrain_%C2%A9Julien-Lanoo.jpg"} />
-         <Header name={this.name.toUpperCase()} style={styles.smallCityChooserHeader}/>
-         <MovingOptions index={5} categories={ currObj.categories } style={styles.movingOptionsStyle}/>
-        </HoverStateContainer>
-        )
+      "id": 5,
+      "url": function () {
+ 	      return "/GymViewerPage:" + this.name;
       },
+      "bgImageURL": "https://farm2.static.flickr.com/1659/25173509034_ce5b3b8c5f_b.jpg",
       "categories": [
         {
-          "category": "FITNESS",
+          "name": "FITNESS",
           "gyms": [
             {
               "name": "Mitte FITNESS",
@@ -590,56 +541,56 @@ export const Gyms = [
             }
         ]}, //end FITNESS
         {
-          "category": "CARDIO-DANCE",
+          "name": "CARDIO-DANCE",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "BOXING",
+          "name": "BOXING",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "JIU JITSU",
+          "name": "JIU JITSU",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
             }
         ]}, //end Boxing
         {
-          "category": "X-FIT",
+          "name": "X-FIT",
           "gyms": [
             {
-              "name": null,
+              "name": "null",
               "activities": [null,null,null,null,null],
               "key": null,
               "description": {
-                "name": null,
+                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip

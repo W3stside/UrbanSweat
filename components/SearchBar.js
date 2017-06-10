@@ -20,13 +20,25 @@ import { StyleSheet, css } from 'aphrodite';
 
 export class SearchBar extends Component {
 
+  static propTypes = {
+    cityIndex: React.PropTypes.number,
+    className: React.PropTypes.string,
+
+    click: React.PropTypes.bool,
+    dataInput: React.PropTypes.string,
+
+    Data: React.PropTypes.array,
+    handleClick: React.PropTypes.func,
+
+    handleDataInput: React.PropTypes.func,
+    value: React.PropTypes.string
+  }
+
   render () {
-    var Data = this.props.dataToFilter;
-    //MOVED OUT: var hideShowList = css(this.props.dataInput ? styles.showList : styles.hideList);
+    //var Data = this.props.dataToFilter;
     var childrenWithProps = React.Children.map( this.props.children ,
       ( child ) => React.cloneElement( child , {
-        dataInput: this.props.dataInput,
-        Data
+        ...this.props
       })
     );
 
@@ -56,7 +68,7 @@ export class SearchBar extends Component {
 
 function mapStateToProps (state) {
   return {
-    dataInput: state.dataInput
+    dataInput: state.dataInput.dataInput
   }
 }
 
