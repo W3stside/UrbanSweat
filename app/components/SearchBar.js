@@ -47,20 +47,18 @@ export class SearchBar extends Component {
 
         <form>
            <input
-             className={this.props.className}
-             type='text'
-             value={this.props.dataInput}
-             onChange={ (input) => {
-               this.props.handleDataInput(input)
-             }}
-             placeholder={this.props.placeholder}
-             />
+           className={this.props.className}
+           type='text'
+           value={this.props.dataInput}
+           onChange={ (input) => {
+             this.props.handleDataInput(input.target.value)
+           }}
+           placeholder={this.props.placeholder}/>
         </form>
 
         <div style={{width: '100%'}}>
           {childrenWithProps}
         </div>
-
       </div>
     );
   }

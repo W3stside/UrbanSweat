@@ -1,40 +1,37 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, css } from 'aphrodite';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import { StyleSheet, css } from 'aphrodite'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as cityActions from '../actions/cityActions'
 
-import {Link} from 'react-router';
+import {Link} from 'react-router'
 
-import FlexColumnContainer from './FlexColumnContainer';
-import Logo from './Logo';
-import HamburgerMenu from './HamburgerMenu';
-import SearchBar from './SearchBar';
-import CitySquares from './CitySquares';
+import CitySearchBarContent from './CitySearchBarContent'
+import FlexColumnContainer from './FlexColumnContainer'
+import HamburgerMenu from './HamburgerMenu'
+import Logo from './Logo'
 
 //data
 //import { Gyms } from '../data/gyms/gym'
 class CityChooser extends Component {
 
   componentDidMount() {
-    setTimeout( () => {this.props.fetchCity()}, 3000)
+    setTimeout( () => {this.props.fetchCity()}, 1000)
   }
 
   render () {
     const {cities} = this.props;
-    console.info(cities)
-
     const citySquares = cities.length
-    ? <SearchBar
-        dataToFilter={cities}
-        placeholder='find your new gym'
-        className={css(styles.searchBar)}
-      >
-        <CitySquares/>
-      </SearchBar>
-    : <h1>LOADING...</h1>;
+      //if cities array has any cities in it:
+      ? <CitySearchBarContent dbData={cities}/>
+      //show loading bar or spinner or whatever
+      : <div className={css(!cities.length ? styles.mtAutoFull : styles.mtAuto, styles.fullWidth)}>
+          <div className={css(styles.fullWidth)}>
+            <h1>LOADING...</h1>
+          </div>
+        </div>;
 
     return (
       <FlexColumnContainer>
@@ -50,18 +47,8 @@ class CityChooser extends Component {
             </div>
           </div>
         </div>
-        {/* below can be refactored as a component passed as children in index.js under routes
-          * For example: <Route path="/CityChooser" component={CityChooser}>
-                            <IndexRoute component={CitySearchBarContent}/>
-                            <Route path="/GymChooser" component={GymSearchBarContent}/>
-                        </Route>
-          * then pass {this.props.children} in place of below
-          */}
-        <div className={css(styles.mtAuto, styles.fullWidth)}>
-          <div className={css(styles.fullWidth)}>
-            {citySquares}
-          </div>
-        </div>
+
+        {citySquares}
 
       </FlexColumnContainer>
     );
@@ -93,7 +80,7 @@ function mapActionCreatorsToProps (dispatch) {
 ////////////////////////////////////////
 // Styling - Aphrodite
 ///////////////////////////////////////
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
   padding_0: {
     padding: '0',
@@ -117,6 +104,10 @@ var styles = StyleSheet.create({
   fullWidth: {
     textAlign: 'center',
     width: '100%'
+  },
+  mtAutoFull: {
+    marginTop: 'auto',
+    minHeight: 400,
   },
   mtAuto: {
     marginTop: 'auto'

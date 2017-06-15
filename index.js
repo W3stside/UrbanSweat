@@ -6,18 +6,20 @@ import "babel-polyfill";
 import { applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import reducer from './reducers';
+import reducer from './app/reducers';
 import { Provider } from 'react-redux';
 
-//Components
-import Home from './components/Home';
-import CityChooser from './components/CityChooser';
-import GymCatChooser from './components/GymCatChooser';
-import GymChooser from './components/GymChooser';
-import GymViewerPage from './components/GymViewerPage';
+import css from './app/css/reactTransitions.css'
 
-import CitySearchBarContent from './components/CitySearchBarContent';
-import GymSearchBarContent from './components/GymSearchBarContent';
+//Components
+import Home from './app/components/Home';
+import CityChooser from './app/components/CityChooser';
+import GymCatChooser from './app/components/GymCatChooser';
+import GymChooser from './app/components/GymChooser';
+import GymViewerPage from './app/components/GymViewerPage';
+
+import CitySearchBarContent from './app/components/CitySearchBarContent';
+import GymSearchBarContent from './app/components/GymSearchBarContent';
 
 const middleware = applyMiddleware( thunk, createLogger() );
 const store = createStore( reducer, middleware );

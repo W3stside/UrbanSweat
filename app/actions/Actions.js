@@ -49,7 +49,18 @@ export function handleMenuClick (clickStatus) {
 export function handleDataInput (input) {
   return {
     type: 'DATA_INPUT',
-    dataInput: input.target.value
+    dataInput: input
+  }
+}
+
+//CitySquare Actions
+export function handleCitySquareClick (clickStatus, id) {
+  return {
+    type: 'CITYSQUARE_CLICK',
+    payload: {
+      clickStatus: !clickStatus,
+      id: id
+    }
   }
 }
 

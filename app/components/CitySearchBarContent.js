@@ -3,16 +3,15 @@ import {StyleSheet,css} from 'aphrodite'
 
 import CitySquares from './CitySquares'
 import SearchBar from './SearchBar'
-import { Gyms } from '../data/gyms/gym'
 
-const CitySearchBarContent = () => (
+const CitySearchBarContent = (props) => (
   <div className={css(styles.mtAuto, styles.fullWidth)}>
     <div className={css(styles.fullWidth)}>
 
       <SearchBar
-        dataToFilter={Gyms}
-        placeholder='Find your spot'
-        className={css(styles.searchBar)}>
+      dataToFilter={props.dbData}
+      placeholder='Find your spot'
+      className={css(styles.searchBar)}>
           <CitySquares/>
       </SearchBar>
 

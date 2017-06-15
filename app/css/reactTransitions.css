@@ -1,0 +1,35 @@
+/*React-Transitions-Group CSS*/
+
+.mappedItems-appear {
+  opacity: 0.01;
+}
+
+.mappedItems-appear.mappedItems-appear-active {
+  opacity: 1;
+  transition: all .5s ease-in-out;
+}
+
+.mappedItems-enter {
+  opacity: 0.01;
+}
+
+.mappedItems-enter.mappedItems-enter-active {
+
+  opacity: 1;
+
+  transition: all 500ms ease-in;
+}
+
+.hoverCSS:hover {
+  background-color: rgba(0,0,0,0.4);
+  transition: background-color 0.5s ease-in-out;
+}
+
+.mappedItems-leave {
+  opacity: 1;
+}
+
+.mappedItems-leave.mappedItems-leave-active {
+  opacity: 0.01;
+  transition: all 300ms ease-in;
+}

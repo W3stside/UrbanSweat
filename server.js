@@ -10,11 +10,11 @@ var webpack = require('webpack'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     //Connect that Database bish
-    mongoose = require('./models/connection'),
+    mongoose = require('./app/models/connection'),
     //Config the compiler for Webpack
     compiler = webpack(config),
     //Cities route
-    cities = require('./routes/citiesRoutes');
+    cities = require('./app/routes/citiesRoutes');
 
 //Middleware
 app.use(logger('dev'));
