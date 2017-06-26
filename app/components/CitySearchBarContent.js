@@ -5,20 +5,24 @@ import CitySquares from './CitySquares'
 import SearchBar from './SearchBar'
 
 const CitySearchBarContent = (props) => (
-  <div className={css(styles.mtAuto, styles.fullWidth)}>
-    <div className={css(styles.fullWidth)}>
-
-      <SearchBar
-      dataToFilter={props.dbData}
-      placeholder='Find your spot'
-      className={css(styles.searchBar)}>
-          <CitySquares/>
-      </SearchBar>
+  <div className={css(styles.fullWidth)} style={{display: 'flex', height: '100%'}}>
+    <div className={css(styles.fullWidth)} style={{display: 'flex', flexDirection: 'column'}}>
+      <div style={{margin: '0 auto 37px auto', width: '85%'}}>
+        <SearchBar
+        shadowFX={true}
+        placeholder='Find your spot'/>
+      </div>
+      <div style={{width: '100%' }}>
+        <CitySquares
+        dataToFilter={props.dbData}
+        renderMovingOptions={true}
+        verticalFade={false}/>
+      </div>
 
     </div>
   </div>
 );
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
     padding_0: {
       padding: '0',
@@ -29,13 +33,13 @@ var styles = StyleSheet.create({
       ':focus': {
         boxShadow: '0px 0px 45px -7px #10FF8C'
       },
-      border: '2px solid ghostwhite',
+      border: '6px solid ghostwhite',
       borderRadius: 18,
       boxShadow: '0px 0px 45px -7px black',
       font: '175% Helvetica',
-      margin: '15px 0 11px 0',
-      padding: 3,
-      outline: 'none !important',
+      margin: '0',
+      padding: 10,
+      outline: 'none',
       textAlign: 'center',
       textTransform: 'lowercase'
     },

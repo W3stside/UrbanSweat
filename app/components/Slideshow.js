@@ -5,9 +5,6 @@ import * as Actions from '../actions/Actions'
 import { StyleSheet, css } from 'aphrodite'
 
 export class Slideshow extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   static propTypes () {
     counter: React.PropTypes.number.isrequired //passed in as STATE from mapStateToProps at bottom -- initialState: 0 -- affected by nextImage and previousImage props
@@ -15,7 +12,9 @@ export class Slideshow extends Component {
     nextImage: React.PropTypes.function.isrequired //passed in as ACTION from mapActionCreatorsToProps -- state.counter++
     previousImage: React.PropTypes.function.isrequired //passed in as ACTION from mapActionCreatorsToProps -- state.counter--
   }
-
+  handleClick (clickStatus) {
+    this.props.handleSlideshowClick(clickStatus);
+  }
   render () {
     // ** to eliminate using this.props.whatever each time, map names via below:
     // * aka "this.props.whatever" BECOMES JUST "whatever"
@@ -27,21 +26,25 @@ export class Slideshow extends Component {
     //Dispatches actions Actions.setImage() which is imported at top and also found in ./actions/Actions.js
 
     return (
-        <div className={css(styles.slideshowContainer)}>
-          <div className={css(styles.flexCenter)}>
+        <div
+          className={css(this.props.clickStatus ? styles.ssContainerOpen : null, styles.slideshowContainer)}>
+          <div className={css(this.props.clickStatus ? styles.ssInnerContainerOpen : styles.flexCenter)}>
+            <button
+              className={css(styles.ssOpenCloseButton, this.props.clickStatus ? styles.ssOpenButton : styles.ssCloseButton)}
+              onClick={() => {this.handleClick(this.props.clickStatus)}}><img src="https://image.flaticon.com/icons/png/128/61/61728.png" className={css(styles.ssButtonIcon)}/></button>
             <button
               className={css(styles.galleryButtons, styles.galleryButtonRight)}
               onClick={ () => {
                 this.props.nextImage(this.props.counter, this.props.images)
               }}>
-              <span> NXT </span>
+              <span className={css(styles.buttonSpans)}>⥤</span>
             </button>
             <button
               className={css(styles.galleryButtons, styles.galleryButtonLeft)}
               onClick={ () => {
                 this.props.previousImage(this.props.counter, this.props.images)
               }}>
-              <span> PRV </span>
+              <span className={css(styles.buttonSpans)}>⥢</span>
             </button>
 
             <img
@@ -55,9 +58,10 @@ export class Slideshow extends Component {
 
 function mapStateToProps (state) {
   return {
-    images: state.images,
-    selectedImage: state.selectedImage,
-    counter: state.counter
+    images: state.slideShow.images,
+    selectedImage: state.slideShow.selectedImage,
+    counter: state.slideShow.counter,
+    clickStatus: state.slideShow.clickStatus
   }
 }
 
@@ -80,18 +84,51 @@ function mapActionCreatorsToProps (dispatch) {
 var height = '100%';
 
 const styles = StyleSheet.create({
+  ssOpenCloseButton: {
+    outline: 'none',
+    position: 'absolute',
+    bottom: 15, right: 110
+  },
+  ssButtonIcon: {
+    width: 29,
+    background: 'transparent',
+    padding: '5px 0'
+  },
+  ssOpenButton: {
+
+  },
+  ssCloseButton: {
+
+  },
+  ssContainerClosed: {
+
+  },
+  ssContainerOpen: {
+    backgroundColor: 'rgba(0,0,0,0.85)',
+    display: 'flex',
+    position: 'fixed',
+    top: 0, left: 0,
+    zIndex: 9999
+  },
+  ssInnerContainerOpen: {
+    border: '5px solid white',
+    height: '80%', width: '80%',
+    margin: 'auto',
+    overflow: 'hidden',
+    position: 'relative'
+  },
   slideshowContainer: {
-    backgroundColor: 'black',
     height: height, width: '100%',
     overflow: "hidden"
   },
   galleryButtons: {
     position: 'absolute',
-    background: 'rgba(0,0,0,0.4)', color: 'white',
+    background: 'rgba(0, 0, 0, 0.49)', color: 'rgba(255,255,255,0.4)',
     border: 'none',
-    font: 'bold italic 140% Helvetica',
+    font: 'bold italic 100% Helvetica',
     height: height,
-    outline: 'none !important'
+    outline: 'none !important',
+    width: 90
   },
   galleryButtonLeft: {
     left: 0
@@ -99,12 +136,19 @@ const styles = StyleSheet.create({
   galleryButtonRight: {
     right: 0
   },
+  buttonSpans: {
+    ':hover': {textShadow: '-5px 0px 12px rgba(255,255,255,1)', color: '#b9ffef', fontSize: 80},
+    fontSize: 60, fontStyle: 'normal', fontWeight: 100, textShadow: '-5px 0px 12px',
+
+    transition: 'all 0.45s linear',
+  },
   flexCenter: {
     display: 'flex', alignItems: 'center', justifyContent: 'center',
-    height: '100%'
+    height: '100%',
+    position: 'relative'
   },
   autoImage: {
-    maxWidth: '100%',
+    minWidth: '100%',
     height: 'auto'
   }
 })

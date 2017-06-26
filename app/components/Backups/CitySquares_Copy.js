@@ -8,7 +8,7 @@ import { StyleSheet, css } from 'aphrodite';
 //redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as citySquaresActions from '../actions/citySquaresActions'
+import * as Actions from '../actions/cityActions'
 //Components
 import HoverStateContainer from './HoverStateContainer'
 import Header from './Header'
@@ -21,9 +21,6 @@ class CitySquares extends Component {
     browserHistory.push('/GymView/' + name);
     //this.props.handleCitySquareClick(clickStatus, index);
     //this.props.handleDataInput(name);
-  }
-  handleFilteredData (data) {
-    this.props.handleFilteredDataAction(data);
   }
   // === SET default ELEM style
   getDefaultStyles () {
@@ -42,17 +39,15 @@ class CitySquares extends Component {
   getStyles () {
     const {dataToFilter, dataInput} = this.props;
     //take initial data and return FILTERED Array
-    const filteredData = dataToFilter.filter( (item) => {
-      let name = item.name ? item.name : item.gym.name;
-      if (dataInput.toLowerCase() === "all") {
+    return dataToFilter.filter( ({name}) => {
+      if (this.props.dataInput.toLowerCase() === "all") {
         return name;
       }
-      return name.toLowerCase().indexOf(dataInput.toLowerCase()) > -1;
+      return name.toLowerCase().indexOf(dataInput.toLowerCase()) !== -1;
     })
     .map( (item, index) => {
-      let name = item.name ? item.name : item.gym.name;
       return {
-        key: name,
+        key: item.name,
         data: {
           ...item
         },
@@ -61,13 +56,10 @@ class CitySquares extends Component {
           flexGrow: spring(1, presets.gentle),
           flexShrink: spring(1, presets.gentle),
           flexBasis: spring(300, presets.gentle),
-          //height: 337,
+          //height: spring(320, {spring: 170, damping: 80}),
         }
       }
     });
-    //Pass the newly filtered Array to Actions to Reduce to State
-    this.handleFilteredData(filteredData);
-    return filteredData;
   }
   // === Styling for ELEM entry
   willEnter() {
@@ -75,7 +67,7 @@ class CitySquares extends Component {
       opacity: 1,
       flexGrow: 0,
       flexShrink: 0,
-      flexBasis: 0,
+      flexBasis: 0
       //height: 0
     };
   };
@@ -86,42 +78,52 @@ class CitySquares extends Component {
       flexGrow: spring(0),
       flexShrink: spring(0),
       flexBasis: spring(0),
-      //height: spring(337)
-    }
+      //height: spring(0)
+    };
   };
 
   //Data passed in via dataToFilter prop MUST be pointing at the correct slices of data before getting HERE
   render () {
     // === Has someone input data into FORM? Yes? THEN show components that match. NO? THEN hide them.
     var hideShowList = css(styles.defaultFlex, this.props.dataInput ? styles.showList : styles.hideList);
+    // === IF CitySquare is clicked, render component below or render WAITING
+    const clickedCatContent = () => {
+      if (this.props.clickStatus) {
+        return (
+          <HoverStateContainer style={styles.citySquareContainerStyle}>
+            <BackgroundPic/>
+            <Header name={'Categories'} style={styles.smallCityChooserHeader}/>
+            <MovingOptions categories={this.props.cities[this.props.id].categories.name} style={styles.movingOptionsStyle}/>
+          </HoverStateContainer>
+        )
+      } else {
+        return <h1>WAITING</h1>
+      }
+    }
     return (
-        <div id="citySquareWrapper" className={css(styles.defaultFlex)}>
+        <div id="citySquareWrapper" className={css(styles.defaultFlex)} style={{marginTop: 37}}>
           <TransitionMotion
             defaultStyles={this.getDefaultStyles()}
-            styles={this.getStyles(this.props.dataInputTypeToFilter)}
+            styles={this.getStyles()}
             willEnter={this.willEnter}
             willLeave={this.willLeave}>
             {motionContent =>
               <div id="citSquareLeft" className={css(styles.citySquareLeft)}>
                 {motionContent.map(
-                ( {key, style, data, index} ) => {
-                      let name = data.name ? data.name : data.gym.name;
-                      return (
-                        <div key={key} style={style} className={css(styles.csDefault, styles.hoverCSS)}>
-                          <div
-                            style={{width: '100%', cursor: 'pointer', minHeight: 330, maxHeight: 330}}
-                            onClick={ this.handleClick.bind(this, this.props.clickStatus, index, name.toLowerCase()) }>
+                ( {key, style, data: {_id, name, bgImageURL, categories}}, index ) =>
+                      <div key={key} style={style} className={css(styles.csDefault, styles.hoverCSS)}>
+                        <div
+                          style={{width: '100%', cursor: 'pointer', minHeight: 330, maxHeight: 330}}
+                          onClick={ this.handleClick.bind(this, this.props.clickStatus, index, name.toLowerCase()) }>
 
-                              <HoverStateContainer style={styles.citySquareContainerStyle}>
-                               <BackgroundPic image={data.bgImageURL}/>
-                               <Header name={name.toUpperCase()} style={styles.smallCityChooserHeader}/>
-                               {this.props.renderMovingOptions ? <MovingOptions index={index} categories={ data.categories } style={styles.movingOptionsStyle}/> : <div/>}
-                             </HoverStateContainer>
+                            <HoverStateContainer style={styles.citySquareContainerStyle}>
+                             <BackgroundPic image={bgImageURL}/>
+                             <Header name={name.toUpperCase()} style={styles.smallCityChooserHeader}/>
+                             <MovingOptions index={index} categories={ categories } style={styles.movingOptionsStyle}/>
+                           </HoverStateContainer>
 
-                          </div>
                         </div>
-                      );
-                    }
+                      </div>
                 )}
               </div>
             }
@@ -131,21 +133,7 @@ class CitySquares extends Component {
     )
   }
 }
-/*<div id="citySquareRight" className={css(styles.citySquareRight, this.props.clickStatus ? styles.clickOpen : null)}>{clickedCatContent()}</div>
-// === IF CitySquare is clicked, render component below or render WAITING
-const clickedCatContent = () => {
-  if (this.props.clickStatus) {
-    return (
-      <HoverStateContainer style={styles.citySquareContainerStyle}>
-        <BackgroundPic/>
-        <Header name={'Categories'} style={styles.smallCityChooserHeader}/>
-        <MovingOptions categories={this.props.cities[this.props.id].categories.name} style={styles.movingOptionsStyle}/>
-      </HoverStateContainer>
-    )
-  } else {
-    return <h1>WAITING</h1>
-  }
-}*/
+//<div id="citySquareRight" className={css(styles.citySquareRight, this.props.clickStatus ? styles.clickOpen : null)}>{clickedCatContent()}</div>
 CitySquares.propTypes = {
   Data: PropTypes.array || PropTypes.object,
   dataInput: PropTypes.string
@@ -153,6 +141,7 @@ CitySquares.propTypes = {
 // === Pass STATE from STORE as PROPS
 function mapStateToProps (state) {
   return {
+    cities: state.cities.cities,
     clickStatus: state.citySquares.clicked,
     id: state.citySquares.id,
     dataInput: state.dataInput.dataInput,
@@ -160,7 +149,7 @@ function mapStateToProps (state) {
 }
 // === Pass ACTION FNS from ACTION MODULE as PROPS
 function mapActionCreatorsToProps (dispatch) {
-  return bindActionCreators(citySquaresActions,dispatch);
+  return bindActionCreators(Actions,dispatch);
 }
 // === Aphrodite Styling
 const styles = StyleSheet.create({
@@ -218,8 +207,7 @@ const styles = StyleSheet.create({
   //citysquares
   smallCityChooserHeader: {
     color: 'ghostwhite',
-    //font: 'italic bold 250% "Helvetica"',
-    fontFamily: 'Helvetica',fontStyle: 'italic', fontWeight: 'bold',
+    font: 'italic bold 250% "Helvetica"',
     margin: '0 0 12px 0',
     position: 'static',
     zIndex: '5'

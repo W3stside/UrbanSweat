@@ -10,7 +10,7 @@ export default class Logo extends React.Component {
   render () {
     return (
       <div
-      style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+      style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}
       className={this.props.className}
       >
         <img src={this.props.logo} style={this.props.styleLogo}/>

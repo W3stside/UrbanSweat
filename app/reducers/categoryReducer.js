@@ -7,29 +7,27 @@ const initialState = {
 
 const categoryReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_CATEGORIES_PENDING":
+    case "FETCH_CATEGORIES_ARRAY_PENDING":
       return {
         ...state,
-        fetching: true
+        fetching: action.payload
       }
-      break;
 
-    case "FETCH_CATEGORIES_ERROR":
+    case "FETCH_CATEGORIES_ARRAY_REJECTED":
       return {
         ...state,
         fetching: false,
         error: action.payload
       }
-      break;
 
-    case "FETCH_CATEGORIES_FULFILLED":
+    case "FETCH_CATEGORIES_ARRAY_FULFILLED":
       return {
         ...state,
         fetching: false,
         fetched: true,
         categories: action.payload
       }
-      break;
+
     default: return state;
   }
 }

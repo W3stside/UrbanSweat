@@ -78,18 +78,33 @@ var styles = StyleSheet.create({
     transition: 'all 0.3s linear'
   },
   sideMenu: {
-    backgroundColor: /*'#505050'*/ 'rgba(255,255,255,0.2)',
     display: 'flex', justifyContent: 'center', alignItems: 'center',
-    opacity: 1,
-    overflow: 'hidden',
-    position: 'absolute', left: 100, top: 20, height: 'auto',
+    //Gradient
+    background: 'rgb(98,252,198)', //Old browsers
+    background: '-moz-linear-gradient(top, rgba(98,252,198,1) 0%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 100%)', // FF3.6-15
+    background: '-webkit-linear-gradient(top, rgba(98,252,198,1) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 100%)', // Chrome10-25,Safari5.1-6
+    background: 'linear-gradient(to bottom, rgba(98,252,198,1) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 100%)', // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
+    filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#62fcc6', endColorstr='#ffffff',GradientType=0 )", // IE6-9
+
+    borderRadius: 500,
+    height: '100%', left: 100, top: 0,
+    opacity: 0.95,
+    position: 'fixed',
+    /*
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    left: 100, top: 20, height: 'auto',
+
     '@media (max-width: 850px)': {
       justifyContent: 'flex-start',
       height: 97
-    }
+     },
+    */
+    overflow: 'hidden',
+    //position: 'absolute',
+    zIndex: 9999,
   },
   openMenu: {
-    width: '18%',
+    width: '50%',
     '@media (max-width: 850px)': {
       width: '60%'
     },
@@ -104,7 +119,7 @@ var styles = StyleSheet.create({
     transition: 'all 0.3s linear'
   },
   menuLiCont: {
-    display: 'flex', flexFlow: 'row wrap', justifyContent: 'center', alignItems: 'center', textAlign: 'left',
+    display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', alignItems: 'center', textAlign: 'left',
     font: '400 italic 3vw Helvetica',
     '@media (max-width: 850px)': {
       flexFlow: 'row nowrap', justifyContent: 'space-around',
@@ -124,11 +139,11 @@ var styles = StyleSheet.create({
   linkStyle: {
       ':hover': {
         color: 'rgba(0,0,0,1)',
-        letterSpacing: 0,
+        letterSpacing: 4,
         textShadow: '1px 0 20px black'
       },
       color: '#505050',
-      letterSpacing: -3,
+      letterSpacing: -4,
       textDecoration: 'none',
 
       transition: 'all 0.24s linear  '

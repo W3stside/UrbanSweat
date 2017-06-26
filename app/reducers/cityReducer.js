@@ -14,7 +14,7 @@ const cityReducer = (state = initialState, action) => {
       }
       break;
 
-    case "FETCH_CITIES_ERROR":
+    case "FETCH_CITIES_REJECTED":
       return {
         ...state,
         fetching: false,

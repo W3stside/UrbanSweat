@@ -15,7 +15,7 @@ const gymsReducer = (state = initialState, action) => {
       }
       break;
 
-    case "FETCH_GYMS_ERROR":
+    case "FETCH_GYMS_REJECTED":
       return {
         ...state,
         fetching: false,

@@ -18,6 +18,7 @@
   "homepage": "http://redux.js.org",
   "dependencies": {
     "aphrodite": "^1.2.0",
+    "async": "^2.4.1",
     "babel-polyfill": "6.3.14",
     "body-parser": "~1.15.1",
     "classnames": "^2.2.5",

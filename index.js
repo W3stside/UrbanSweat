@@ -44,6 +44,7 @@ render((
         */}
       <Route path="/FindYourGym/:name/:id/categories" component={GymCatChooser}></Route>
       <Route path="/FindYourGym/:name/:id/categories/:catName/:catId" component={GymChooser}></Route>
+      <Route path="/GymView/:id" component={GymViewerPage}/>
       {/*<Route path="/FindYourGym/paris/0/categories/boxing/0" component={GymChooser}></Route>*/}
     </Router>
   </ Provider>

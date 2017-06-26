@@ -13,8 +13,11 @@ var webpack = require('webpack'),
     mongoose = require('./app/models/connection'),
     //Config the compiler for Webpack
     compiler = webpack(config),
-    //Cities route
-    cities = require('./app/routes/citiesRoutes');
+    //ROUTES
+    cities = require('./app/routes/cityRoutes'),
+    gyms = require('./app/routes/gymRoutes'),
+    gymInstance = require('./app/routes/gymInstanceRoutes'),
+    categories = require('./app/routes/categoryRoutes');
 
 //Middleware
 app.use(logger('dev'));
@@ -26,6 +29,9 @@ app.use(webpackHotMiddleware(compiler));
 
 //db REST API routes
 app.use('/models/cities', cities);
+app.use('/models/gyms', gyms);
+app.use('/models/gymInstance', gymInstance);
+app.use('/models/categories', categories);
 
 //Where to serve HTML site for React App
 app.get("/*", function(req, res) {

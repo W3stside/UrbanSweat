@@ -1,5 +1,3 @@
-import axios from 'axios';
-//Actions listStyle
 
 //GymViewerPage actions
 export function setImage (image) {
@@ -72,60 +70,9 @@ export function handleClick (clickStatus) {
   }
 }
 
-///////////////////////////////////////////////
-//// ASYNC ACTIONs
-//////////////////////////////////////////////
-
-export function fetchCity (id = '') {
-  return function (dispatch) {
-    axios.get('http://localhost:3007/models/cities/' + id)
-      .then( (resp) => {
-        dispatch({
-          type: 'FULFILLED',
-          payload: resp,
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: 'REJECTED',
-          payload: err,
-        });
-      })
-    }
-}
-
-export function fetchCategory (id = '') {
-  return function (dispatch) {
-    axios.get('http://localhost:3007/models/categories/' + id)
-      .then( (resp) => {
-        dispatch({
-          type: 'FULFILLED',
-          payload: resp,
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: 'REJECTED',
-          payload: err,
-        });
-      })
-    }
-}
-
-export function getchGym (id = '') {
-  return function (dispatch) {
-    axios.get('http://localhost:3007/models/gym/' + id)
-      .then( (resp) => {
-        dispatch({
-          type: 'FULFILLED',
-          payload: resp,
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: 'REJECTED',
-          payload: err,
-        });
-      })
+export function handleSlideshowClick(clickStatus) {
+  return {
+    type: 'CLICK',
+    payload: !clickStatus
   }
 }

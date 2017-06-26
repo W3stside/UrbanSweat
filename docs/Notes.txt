@@ -18,3 +18,29 @@ CSS is all done with aphrodite .. example of how that works below:
 //      display: "-webkit-flex"
 //    }
 //  })
+
+
+// == How to query specific Gym Instance and get info from base Gym
+GymInstance.find( {"_id": "594ae37452afea273c8b11af"} )
+            // == 'gym' is property referencing Gym base db collection
+           .populate( 'gym' )
+           .exec( function (err, resp) {
+              if (err) throw 'Error';
+              console.log(resp);
+           });
+
+// === Querying Array and getting name of one Property
+GymInstance.find({})
+          .populate('gym')
+          .exec( function (err, resp) {
+            if (err) throw 'Error';
+            resp.forEach( (gym) => { console.log( gym.gym.name ) })
+          });
+
+// ===
+City.find({})
+    .populate('categories')
+    .exec( function (err, resp) {
+      if (err) throw 'Error';
+      resp.forEach( city => { console.log( city.categories.map( cat => cat.name ) ) } )
+    });          

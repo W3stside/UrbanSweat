@@ -1,13 +1,14 @@
 import axios from 'axios'
 
-export function fetchCity (id = '') {
+export function fetchCity (id = 'all') {
   return function (dispatch) {
-    axios.get('http://localhost:3007/models/cities/' + id)
+    dispatch({type: 'FETCH_CITIES_PENDING'})
+    axios.get('http://localhost:3007/models/cities/loadCats/' + id)
       .then( (resp) => {
-        dispatch({
+        setTimeout(() => {dispatch({
           type: 'FETCH_CITIES_FULFILLED',
           payload: resp.data,
-        });
+        })}, 1000);
       })
       .catch((err) => {
         dispatch({
@@ -16,4 +17,22 @@ export function fetchCity (id = '') {
         });
       })
     }
-}
+  }
+
+  export function fetchCityById (id = 'all') {
+    return function (dispatch) {
+      axios.get('http://localhost:3007/models/cities/' + id)
+        .then( (resp) => {
+          dispatch({
+            type: 'FETCH_CITIES_FULFILLED',
+            payload: resp.data,
+          });
+        })
+        .catch((err) => {
+          dispatch({
+            type: 'FETCH_CITIES_REJECTED',
+            payload: err,
+          });
+        })
+      }
+    }

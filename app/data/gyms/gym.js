@@ -22,9 +22,7 @@ export const Gyms = [
                 {title: 'BOXING', url: "#"},
                 {title: '...MORE', url: "#"}
               ],
-              "key": 1,
               "description": {
-                "name": "Max-Out FITNESS",
                 "image_urls": [
                   "https://cdn.theculturetrip.com/wp-content/uploads/2016/11/inside-the-paris-navigating-gym--carlo-ratti-associati-1024x512.jpg",
                   "https://s-media-cache-ak0.pinimg.com/736x/1a/42/de/1a42de6b58d700347c3571cbb5118082.jpg",
@@ -39,12 +37,6 @@ export const Gyms = [
                 }
               } //end descrip
             },
-            {
-              "name": "Git'r Dun"
-            },
-            {
-              "name": "Sweaty Buddha"
-            }
         ]}, //end FITNESS
         {
           "name": "CARDIO-DANCE",
@@ -53,9 +45,7 @@ export const Gyms = [
             {
               "name": "Dance ALL Nacht",
               "activities": [null,null,null,null,null],
-              "key": null,
               "description": {
-                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip
@@ -68,9 +58,7 @@ export const Gyms = [
             {
               "name": "SQUARE OFF",
               "activities": [null,null,null,null,null],
-              "key": null,
               "description": {
-                "name": "null",
                 "image_urls": [null, null, null, null, null],
                 "text": {"header": null, "pOne": null, "pTwo": null}
               } //end descrip

@@ -1,9 +1,33 @@
 import React, {Component} from 'react'
 
-import { StyleSheet, css } from 'aphrodite';
+import { StyleSheet, css } from 'aphrodite'
 
-//data
-//import { Gyms } from '../data/gyms/gym'
+/** MovingOptions semi-smart
+* Component Purpose:
+*  >>> Maps through activities ARRAY (see bottom) to build a DYNAMIC LIST
+*  >>> Build an <li> with all proper aphrodite css classes and parameteres required i.e activity.url + activity.title as stated
+*/
+export default function MovingOptions (props) {
+  let City = props.categories;
+  let listActivities = () => {
+    if (City === null || City === []) return;
+    return (
+      City.map (
+      (activity, index) =>
+        <li className={props.hoverState ? css(animationStyles.movingOptionsKeyFrames) : css(styles.opacity_0)} key={index}>
+          <a className={css(styles.strikethroughHover)} href={'#'} style={{color: 'white'}}>
+            {activity.name}
+          </a>
+        </li>
+      )
+    );
+  }
+    return (
+      <ul className={css(props.style)}>
+          {listActivities()}
+      </ul>
+   );
+}
 
 ////////////////////////////////////////
 // Styling - Aphrodite
@@ -47,25 +71,3 @@ const animationStyles = StyleSheet.create({
     animationDuration: '1.2s'
   }
 })
-
-/** MovingOptions semi-smart
-* Component Purpose:
-*  >>> Maps through activities ARRAY (see bottom) to build a DYNAMIC LIST
-*  >>> Build an <li> with all proper aphrodite css classes and parameteres required i.e activity.url + activity.title as stated
-*/
-export default function MovingOptions (props) {
-  let City = props.categories;
-  let listActivities = City.map (
-    (activity, index) =>
-      <li className={props.hoverState ? css(animationStyles.movingOptionsKeyFrames) : css(styles.opacity_0)} key={index}>
-        <a className={css(styles.strikethroughHover)} href={'#'} style={{color: 'white'}}>
-          {activity}
-        </a>
-      </li>
-    )
-    return (
-      <ul className={css(props.style)}>
-          {listActivities}
-      </ul>
-   );
-}

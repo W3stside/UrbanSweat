@@ -1,5 +1,6 @@
 const initialState = {
-  dataInput: 'all'
+  dataInput: 'all',
+  catDataInput: 'all',
 }
 
 export default function reducer (state = initialState, action) {
@@ -9,7 +10,11 @@ export default function reducer (state = initialState, action) {
         ...state,
         dataInput: action.dataInput
       }
-
+      case 'CATEGORY_DATA_INPUT':
+        return {
+          ...state,
+          catDataInput: action.dataInput,
+        }
     default: return state;
   }
 }

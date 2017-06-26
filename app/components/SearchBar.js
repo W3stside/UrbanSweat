@@ -35,19 +35,29 @@ export class SearchBar extends Component {
   }
 
   render () {
-    //var Data = this.props.dataToFilter;
-    var childrenWithProps = React.Children.map( this.props.children ,
-      ( child ) => React.cloneElement( child , {
-        ...this.props
-      })
-    );
+    const styles = StyleSheet.create({
+      defaultStyle: {
+        ':focus': {
+          boxShadow: this.props.shadowFX ? '0px 0px 45px -7px #10FF8C' : 'none',
+        },
+        border: '6px solid ghostwhite',
+        boxShadow: this.props.shadowFX ? '0px 0px 45px -7px black' : 'none',
+        font: '175% Helvetica',
+        height: '100%', width: '100%',
+        margin: '0',
+        padding: 10,
+        outline: 'none',
+        textAlign: 'center',
+        textTransform: 'lowercase'
+      },
+    })
 
     return (
-      <div style={{width:'100%'}}>
+      <div style={{height: '100%', width:'100%'}}>
 
-        <form>
+        <form style={{height: '100%', width: '100%'}}>
            <input
-           className={this.props.className}
+           className={css(styles.defaultStyle, this.props.customAphrodite)}
            type='text'
            value={this.props.dataInput}
            onChange={ (input) => {
@@ -56,9 +66,6 @@ export class SearchBar extends Component {
            placeholder={this.props.placeholder}/>
         </form>
 
-        <div style={{width: '100%'}}>
-          {childrenWithProps}
-        </div>
       </div>
     );
   }

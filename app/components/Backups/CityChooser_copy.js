@@ -4,15 +4,7 @@ import { StyleSheet, css } from 'aphrodite'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-//import actions and create 1 actions object
 import * as cityActions from '../actions/cityActions'
-import * as AllActions from '../actions/Actions'
-import * as hamburgerMenuActions from '../actions/hamburgerMenuActions'
-const Actions = {
-  fetchCity: cityActions.fetchCity,
-  handleDataInput: AllActions.handleDataInput,
-  handleMenuClick: hamburgerMenuActions.handleMenuClick,
-}
 
 import {Link} from 'react-router'
 
@@ -29,21 +21,18 @@ class CityChooser extends Component {
     //load in cities from DB
     this.props.fetchCity()
   }
-  componentWillUnmount () {
-    //reset dataInput in form search bar to nothing
-    this.props.handleDataInput('');
-    //if burger menu is open, close it
-    this.props.handleMenuClick(true);
-  }
+
   render () {
-    const {cities, fetchingCities} = this.props;
-    const citySquares = fetchingCities
+    const {cities} = this.props;
+    const citySquares = cities.length
       //if cities array has any cities in it:
-      ? <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%'}}>
-          <img src="http://31.media.tumblr.com/0c855ac97b211311541a2fad6b3042be/tumblr_nfi14mS6qx1stn28do1_1280.gif" style={{height: '100%', width: '100%'}}/>
-        </div>
-      : <CitySearchBarContent dbData={cities}/>;
+      ? <CitySearchBarContent dbData={cities}/>
       //show loading bar or spinner or whatever
+      : <div className={css(!cities.length ? styles.mtAutoFull : styles.mtAuto, styles.fullWidth)}>
+          <div className={css(styles.fullWidth)}>
+            <h1>LOADING...</h1>
+          </div>
+        </div>;
 
     return (
       <FlexColumnContainer>
@@ -82,14 +71,16 @@ class CityChooser extends Component {
 function mapStateToProps (state) {
   return {
     cities: state.cities.cities,
-    fetchingCities: state.cities.fetching,
   }
 }
 
 function mapActionCreatorsToProps (dispatch) {
-  return bindActionCreators(Actions, dispatch);
+  return bindActionCreators(cityActions, dispatch);
 }
 
+////////////////////////////////////////
+// Styling - Aphrodite
+///////////////////////////////////////
 const styles = StyleSheet.create({
 
   padding_0: {
