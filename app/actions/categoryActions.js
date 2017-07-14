@@ -23,3 +23,13 @@ export function fetchCategoriesByCity (id = 'all') {
       })
     }
   }
+
+  export function handleCategoryChoice (cat, catClickStatus) {
+    return {
+      type: 'ADD_CATEGORY',
+      payload: {
+        cat,
+        catClickStatus
+      }
+    }
+  }

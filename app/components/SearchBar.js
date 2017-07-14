@@ -20,6 +20,10 @@ import { StyleSheet, css } from 'aphrodite';
 
 export class SearchBar extends Component {
 
+  /*componentWillReceiveProps(nextProps) {
+    nextProps !== currentProps ? SOMETHING : SOMETHING_ELSE;
+  }*/
+
   static propTypes = {
     cityIndex: React.PropTypes.number,
     className: React.PropTypes.string,
@@ -53,9 +57,9 @@ export class SearchBar extends Component {
     })
 
     return (
-      <div style={{height: '100%', width:'100%'}}>
+      <div className="fullWidthHeight">
 
-        <form style={{height: '100%', width: '100%'}}>
+        <form className="fullWidthHeight">
            <input
            className={css(styles.defaultStyle, this.props.customAphrodite)}
            type='text'

@@ -4,6 +4,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as gymInstanceActions from '../actions/gymInstanceActions'
+import * as filteredDataActions from '../actions/filteredDataActions'
 import * as cityActions from '../actions/cityActions'
 import * as categoryActions from '../actions/categoryActions'
 import * as AllActions from '../actions/Actions'
@@ -16,16 +17,17 @@ const Actions = {
   fetchCity: cityActions.fetchCity,
   fetchCityById: cityActions.fetchCityById,
   handleDataInput: AllActions.handleDataInput,
+  handleCategoryChoice: categoryActions.handleCategoryChoice,
   handleMenuClick: hamburgerMenuActions.handleMenuClick,
+
+  updateGymInstanceByCityByCat: gymInstanceActions.updateGymInstanceByCityByCat
 }
 // === COMPONENTS
 import BackgroundPic from './BackgroundPic'
-import CitySquares from './CitySquares'
+import CategorySelector from './CategorySelector'
+import GymContent from './GymLowerHalfContent'
 import HamburgerMenu from './HamburgerMenu'
-import Header from './Header'
 import Logo from './Logo'
-import SearchBar from './SearchBar'
-import Slideshow from './Slideshow'
 
 // === APHRODITE CSS
 import { StyleSheet, css } from 'aphrodite';
@@ -56,7 +58,7 @@ class GymViewerPage extends React.Component {
   }
 
   render () {
-    const {categoriesByCity, currentFilteredDataArray, gymInstancesByCity, fetchingCities, fetchingCategories, fetchingGymInstances} = this.props;
+    const {categoriesByCity, catDataInput, catClickStatus, categoriesSelected, currentFilteredDataArray, gymInstancesByCity, fetchingCities, fetchingCategories, fetchingGymInstances, handleCategoryChoice} = this.props;
     //ASync conditional - if currently fetching data, render spinner
     if (fetchingCategories) {
       return (
@@ -65,137 +67,39 @@ class GymViewerPage extends React.Component {
         </div>
     )}
     return (
-      <div className={css(styles.flexContainer, styles.colWrap, styles.fullWidthHeight)}>
+      <div className="flex colNoWrap fullWidthHeight">
           {/*Top 100% section*/}
-          <div className={css(styles.flexContainer, styles.flexItemFullWidth, styles.flex20, styles.justifyCenter, styles.alignChildrenTop, styles.fullHeight)}>
+          <div className="flex rowNoWrap aStart jCenter mdP2 fullWidthHeight overflowHidden" style={{position: 'relative'}}>
                 <HamburgerMenu />
                 <BackgroundPic image={this.props.currentCity.bgImageURL}/>
-                <div style={{display: 'flex', flexDirection: 'row nowrap', justifyContent: 'center', alignItems:'center', height: '100%'}}>
+                <div className="flex rowNoWrap jCenter aCenter height100">
                   <Logo styleLogo={{maxWidth: '30vh'}}/>
                   <h1 style={{font: 'bold italic 320% "Helvetica"', color: 'white', marginLeft: -40}}> x {this.props.routeParams.id.toUpperCase()} </h1>
                 </div>
           </div >
 
+          {/*CatSelecta Column/Row*/}
+          <CategorySelector
+            categoriesSelected={categoriesSelected}
+            categoriesByCity={categoriesByCity}
+            catClickStatus={catClickStatus}
+            handleCategoryChoice={this.props.handleCategoryChoice}
+            //updateFilteredArrByCat={this.props.updateFilteredArrByCat}
+            updateGymInstanceByCityByCat={this.props.updateGymInstanceByCityByCat}
+            />
+
           {/*Bottom 100% section*/}
           <GymContent
-            categoriesByCity={categoriesByCity}
             currentFilteredDataArray={currentFilteredDataArray}
-            catDataInput={this.props.catDataInput}
-            gymInstancesByCity={gymInstancesByCity}/>
+            catDataInput={catDataInput}
+            handleCategoryChoice={handleCategoryChoice}
+            gymInstancesByCity={gymInstancesByCity}
+            />
       </div> //end main div
     );
   }
 }
 
-const GymText = ({gymHeader,gymPOne,gymPTwo}) => (
-
-    <div className={css(styles.flexContainer, styles.minWidth, styles.flex1, styles.alignChildrenCenter, styles.justifyCenter, styles.colWrap, styles.defaultFont)}>
-      <div>
-        <h2 style={{width: '100%', display: "inline-block", backgroundColor:"lightgrey"}}>{gymHeader}</h2>
-        <br/>
-        <div style={{fontSize: '80%', width: '100%'}}>{gymPOne}</div>
-      </div>
-    </div>
-)
-
-const GymPhotos = ({gymPhotos}) => (
-  <div className={css(styles.flexContainer, styles.minWidth, styles.flex1)} style={{minHeight: 330}}>
-    <Slideshow />
-  </div>
-)
-
-function GymContent (props) {
-  const {categoriesByCity, currentFilteredDataArray, gymInstancesByCity} = props;
-
-  const gymRendererArray = gymInstancesByCity.map( (gym, index) =>
-    <div key={index} className={css(styles.flexContainer, styles.colWrap, styles.fullWidthHeight, styles.flex90)} >
-      <h1> HELLO WORLD </h1>
-      <GymPhotos gymPhotos={gym.gallery}/>
-      <GymText gymHeader={gym.gym.name} gymPOne={gym.gym.summary}/>
-    </div>
-  );
-  //CONDITIONAL RENDER for the left side Gyms to scoll through
-  const gymSquareRenderer = gymInstancesByCity.length
-    ? gymInstancesByCity.map( (inst, index) =>
-        <div key={index} className={css(styles.flex10, styles.centerFlexContainer)}>
-          <BackgroundPic image={inst.bgImageURL} />
-          <Header name={inst.gym.name} />
-        </div>
-      )
-    : <div className={css(styles.flex10, styles.centerFlexContainer)}>
-        <img src="http://i.imgur.com/EZqOrRN.gif"/>;
-      </div>;
-
-  //Renders the main Gym Details based off of the first elem in the FilteredData Array returned by the Search dataInput
-  const gymDetailsToRender = () => (
-      //Check first that their are any elems in array and that it is NOT the cities
-      currentFilteredDataArray.length && currentFilteredDataArray[0].data.gym
-      ? <div className={css(styles.flexContainer, styles.colWrap, styles.fullWidthHeight, styles.flex90)} >
-          <div id="logoHeader" style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', minHeight: 64, maxHeight: 64}}>
-            <img src={currentFilteredDataArray[0].data.gym.logo} style={{width: 120}}/>
-            <h1 className={css(styles.fontDef, styles.header)} style={{padding: 12, textAlign: 'center', width: 'auto'}}>{currentFilteredDataArray[0].data.gym.name.toUpperCase()} </h1>
-            <img src={currentFilteredDataArray[0].data.gym.logo} style={{width: 120}}/>
-          </div>
-          <GymPhotos gymPhotos={currentFilteredDataArray[0].data.gallery}/>
-          <GymText gymHeader={currentFilteredDataArray[0].data.gym.name} gymPOne={currentFilteredDataArray[0].data.gym.summary}/>
-        </div>
-    : <img style={{width: 100}} src="http://31.media.tumblr.com/0c855ac97b211311541a2fad6b3042be/tumblr_nfi14mS6qx1stn28do1_1280.gif"/>
-  );
-  return (
-    <div style={{display: 'flex', flex: '1 1 75%', padding: '0 6px'}}>
-      <div id="gymSelectaWrapper" className={css(styles.flex25, styles.scrollBarThinBlack)} style={{overflow: 'auto'}}>
-        <div id="gymSelecta" className={css(styles.centerFlexContainer, styles.colNoWrap)}>
-          <div style={{height: 40, margin: 12, width: '100%'}}>
-            <SearchBar
-              customAphrodite={styles.searchBarForm}
-              placeholder='Find your spot'
-              autoFocus={true}/>
-          </div>
-          <CitySquares
-            dataToFilter={gymInstancesByCity}
-            verticalFade={true}/>
-        </div>
-      </div>
-
-      <div id="gymDetails" className={css(styles.centerFlexContainer, styles.colNoWrap)} style={{flex: '1 1 100%', overflowX: 'hidden'}}>
-        {gymDetailsToRender()}
-      </div>
-
-      {/** Categories column
-        * Insert a MAP here of categories available (from current Cities and Gyms loaded)
-            > Use .populate() on the current City to grab all Categories and load
-        * Create a small column on right that has logos and small text to rep each catSelecta
-        * create an Action that onClick will change STATE and change the visible view of Gyms loaded on left
-        */}
-
-      <div id="catSelectaWrapper" className={css(styles.flex15, styles.scrollBarThinBlack)} style={{height: '100%', marginRight: -6, padding: '0 3px 0 10px;', overflow: 'auto'}}>
-        <div id="catSelecta" className={css(styles.centerFlexContainer, styles.colNoWrap)} style={{height: '100%', width: '100%'}}>
-          {categoriesByCity.map( (cat, index) => {
-            return (
-              <div className={null} key={index} className={css(index === 0 ? styles.marginTop50 : null, styles.catDivs)} style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column', height: '100%', width: '100%'}}>
-                <h1 style={{font: '800 italic 110% "Helvetica"'}}>{cat.name.toUpperCase()}</h1>
-                <img src={cat.icon} style={{width: 60}}/>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-
-    </div>
-  );
-}
-/* Categories with CitySquares
-<div style={{height: 40, margin: 12, width: '100%'}}>
-  <SearchBar
-    customAphrodite={styles.searchBarForm}
-    placeholder='Choose Category'
-    autoFocus={true}/>
-</div>
-<CitySquares
-  dataToFilter={categoriesByCity}
-  //useCatDataInput={true}
-  verticalFade={true}/>
-*/
 const styles = StyleSheet.create({
   border: {
     border: '0px solid black'
@@ -301,7 +205,7 @@ const styles = StyleSheet.create({
       boxShadow: '0px 0px 8px rgba(255,0,0,0.5)',
     },
     cursor: 'pointer',
-    minHeight: 110,
+    minHeight: 120, maxHeight: 120,
     overflow: 'hidden'
   },
   scrollBarThinBlack: {
@@ -319,13 +223,14 @@ const styles = StyleSheet.create({
 function mapStateToProps (state) {
   return {
     categoriesByCity: state.categories.categories,
+    catClickStatus: state.categories.catClickStatus,
+    categoriesSelected: state.categories.categoriesSelected,
     currentCity: state.cities.cities,
     currentFilteredDataArray: state.filteredData.data,
     gymInstancesByCity: state.gymInstances.gymInstancesByCity,
     fetchingCities: state.cities.fetching,
     fetchingCategories: state.categories.fetching,
     fetchingGymInstances: state.gymInstances.fetching,
-
   }
 }
 // === Pass ACTION FNS from ACTION MODULE as PROPS

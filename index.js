@@ -9,7 +9,9 @@ import thunk from 'redux-thunk';
 import reducer from './app/reducers';
 import { Provider } from 'react-redux';
 
+//Styling
 import css from './app/css/reactTransitions.css'
+import './app/styles/default'
 
 //Components
 import Home from './app/components/Home';

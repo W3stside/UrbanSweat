@@ -131,21 +131,7 @@ class CitySquares extends Component {
     )
   }
 }
-/*<div id="citySquareRight" className={css(styles.citySquareRight, this.props.clickStatus ? styles.clickOpen : null)}>{clickedCatContent()}</div>
-// === IF CitySquare is clicked, render component below or render WAITING
-const clickedCatContent = () => {
-  if (this.props.clickStatus) {
-    return (
-      <HoverStateContainer style={styles.citySquareContainerStyle}>
-        <BackgroundPic/>
-        <Header name={'Categories'} style={styles.smallCityChooserHeader}/>
-        <MovingOptions categories={this.props.cities[this.props.id].categories.name} style={styles.movingOptionsStyle}/>
-      </HoverStateContainer>
-    )
-  } else {
-    return <h1>WAITING</h1>
-  }
-}*/
+
 CitySquares.propTypes = {
   Data: PropTypes.array || PropTypes.object,
   dataInput: PropTypes.string

@@ -16,8 +16,8 @@ BackgroundPic.defaultProps = {
 
 const styles = StyleSheet.create({
   bgPicContainer: {
-    position: 'absolute',
-    width: '100%', height: '100%', left: 0,
+    position: 'absolute', left: 0,
+    minWidth: '100%', minHeight: '100%',
     overflow: 'hidden',
     zIndex: '-99999'
   },

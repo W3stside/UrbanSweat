@@ -37,3 +37,13 @@ export function fetchGymInstancesByCity (id = 'all') {
          })
     }
   }
+
+  export function updateGymInstanceByCityByCat (id, clickStatus) {
+    return {
+      type: 'UPDATE_GYM_INSTANCE_BY_CITY_BY_CAT',
+      payload: {
+        id,
+        clickStatus: !clickStatus
+      }
+    }
+  }

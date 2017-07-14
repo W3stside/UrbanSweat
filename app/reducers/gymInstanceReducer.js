@@ -50,6 +50,22 @@ const gymInstanceReducer = (state = initialState, action) => {
         gymInstancesByCity: action.payload
       }
 
+    case "UPDATE_GYM_INSTANCE_BY_CITY_BY_CAT":
+      return {
+        ...state,
+        gymInstancesByCity:
+          action.payload.clickStatus && state.gymInstancesByCity.length !== 0
+          //FILTER and return NEW ARRAY of any matching GYMINSTANCES according to the CATEGORY ID passed in
+          ? state.gymInstancesByCity.filter( gyms => {
+            console.log(gyms.categories.indexOf(action.payload.id) > -1)
+            return gyms.categories.indexOf(action.payload.id) > -1
+          })
+          //IF array is empty, just return the current state
+          : state.gymInstancesByCity.filter( gyms => {
+            return gyms.categories.indexOf(action.payload.id) === -1
+          })
+      }
+
     default: return state;
   }
 }
