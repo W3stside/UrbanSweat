@@ -8,10 +8,18 @@ Travel alot? Love to stay in shape? It sucks finding gyms in every new city you 
 
 Urban Sweat is the way forward - Pick your city, narrow by categories or just search gyms available in your city of choice and check out the facilities.
 
-
+<h2>Tech jargon:</h2>
+<h4>Frontend</h4>
 <ul>
-  <h2>Tech jargon:</h2>
   <li>Built on ReactJS w/Redux state management</li>
   <li>Aphrodite inline styling + my own lightweight Flexbox system</li>
   <li>ES6 + 7</li>
 </ul>
+<h4>Backend</h4>
+<ul>
+  <li>Built on MongoDB w/Mongoose</li>
+  <li>Express API</li>
+  <li>NodeJS</li>
+</ul>
+
+
