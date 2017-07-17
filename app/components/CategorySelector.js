@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 // === APHRODITE CSS
 import { StyleSheet, css } from 'aphrodite';
 
-const CategorySelector = ({categoriesSelected, categoriesByCity, catClickStatus, handleCategoryChoice, updateGymInstanceByCityByCat}) => {
+const CategorySelector = ({categoriesSelected, categoriesByCity, catClickStatus, handleCategoryChoice, updateGymInstanceByCityByCat, updateFilteredArrByCat}) => {
     {
       /** Categories column
       * Insert a MAP here of categories available (from current Cities and Gyms loaded)
@@ -27,7 +27,8 @@ const CategorySelector = ({categoriesSelected, categoriesByCity, catClickStatus,
             <span> {cat.name.toUpperCase()} </span>
             <span
               className="margin10LR font100"
-              onClick={ () => {handleCategoryChoice(cat._id) }}
+              style={{cursor: 'pointer'}}
+              onClick={ () => {handleCategoryChoice(cat)}}
             > x </span>
 
           </div>
@@ -38,7 +39,7 @@ const CategorySelector = ({categoriesSelected, categoriesByCity, catClickStatus,
     return (
       <div id="catSelectaWrapper" className={"flex xsP3 smP3 mdP3 colNoWrap height100 overflowAuto" + css(styles.scrollBarThinBlack)}>
         {/*Whatever Category the user clicks on in calSelecta, add to the div below*/}
-        <div className="flex rowWrap aCenter jCenter padding15 width100" id="selectedCats" style={{minHeight: 97}}>
+        <div className="flex rowWrap aCenter jCenter padding15 width100" id="selectedCats" style={{minHeight: 97, maxHeight: 97}}>
           {catChooserToRender()}
         </div>
         {/*Take the "categoriesByCity" array from the state object and map here*/}
@@ -47,19 +48,11 @@ const CategorySelector = ({categoriesSelected, categoriesByCity, catClickStatus,
             return (
               <div
               className={null} key={index} className={css(styles.catDivs) + " flex colNoWrap jCenter aCenter height100 smP6 mdP3 lgP1 margin15"}
-              onClick={
-                () => {
-                  Promise.resolve(handleCategoryChoice(cat, !catClickStatus))
-                  .then( () => {
-                    updateGymInstanceByCityByCat(cat._id, catClickStatus);
-                  })
-                  .catch( err => {
-                    console.log(err);
-                  });
-                }
-              }>
-                <h1 style={{font: '800 italic 110% "Helvetica"'}}>{cat.name.toUpperCase()}</h1>
-                <img src={cat.icon} style={{width: 60}}/>
+              style={{borderRadius: 50}}
+              onClick={ () => {handleCategoryChoice(cat)}}
+              >
+                <h1 className="margin0" style={{font: '800 italic 110% "Helvetica"'}}>{cat.name.toUpperCase()}</h1>
+                <img src={cat.icon} style={{width: 50}}/>
               </div>
             )
           })}

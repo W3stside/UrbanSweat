@@ -15,7 +15,7 @@ const GymContent = (props) => {
 
   const GymText = ({gymHeader,gymPOne,gymPTwo}) => (
 
-      <div className="flex flex1 fontP160 colNoWrap aCenter jCenter italic">
+      <div className="flex flex1 fontP160 colNoWrap aCenter jStart width75 marginAuto italic textCenter">
         <div>
           <h2 className="width100" style={{display: "inline-block", backgroundColor:"lightgrey"}}>{gymHeader}</h2>
           <br/>
@@ -25,7 +25,7 @@ const GymContent = (props) => {
   )
 
   const GymPhotos = ({gymPhotos}) => (
-    <div className="flex" style={{height: 600}}>
+    <div className="flex" style={{height: 450}}>
       <Slideshow />
     </div>
   )
@@ -38,19 +38,18 @@ const GymContent = (props) => {
           <div id="logoHeader" className="flex rowNoWrap jCenter aCenter" style={{minHeight: 64}}>
             <img src={currentFilteredDataArray[0].data.gym.logo} style={{width: 120}}/>
             <h1 className={css(styles.fontDef, styles.header)} style={{padding: 12, textAlign: 'center', width: 'auto'}}>{currentFilteredDataArray[0].data.gym.name.toUpperCase()} </h1>
-            <img src={currentFilteredDataArray[0].data.gym.logo} style={{width: 120}}/>
           </div>
           <GymPhotos gymPhotos={currentFilteredDataArray[0].data.gallery}/>
           <GymText gymHeader={currentFilteredDataArray[0].data.gym.name} gymPOne={currentFilteredDataArray[0].data.gym.summary}/>
         </div>
-    : <img style={{width: 100}} src="http://31.media.tumblr.com/0c855ac97b211311541a2fad6b3042be/tumblr_nfi14mS6qx1stn28do1_1280.gif"/>
+    : <img style={{minHeight: '100%', minWidth: '100%'}} src="http://31.media.tumblr.com/0c855ac97b211311541a2fad6b3042be/tumblr_nfi14mS6qx1stn28do1_1280.gif"/>
   );
 
   return (
-    <div className="flex rowWrap">
+    <div className="flex rowWrap" style={{height: 800}}>
 
       <div className="flex colNoWrap smP12 mdP3 fullWidthHeight">
-        <div className="width100" style={{minHeight: 70, margin: '12px 0'}}>
+        <div className="flex aCenter jCenter width100" style={{minHeight: 97, maxHeight: 97}}>
           <SearchBar
             customAphrodite={styles.searchBarForm}
             placeholder='Find your spot'
@@ -74,14 +73,13 @@ const GymContent = (props) => {
 }
 
 const styles = StyleSheet.create({
-  defaultFont: {
-    color: 'black',
-    font: 'italic 150% "Helvetica"',
-    textAlign: 'center'
-  },
-  header: {
-    textShadow: '0px 0px 8px black'
-  },
+    defaultFont: {
+        color: 'black',
+        font: 'italic 150% "Helvetica"',
+        textAlign: 'center'
+    },
+    header: {
+        textShadow: '0px 0px 8px black'
+    },
 })
-
 export default GymContent;

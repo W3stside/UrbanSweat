@@ -19,24 +19,25 @@ import CityChooser from './app/components/CityChooser';
 import GymCatChooser from './app/components/GymCatChooser';
 import GymChooser from './app/components/GymChooser';
 import GymViewerPage from './app/components/GymViewerPage';
-
-import CitySearchBarContent from './app/components/CitySearchBarContent';
-import GymSearchBarContent from './app/components/GymSearchBarContent';
+import Register from './app/components/Registration/Register';
 
 const middleware = applyMiddleware( thunk, createLogger() );
 const store = createStore( reducer, middleware );
 
+//App component
 const App = () => (
   <div>
     <Home />
   </div>
 )
 
+//Top level render
 render((
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}/>
       {/* add the routes here */}
+      <Route path="/registration" component={Register}/>
       <Route path="/FindYourSpot" component={CityChooser}/>
       {/* {Prop} :id
         * WHERE DOES IT COME FROM: <CitySquare />'s handleClick method

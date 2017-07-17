@@ -1,14 +1,14 @@
-
 const hoverReducer = (state = false, action) => {
-    switch(action.type) {
+    switch (action.type) {
 
-      case 'ON_MOUSE_HOVER':
-        return state = action.hover;
+        case 'ON_MOUSE_HOVER':
+            return state = action.hover;
 
-      case 'OFF_MOUSE_HOVER':
-        return state = action.hover;
+        case 'OFF_MOUSE_HOVER':
+            return state = action.hover;
 
-      default: return state;
+        default:
+            return state;
     }
 }
 

@@ -109,6 +109,9 @@ const preStyles = {
   '.padding25LR': {paddingLeft: 25, paddingRight: 25},
   '.padding25TB': {paddingTop: 25, paddingBottom: 25},
   //MARGINS
+  '.margin0': {margin: 0},
+  '.margin0LR': {marginLeft: 0, marginRight: 0},
+  '.margin0TB': {marginTop: 0, marginBottom: 0},
   '.margin5': {margin: 5},
   '.margin5LR': {marginLeft: 5, marginRight: 5},
   '.margin5TB': {marginTop: 5, marginBottom: 5},

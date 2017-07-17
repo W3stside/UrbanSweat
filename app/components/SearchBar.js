@@ -44,7 +44,7 @@ export class SearchBar extends Component {
         ':focus': {
           boxShadow: this.props.shadowFX ? '0px 0px 45px -7px #10FF8C' : 'none',
         },
-        border: '6px solid ghostwhite',
+        border: '0px solid ghostwhite',
         boxShadow: this.props.shadowFX ? '0px 0px 45px -7px black' : 'none',
         font: '175% Helvetica',
         height: '100%', width: '100%',

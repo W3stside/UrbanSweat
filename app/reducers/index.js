@@ -1,5 +1,5 @@
 //index reducer with combineReducer
-import { combineReducers } from 'redux'
+import {combineReducers} from 'redux'
 //reducers
 import categories from './categoryReducer'
 import cities from './cityReducer'
@@ -11,17 +11,17 @@ import gyms from './gymReducer'
 import gymInstances from './gymInstanceReducer'
 import hamburgerMenu from './hamburgerClickReducer'
 import slideShow from './slideShowReducer'
+import users from './userReducer'
 
 export default combineReducers({
-  categories,
-  cities,
-  citySquares,
-  dataInput,
-  filteredData,
-  gyms,
-  gymInstances,
-  hamburgerMenu,
-  slideShow,
+    categories,
+    cities,
+    citySquares,
+    dataInput,
+    filteredData,
+    gyms,
+    gymInstances,
+    hamburgerMenu,
+    slideShow,
+    users,
 });
-
-//change hover and click state to aphrodite css

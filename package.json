@@ -20,6 +20,7 @@
     "aphrodite": "^1.2.0",
     "async": "^2.4.1",
     "babel-polyfill": "6.3.14",
+    "bcrypt": "^1.0.2",
     "body-parser": "~1.15.1",
     "classnames": "^2.2.5",
     "cookie-parser": "~1.4.3",
