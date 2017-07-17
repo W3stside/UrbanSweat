@@ -69,7 +69,6 @@ router.get("/fetchGymInstancesByCity/:id", function ( req, res, next) {
            .populate('gym')
            .exec( function (err, resp) {
              if (err) return next(err);
-             console.log(resp);
              res.json(resp);
            });
 });

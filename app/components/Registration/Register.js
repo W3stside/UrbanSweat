@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../../actions/userActions'
 
+// === ROUTER
+import { browserHistory } from 'react-router';
+
 class Register extends Component {
 
     handleFormSubmit (e) {
@@ -16,12 +19,15 @@ class Register extends Component {
             return;
         };
 
-        //dispatch addUser action - info deleted after POST in action
+        //ACTION dispatch addUser action - info deleted after POST in action
         this.props.addUser({first_name, last_name, email, username, password});
     }
 
     render() {
         const {addFirstName, addLastName, addEmail, addUsername, addPassword, users} = this.props;
+
+        //Check if user is registered/logged in
+        users.registered ? browserHistory.push('/') : null;
 
         //onSubmission, show this, else show form
         if (users.registering) {

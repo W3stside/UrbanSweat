@@ -70,7 +70,7 @@ router.get("/fetchCategoriesByCity/:id", function ( req, res, next) {
            .populate('categories')
            .exec( function (err, resp) {
              if (err) return next(err);
-             resp.forEach(city => {console.log(city.categories)})
+             //resp.forEach(city => {console.log(city.categories)})
              res.json(resp);
            });
 });

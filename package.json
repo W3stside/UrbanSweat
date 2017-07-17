@@ -25,6 +25,7 @@
     "classnames": "^2.2.5",
     "cookie-parser": "~1.4.3",
     "css-loader": "^0.26.1",
+    "dotenv": "^4.0.0",
     "mongodb": "^2.2.28",
     "morgan": "~1.7.0",
     "prop-types": "^15.5.10",

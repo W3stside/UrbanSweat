@@ -121,103 +121,36 @@ class CitySquares extends Component {
         // === Has someone input data into FORM? Yes? THEN show components that match. NO? THEN hide them.
         var hideShowList = css(styles.defaultFlex, this.props.dataInput ? styles.showList : styles.hideList);
 
-        return ( <
-            div id = "citySquareWrapper"
-            className = {
-                css(styles.defaultFlex)
-            } >
-            <
-            TransitionMotion defaultStyles = {
-                this.getDefaultStyles()
-            }
-            styles = {
-                this.getStyles(this.props.dataInputTypeToFilter)
-            }
-            willEnter = {
-                this.willEnter
-            }
-            willLeave = {
-                this.willLeave
-            } > {
-                motionContent =>
-                <
-                div id = "citSquareLeft"
-                className = {
-                    css(styles.citySquareLeft)
-                } > {
-                    motionContent.map(
-                        ({
-                            key,
-                            style,
-                            data,
-                            index
-                        }) => {
-                            let name = data.name ? data.name : data.gym.name;
-                            return ( <
-                                div key = {
-                                    key
-                                }
-                                style = {
-                                    style
-                                }
-                                className = {
-                                    css(styles.csDefault, styles.hoverCSS)
-                                } >
-                                <
-                                div style = {
-                                    {
-                                        width: '100%',
-                                        cursor: 'pointer',
-                                        minHeight: 330,
-                                        maxHeight: 330
-                                    }
-                                }
-                                onClick = {
-                                    this.handleClick.bind(this, this.props.clickStatus, index, name.toLowerCase())
-                                } >
-
-                                <
-                                HoverStateContainer style = {
-                                    styles.citySquareContainerStyle
-                                } >
-                                <
-                                BackgroundPic image = {
-                                    data.bgImageURL
-                                }
-                                /> <
-                                Header name = {
-                                    name.toUpperCase()
-                                }
-                                style = {
-                                    styles.smallCityChooserHeader
-                                }
-                                /> {
-                                    this.props.renderMovingOptions ? < MovingOptions index = {
-                                        index
-                                    }
-                                    categories = {
-                                        data.categories
-                                    }
-                                    style = {
-                                        styles.movingOptionsStyle
-                                    }
-                                    /> : <div/ >
-                                } <
-                                /HoverStateContainer>
-
-                                <
-                                /div> <
-                                /div>
-                            );
-                        }
-                    )
-                } <
-                /div>
-            } <
-            /TransitionMotion>
-
-            <
-            /div>
+        return (
+            <div id = "citySquareWrapper" className = {css(styles.defaultFlex)}>
+                <TransitionMotion
+                defaultStyles = {this.getDefaultStyles()}
+                styles = {this.getStyles(this.props.dataInputTypeToFilter)}
+                willEnter = {this.willEnter}
+                willLeave = {this.willLeave}>
+                    {motionContent =>
+                        <div id = "citSquareLeft" className = {css(styles.citySquareLeft)}>
+                            {motionContent.map(({key, style, data, index}) => {
+                                let name = data.name ? data.name : data.gym.name;
+                                return (
+                                    <div
+                                    key = {key}
+                                    style = {style}
+                                    className = {css(styles.csDefault, styles.hoverCSS)}>
+                                        <div style = {{width: '100%', cursor: 'pointer', minHeight: 330, maxHeight: 330}} onClick = {this.handleClick.bind(this, this.props.clickStatus, index, name.toLowerCase())}>
+                                            <HoverStateContainer style = {styles.citySquareContainerStyle}>
+                                                <BackgroundPic image = {data.bgImageURL}/>
+                                                <Header name = {name.toUpperCase()} style = {styles.smallCityChooserHeader}/>
+                                                {this.props.renderMovingOptions ? <MovingOptions index = {index} categories = {data.categories} style = {styles.movingOptionsStyle}/> : <div/>}
+                                            </HoverStateContainer>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    }
+                </TransitionMotion>
+            </div>
         )
     }
 }

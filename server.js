@@ -9,24 +9,49 @@ var webpack = require('webpack'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
-    //Connect that Database bish
-    mongoose = require('./app/models/connection'),
     //Config the compiler for Webpack
     compiler = webpack(config),
-    //ROUTES
+    //EXPRESS ROUTES
     cities = require('./app/routes/cityRoutes'),
     gyms = require('./app/routes/gymRoutes'),
     gymInstance = require('./app/routes/gymInstanceRoutes'),
     categories = require('./app/routes/categoryRoutes'),
-    users = require('./app/routes/userRoutes');
+    users = require('./app/routes/userRoutes'),
+    //MODELS
+    User = require('./app/models/usersModel'),
+    //AUTH Packages
+    session = require('express-session'),
+    passport = require('passport'),
+    //helper FNS
+    utils = require('./utils/utils');
 
-//Middleware
+//Set up .env
+require('dotenv').config()
+
+//Connect that Database bish
+var mongooseConnect = require('./app/models/connection');
+
+//Express Middleware
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cookieParser());
+
+//Express-Session start
+app.use(session({
+  secret: utils.makeId(),
+  resave: false,
+  saveUninitialized: false,
+  //cookie: { secure: true }
+}))
+
+//Passport Integration (LOGIN and SESSIONS)
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Express + Webpack Middleware
 app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
@@ -43,6 +68,17 @@ app.use('/registration', users);
 //Where to serve HTML site for React App
 app.get("/*", function(req, res) {
     res.sendFile(__dirname + '/index.html')
+});
+
+//Passport serialization and deserialization for persistent login sessions
+passport.serializeUser(function(userID, done) {
+    done(null, userID);
+});
+
+passport.deserializeUser(function(userID, done) {
+    User.findById(userID, function(err, user) {
+        done(err, userID);
+    });
 });
 
 app.listen(port, function(error) {

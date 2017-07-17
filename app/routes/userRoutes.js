@@ -6,6 +6,9 @@ var User = require('../models/usersModel');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+//import passport session management
+var passport = require('passport');
+
 var router = express.Router();
 
 //POST --> User Registration
@@ -21,19 +24,20 @@ router.post('/register', function(req, res, next) {
     bcrypt.hash(password, saltRounds, function(err, hash) {
         if (err) throw err;
         // Store hash in your password DB.
-        //create User here
-        User.create({
-            username,
-            first_name,
-            last_name,
-            email,
-            password: hash
-        }, function(err, resp) {
-            if (err) return next(err);
-
-            res.json(resp);
-        })
-        res.render('index');
+        // create User here
+        User.create({username, first_name, last_name, email, password: hash})
+            //send RESPONSE back to confirm
+            .then(userInfo => {
+                const userID = userInfo._id;
+                //Pass passport login method current Users _id
+                req.login(userID, function (err) {
+                    //redirect to home/root
+                    res.redirect('/');
+                })
+            })
+            .catch(err => {
+                return next(err);
+            })
     });
 })
 

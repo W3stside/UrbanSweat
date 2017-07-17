@@ -8,16 +8,16 @@ export function addUser(userData) {
         });
         //#STEP 2: Async post to the backend
         axios.post('http://localhost:3007/registration/register', userData)
-            //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
-            .then(resp => {
-                dispatch({
-                    type: 'END_USER_REGISTRATION',
-                })
-            })
             //#STEP 4: Stop async load gif and CLEAR userInfo state
             .then(resp => {
                 dispatch({
                     type: 'CLEAR_USER_INFO'
+                })
+            })
+            //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
+            .then(resp => {
+                dispatch({
+                    type: 'END_USER_REGISTRATION',
                 })
             })
             //#STEP 3b: IF ERROR, end gif and post error
