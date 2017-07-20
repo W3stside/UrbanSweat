@@ -61,7 +61,7 @@
         "webpack-hot-middleware": "^2.9.1"
     },
     "scripts": {
-        "build": "SET NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors",
+        "build": "NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors",
         "start": "node server.js",
         "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register",
         "test:watch": "npm test -- --watch"
