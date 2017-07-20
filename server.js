@@ -6,12 +6,31 @@ require('dotenv').config()
 //Create new Express instance
 const app = new(require('express'))();
 const port = process.env.PORT || 8080;
+//Bring in Webpack
+const webpack = require('webpack');
 
 //Check if we're currently running in a DEV environment
-if (process.env.NODE_ENV !== 'production') {
+/*app.configure('development', function(){
     //DEVELOPMENT ENVIRONMENT
     var webpack = require('webpack'),
         webpackDevMiddleware = require('webpack-dev-middleware'),
+        webpackHotMiddleware = require('webpack-hot-middleware'),
+        //Which webpack config to use... should be dev as of now
+        config = require('./webpack.dev.config'),
+        //Config the compiler for Webpack
+        compiler = webpack(config);
+
+    //Express + Webpack Middleware
+    app.use(webpackDevMiddleware(compiler, {
+        noInfo: true,
+        publicPath: config.output.publicPath
+    }));
+    app.use(webpackHotMiddleware(compiler));
+});*/
+//IF in DEV mode
+if (process.env.NODE_ENV !== 'production') {
+    //DEVELOPMENT ENVIRONMENT
+    var webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleware = require('webpack-hot-middleware'),
         //Which webpack config to use... should be dev as of now
         config = require('./webpack.dev.config'),
@@ -88,7 +107,7 @@ app.get("/*", function(req, res) {
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/dist/index.html')
 });
 
 //LOGIN STRATEGY - For when users login

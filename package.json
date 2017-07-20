@@ -5,7 +5,7 @@
         "node": "6.10.2"
     },
     "description": "v0.0.1 of UrbanSweat app on ReactJS",
-    "main": "index.js",
+    "main": "./src/index.js",
     "directories": {
         "doc": "docs"
     },
@@ -61,7 +61,7 @@
         "webpack-hot-middleware": "^2.9.1"
     },
     "scripts": {
-        "build": "SET NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
+        "build": "SET NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors",
         "start": "node server.js",
         "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register",
         "test:watch": "npm test -- --watch"
