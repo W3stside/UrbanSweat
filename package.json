@@ -1,22 +1,25 @@
 {
     "name": "urbansweatapp",
     "version": "0.0.1",
+    "engines": {
+        "node": "6.10.2"
+    },
     "description": "v0.0.1 of UrbanSweat app on ReactJS",
     "scripts": {
-        "build": "NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
+        "build": "SET NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
         "start": "node server.js",
         "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register",
         "test:watch": "npm test -- --watch"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/reactjs/redux.git"
+        "url": "https://github.com/w3stside/UrbanSweat"
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/reactjs/redux/issues"
+        "url": "https://github.com/w3stside/UrbanSweat/issues"
     },
-    "homepage": "http://redux.js.org",
+    "homepage": "http://spiderkitty.com",
     "dependencies": {
         "aphrodite": "^1.2.0",
         "async": "^2.4.1",
