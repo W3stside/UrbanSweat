@@ -1,40 +1,51 @@
 {
-    "name": "urbansweat",
+    "name": "urbansweatapp",
     "version": "0.0.1",
     "engines": {
         "node": "6.10.2"
     },
     "description": "v0.0.1 of UrbanSweat app on ReactJS",
-    "main": "index.js",
-    "directories": {
-        "doc": "docs"
+    "scripts": {
+        "build": "SET NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
+        "start": "node server.js",
+        "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register",
+        "test:watch": "npm test -- --watch"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/w3stside/UrbanSweat"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/w3stside/UrbanSweat/issues"
+    },
+    "homepage": "http://spiderkitty.com",
     "dependencies": {
         "aphrodite": "^1.2.0",
-        "axios": "^0.16.2",
         "async": "^2.4.1",
         "babel-polyfill": "6.3.14",
         "bcrypt": "^1.0.2",
         "body-parser": "~1.15.1",
-        "connect-mongo": "^1.3.2",
+        "classnames": "^2.2.5",
         "cookie-parser": "~1.4.3",
+        "css-loader": "^0.26.1",
         "dotenv": "^4.0.0",
         "express": "^4.13.3",
-        "express-session": "^1.15.3",
         "mongodb": "^2.2.28",
-        "mongoose": "^4.10.5",
         "morgan": "~1.7.0",
-        "passport-local": "^1.0.0",
-        "passport": "^0.3.2",
         "prop-types": "^15.5.10",
         "react": "^0.14.7",
+        "react-bootstrap": "^0.30.7",
+        "react-dom": "^0.14.7",
         "react-motion": "^0.5.0",
+        "react-redux": "^4.4.1",
         "react-router-dom": "^4.1.1",
         "react-transition-group": "^1.2.0",
         "redux": "^3.3.1",
         "redux-logger": "^3.0.6",
+        "redux-persist": "^4.8.2",
         "redux-thunk": "^2.2.0",
-        "redux-persist": "^4.8.2"
+        "style-loader": "^0.13.1"
     },
     "devDependencies": {
         "babel-core": "^6.4.0",
@@ -59,21 +70,5 @@
         "webpack": "^1.9.11",
         "webpack-dev-middleware": "^1.2.0",
         "webpack-hot-middleware": "^2.9.1"
-    },
-    "scripts": {
-        "build": "SET NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
-        "start": "node server.js",
-        "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register",
-        "test:watch": "npm test -- --watch"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/w3stside/UrbanSweat"
-    },
-    "author": "David Sato",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/W3stside/UrbanSweat/issues"
-    },
-    "homepage": "https://github.com/W3stside/UrbanSweat#readme"
+    }
 }
