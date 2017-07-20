@@ -4,10 +4,10 @@
 require('dotenv').config()
 
 //Create new Express instance
-const app = new(require('express'))();
-const port = process.env.PORT || 8080;
-//Bring in Webpack
-const webpack = require('webpack');
+var app = new(require('express'))(),
+    port = process.env.PORT || 8080,
+    //Bring in Webpack
+    webpack = require('webpack');
 
 //Check if we're currently running in a DEV environment
 /*app.configure('development', function(){
