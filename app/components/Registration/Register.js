@@ -5,16 +5,19 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from '../../actions/userActions'
 
+// === Aphrodite
+import {css, StyleSheet} from 'aphrodite'
+
 // === ROUTER
 import { browserHistory } from 'react-router';
 
 class Register extends Component {
 
     handleFormSubmit (e) {
-        const {first_name, last_name, email, username, password} = this.props.users.userInfo;
+        const {first_name, last_name, email, username, password, reEnter_password} = this.props.users.userInfo;
         e.preventDefault();
 
-        if (!first_name || !last_name || !email || !username || !password) {
+        if (!first_name || !last_name || !email || !username || !password || !reEnter_password) {
             window.alert("Please fill out all fields.");
             return;
         };
@@ -24,7 +27,7 @@ class Register extends Component {
     }
 
     render() {
-        const {addFirstName, addLastName, addEmail, addUsername, addPassword, users} = this.props;
+        const {addFirstName, addLastName, addEmail, addUsername, addPassword, addReEnterPassword, users} = this.props;
 
         //Check if user is registered/logged in
         users.registered ? browserHistory.push('/') : null;
@@ -37,65 +40,101 @@ class Register extends Component {
             </div>
         )}
 
+        //Input field warnings
+        const inputWarning = (field) => {
+            if(users.userInfo[field] && users.userInfo[field].length > 0) return true;
+            return false;
+        }
+
+        //Password match warning
+        const passwordWarning = () => {
+            if(users.userInfo.reEnter_password.match && users.userInfo.reEnter_password.password && users.userInfo.reEnter_password.password.length > 0) return true;
+            return false;
+        }
+
         return (
-            <div className="flex colWrap aCenter jCenter width75">
-                <form method="post" onSubmit={this.handleFormSubmit.bind(this)}>
-                    {/*First Name*/}
-                    <div className="flex colWrap aStart jCenter">
-                        <label htmlFor="first_name" >First Name</label>
-                        <input
-                            onChange={ (input) => {addFirstName(input.target.value)}}
-                            type="first_name"
-                            placeholder="Please enter your first name"
-                        />
-                    </div>
-                    <hr/>
-                    {/*Last Name*/}
-                    <div className="flex colWrap aStart jCenter">
-                        <label htmlFor="last_name">Last Name</label>
-                        <input
-                            onChange={ (input) => {addLastName(input.target.value)}}
-                            type="last_name"
-                            placeholder="Please enter your last name"
-                        />
-                    </div>
-                    <hr/>
-                    {/*Email*/}
-                    <div className="flex colWrap aStart jCenter">
-                        <label htmlFor="email">Email Address</label>
-                        <input
-                            onChange={ (input) => {addEmail(input.target.value)}}
-                            type="email"
-                            placeholder="Enter email"
-                        />
-                    </div>
-                    <hr/>
-                    {/*Username*/}
-                    <div className="flex colWrap aStart jCenter">
-                        <label htmlFor="username">Username</label>
-                        <input
-                            onChange={ (input) => {addUsername(input.target.value)}}
-                            type="username"
-                            placeholder="Username"
-                        />
-                    </div>
-                    <hr/>
-                    {/*Password*/}
-                    <div className="flex colWrap aStart jCenter">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            onChange={ (input) => {addPassword(input.target.value)}}
-                            type="password"
-                            placeholder="Password"
-                        />
-                    </div>
-                    <hr/>
+            <div className="flex colWrap aCenter jCenter fullWindowWidthHeight">
+                <div className="marginAuto padding25 boxShadow">
+                    <form id="authorization" method="post" onSubmit={this.handleFormSubmit.bind(this)}>
+                        {/*First Name*/}
+                        <div className="flex colWrap aStart jCenter">
+                            <label htmlFor="first_name" >First Name</label>
+                            <input
+                                onChange={ (input) => {addFirstName(input.target.value)}}
+                                type="first_name"
+                                placeholder="Please enter your first name"
+                            />
+                            <small className={css(inputWarning('first_name') ? styles.green : styles.red) + " padding5 margin5TB"}>
+                                <strong>{inputWarning('first_name') ? "A-OK!" : "First name must be at least 1 letter"}</strong>
+                            </small>
+                        </div>
+                        <hr/>
+                        {/*Last Name*/}
+                        <div className="flex colWrap aStart jCenter">
+                            <label htmlFor="last_name">Last Name</label>
+                            <input
+                                onChange={ (input) => {addLastName(input.target.value)}}
+                                type="last_name"
+                                placeholder="Please enter your last name"
+                            />
+                            <small className={css(inputWarning('last_name') ? styles.green : styles.red) + " padding5 margin5TB"}>
+                                <strong>{inputWarning('last_name') ? "A-OK!" : "Last name must be at least 1 letter"}</strong>
+                            </small>
+                        </div>
+                        <hr/>
+                        {/*Email*/}
+                        <div className="flex colWrap aStart jCenter">
+                            <label htmlFor="email">Email Address</label>
+                            <input
+                                onChange={ (input) => {addEmail(input.target.value)}}
+                                type="email"
+                                placeholder="Enter email"
+                            />
+                        </div>
+                        <hr/>
+                        {/*Username*/}
+                        <div className="flex colWrap aStart jCenter">
+                            <label htmlFor="username">Username</label>
+                            <input
+                                onChange={ (input) => {addUsername(input.target.value)}}
+                                type="username"
+                                placeholder="Username"
+                            />
+                            <small className={css(inputWarning('username') ? styles.green : styles.red) + " padding5 margin5TB"}>
+                                <strong>{inputWarning('username') ? "A-OK!" : "Username must be at least 1 character"}</strong>
+                            </small>
+                        </div>
+                        <hr/>
+                        {/*Password*/}
+                        <div className="flex colWrap aStart jCenter">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                onChange={ (input) => {addPassword(input.target.value)}}
+                                type="password"
+                                placeholder="Password"
+                            />
+                        </div>
+                        <br/>
+                        {/*Re-Enter Password*/}
+                        <div className="flex colWrap aStart jCenter">
+                            <label htmlFor="reenter_password">Re - Enter Password</label>
+                            <input
+                                onChange={ (input) => {addReEnterPassword(input.target.value)}}
+                                type="password"
+                                placeholder="Re-Enter Password"
+                            />
+                            <small className={css(passwordWarning() ? styles.green : styles.red) + " padding5 margin5TB"}>
+                                <strong>{passwordWarning() ? "A-OK!" : "Passwords do not match!"}</strong>
+                            </small>
+                        </div>
+                        <hr/>
 
-                    <div className="flex colWrap aCenter jCenter">
-                        <input type="submit" value="Join us!"/>
-                    </div>
+                        <div className="flex colWrap aCenter jCenter">
+                            <input type="submit" value="Join us!"/>
+                        </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
         )
     }
@@ -111,5 +150,12 @@ function mapStateToProps (state) {
 function mapActionCreatorsToProps (dispatch) {
   return bindActionCreators(userActions, dispatch);
 }
-
+const styles = StyleSheet.create({
+    green: {
+        backgroundColor: 'rgba(10,190,0,0.5)',
+    },
+    red: {
+        backgroundColor: 'rgba(200,10,0,0.5)',
+    }
+})
 export default connect(mapStateToProps, mapActionCreatorsToProps)(Register)

@@ -35,7 +35,7 @@ const GymContent = (props) => {
       //Check first that their are any elems in array and that it is NOT the cities
       currentFilteredDataArray.length && currentFilteredDataArray[0].data.gym
       ? <div className="flex colNoWrap fullWidthHeight mdP6">
-          <div id="logoHeader" className="flex rowNoWrap jCenter aCenter" style={{minHeight: 64}}>
+          <div id="logoHeader" className="flex rowNoWrap jCenter aCenter" style={{minHeight: 120, maxHeight: 120}}>
             <img src={currentFilteredDataArray[0].data.gym.logo} style={{width: 120}}/>
             <h1 className={css(styles.fontDef, styles.header)} style={{padding: 12, textAlign: 'center', width: 'auto'}}>{currentFilteredDataArray[0].data.gym.name.toUpperCase()} </h1>
           </div>
@@ -49,7 +49,7 @@ const GymContent = (props) => {
     <div className="flex rowWrap" style={{height: 800}}>
 
       <div className="flex colNoWrap smP12 mdP3 fullWidthHeight">
-        <div className="flex aCenter jCenter width100" style={{minHeight: 97, maxHeight: 97}}>
+        <div className="flex aCenter jCenter width100" style={{minHeight: 120, maxHeight: 120}}>
           <SearchBar
             customAphrodite={styles.searchBarForm}
             placeholder='Find your spot'

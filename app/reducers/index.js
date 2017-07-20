@@ -23,5 +23,5 @@ export default combineReducers({
     gymInstances,
     hamburgerMenu,
     slideShow,
-    users,
+    users
 });

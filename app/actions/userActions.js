@@ -1,5 +1,43 @@
 import axios from 'axios'
 
+export function loginUser(userLoginData) {
+    return function (dispatch) {
+        //#STEP 1: Dispatch when user clicks to start async add to db - this triggers TRUE and brings in async loader
+        dispatch({
+            type: 'START_USER_LOGIN',
+        });
+        //#STEP 2: Async post to the backend
+        axios.post('http://localhost:3007/login', userLoginData)
+            //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
+            .then(resp => {
+                //if SUCCESSFUL login...
+                if (resp.data._id) {
+                    dispatch({
+                        type: 'END_USER_LOGIN',
+                    })
+                } else if (!resp.data._id) {
+
+                    dispatch({
+                        type: 'BAD_USER_LOGIN',
+                        payload: resp.data.message
+                    })
+                }
+            })
+            .then( () => {
+                dispatch({
+                    type: 'CLEAR_USER_INFO'
+                })
+            })
+            //#STEP 3b: IF ERROR, end gif and post error... lay down and cry.
+            .catch(error => {
+                dispatch({
+                    type: 'ERROR_USER_LOGIN',
+                    payload: error
+                })
+            })
+    }
+}
+
 export function addUser(userData) {
     return function(dispatch) {
         //#STEP 1: Dispatch when user clicks to start async add to db - this triggers TRUE and brings in async loader
@@ -7,7 +45,7 @@ export function addUser(userData) {
             type: 'START_USER_REGISTRATION',
         });
         //#STEP 2: Async post to the backend
-        axios.post('http://localhost:3007/registration/register', userData)
+        axios.post('http://localhost:3007/register', userData)
             //#STEP 4: Stop async load gif and CLEAR userInfo state
             .then(resp => {
                 dispatch({
@@ -62,5 +100,19 @@ export function addPassword(input) {
     return {
         type: 'USER_INFO_PASSWORD',
         payload: input
+    }
+}
+
+export function addReEnterPassword(input) {
+    return {
+        type: 'USER_INFO_REENTER_PASSWORD',
+        payload: input
+    }
+}
+
+export function saveRedirectURL(URL) {
+    return {
+        type: 'SAVE_REDIRECT_URL',
+        payload: URL
     }
 }

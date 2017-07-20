@@ -20,6 +20,7 @@ import CitySearchBarContent from './CitySearchBarContent'
 import FlexColumnContainer from './FlexColumnContainer'
 import HamburgerMenu from './HamburgerMenu'
 import Logo from './Logo'
+import UIUnmounter from './Containers/UIUnmounter'
 
 //data
 //import { Gyms } from '../data/gyms/gym'
@@ -32,8 +33,6 @@ class CityChooser extends Component {
   componentWillUnmount () {
     //reset dataInput in form search bar to nothing
     this.props.handleDataInput('');
-    //if burger menu is open, close it
-    this.props.handleMenuClick(true);
   }
   render () {
     const {cities, fetchingCities} = this.props;
@@ -52,7 +51,9 @@ class CityChooser extends Component {
           <div className={css(styles.fullWidth)}>
             {/*Top half content: Logo and Hamburger Menus*/}
             <div className={css(styles.padding_0)}>
-               <HamburgerMenu />
+                <UIUnmounter>
+                    <HamburgerMenu />
+                </UIUnmounter>
                <Logo
                 className={css(styles.threeQuarters)}
                />

@@ -1,8 +1,15 @@
 //user Reducer
 
 const initialState = {
+    redirectURL: '/',
+
+    loggedIn: false, //will depend on cookie and session
+    isLoggingIn: false,
+    alertMessage: null,
+
     registering: false,
     registered: false,
+
     error: null,
 
     userInfo: {
@@ -10,12 +17,46 @@ const initialState = {
         last_name: null,
         email: null,
         username: null,
-        password: null
+        password: null,
+        reEnter_password: {
+            password: null,
+            match: true
+        }
     }
 }
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
+
+        case 'START_USER_LOGIN':
+            return {
+                ...state,
+                isLoggingIn: true
+            }
+
+        case 'END_USER_LOGIN':
+            return {
+                ...state,
+                isLoggingIn: false,
+                loggedIn: true
+            }
+
+        case 'BAD_USER_LOGIN':
+            return {
+                ...state,
+                isLoggingIn: false,
+                loggedIn: false,
+                alertMessage: action.payload
+            }
+
+        case 'ERROR_USER_LOGIN':
+            return {
+                ...state,
+                isLoggingIn: false,
+                loggedIn: false,
+                error: action.payload
+            }
+
         case 'START_USER_REGISTRATION':
             return {
                 ...state,
@@ -81,6 +122,23 @@ const userReducer = (state = initialState, action) => {
                 }
             }
 
+        case 'USER_INFO_REENTER_PASSWORD':
+            return {
+                ...state,
+                userInfo: {
+                    ...state.userInfo,
+                    reEnter_password: action.payload === state.userInfo.password && state.userInfo.password.length > 0
+                    ? {
+                        password: action.payload,
+                        match: true
+                      }
+                    : {
+                        password: action.payoad,
+                        match: false
+                      }
+                }
+            }
+
         case 'CLEAR_USER_INFO':
             return {
                 ...state,
@@ -91,6 +149,12 @@ const userReducer = (state = initialState, action) => {
                     username: null,
                     password: null
                 }
+            }
+
+        case 'SAVE_REDIRECT_URL':
+            return {
+                ...state,
+                redirectURL: action.payload
             }
 
         default:

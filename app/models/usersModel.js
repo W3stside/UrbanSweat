@@ -41,4 +41,9 @@ var userSchema = new Schema({
     },
 });
 
+//PW validator
+userSchema.methods.validPassword = function(pw) {
+    return (this.password === pw);
+}
+
 module.exports = mongoose.model('User', userSchema);

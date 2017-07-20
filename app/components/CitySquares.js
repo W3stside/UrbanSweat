@@ -1,29 +1,14 @@
 //React imports
-import React, {
-    Component,
-    PropTypes
-} from 'react'
-import {
-    TransitionMotion,
-    spring,
-    presets
-} from 'react-motion'
+import React, {Component, PropTypes} from 'react'
+//REACT-MOTION
+import {TransitionMotion, spring, presets} from 'react-motion'
 //React-Router
-import {
-    browserHistory
-} from 'react-router'
+import {browserHistory} from 'react-router'
 //Aphrodite CSS - inline styles
-import {
-    StyleSheet,
-    css
-} from 'aphrodite';
+import {StyleSheet,css} from 'aphrodite';
 //redux
-import {
-    connect
-} from 'react-redux'
-import {
-    bindActionCreators
-} from 'redux'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import * as citySquaresActions from '../actions/citySquaresActions'
 //Components
 import HoverStateContainer from './HoverStateContainer'

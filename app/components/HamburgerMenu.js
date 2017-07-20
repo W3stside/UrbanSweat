@@ -31,8 +31,7 @@ export class HamburgerMenu extends Component {
           <div className={css(styles.menuLiCont)}>
             <div className={css(styles.menuLi)}><Links name={'HOME'} url={"/"} className={css(styles.linkStyle)}/></div>
             <div className={css(styles.menuLi)}><Links name={'CITIES'} url={"/FindYourSpot"} className={css(styles.linkStyle)}/></div>
-            <div className={css(styles.menuLi)}><Links name={'GYMS'} url={"/FindYourGym"} className={css(styles.linkStyle)}/></div>
-            <div className={css(styles.menuLi)}><Links name={'PROFILE'} className={css(styles.linkStyle)}/></div>
+            <div className={css(styles.menuLi)}><Links name={'PROFILE'} url={"/Profile"} className={css(styles.linkStyle)}/></div>
 
           </div>
         </div>
@@ -86,9 +85,9 @@ var styles = StyleSheet.create({
     background: 'linear-gradient(to bottom, rgba(98,252,198,1) 0%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 100%,rgba(255,255,255,1) 100%)', // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
     filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#62fcc6', endColorstr='#ffffff',GradientType=0 )", // IE6-9
 
-    borderRadius: 500,
+    //borderRadius: 500,
     height: '100%', left: 100, top: 0,
-    opacity: 0.95,
+    opacity: 0.96,
     position: 'fixed',
     /*
     backgroundColor: 'rgba(255,255,255,0.2)',
@@ -104,27 +103,28 @@ var styles = StyleSheet.create({
     zIndex: 9999,
   },
   openMenu: {
-    width: '50%',
-    '@media (max-width: 850px)': {
+    opacity: 0.96,
+    width: '90%',
+    /*'@media (max-width: 850px)': {
       width: '60%'
     },
     '@media (max-width: 550px)': {
       width: '66%'
-    },
+  },*/
     transition: 'all 0.3s linear'
   },
   closedMenu: {
+    opacity: 0,
     width: 0,
 
     transition: 'all 0.3s linear'
   },
   menuLiCont: {
-    display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-around', alignItems: 'center', textAlign: 'left',
-    font: '400 italic 3vw Helvetica',
+    display: 'flex', flexFlow: 'column nowrap', justifyContent: 'space-around', alignItems: 'flex-start', textAlign: 'left',
+    font: '400 italic 80px Helvetica',
+    marginLeft: -10,
     '@media (max-width: 850px)': {
-      flexFlow: 'row nowrap', justifyContent: 'space-around',
-      font: '400 italic 4vw Helvetica',
-      width: '100%'
+      font: '400 italic 10vw Helvetica',
     }
   },
   menuLi: {
@@ -139,11 +139,11 @@ var styles = StyleSheet.create({
   linkStyle: {
       ':hover': {
         color: 'rgba(0,0,0,1)',
-        letterSpacing: 4,
-        textShadow: '1px 0 20px black'
+        //letterSpacing: 4,
+        textShadow: '5px 5px 10px rgba(0,0,0,0.5)'
       },
       color: '#505050',
-      letterSpacing: -4,
+      letterSpacing: -7,
       textDecoration: 'none',
 
       transition: 'all 0.24s linear  '

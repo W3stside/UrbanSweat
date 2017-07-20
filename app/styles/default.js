@@ -2,62 +2,82 @@ import { StyleSheet } from 'aphrodite/no-important';
 import {colors, fonts} from './variables.js';
 
 const globalSelectorHandler = (selector, _, generateSubtreeStyles) => {
-  if (selector[0] !== '*') {
-return null;
-  }
-  return generateSubtreeStyles(selector.slice(1));
+    if (selector[0] !== '*') {
+        return null;
+    }
+    return generateSubtreeStyles(selector.slice(1));
 };
 
 const globalExtension = { selectorHandler: globalSelectorHandler };
 const extended = StyleSheet.extend([globalExtension]);
 
-function cssGlobal (stylesObj) {
-  var globalStyles = {};
-  Object.keys(stylesObj)
-.forEach( (key) => {
-  globalStyles['*' + key] = stylesObj[key];
-})
-return globalStyles;
+function cssGlobal(stylesObj) {
+    var globalStyles = {};
+    Object.keys(stylesObj)
+        .forEach((key) => {
+            globalStyles['*' + key] = stylesObj[key];
+        })
+    return globalStyles;
 }
 
 const preStyles = {
-  'html': {
-    fontFamily: fonts.font__default,
-    height: '100%', width: '100%',
-    minHeight: '100%',
-    overflowX: 'hidden',
-  },
-  'body': {
-    height: '100%', width: '100%',
-    minHeight: '100%', minWidth: 250,
-    overflowX: 'hidden',
-  },
-  '#root': { minHeight: '100%' },
-  'a': {
-    color: 'black',
-    textDecoration: 'none',
-    ':hover': {
-      color: colors.urb__teal,
-      letterSpacing: 1.2,
-      fontWeight: 500,
-      textDecoration: 'none',
-      textShadow: '1px 0 20px rgba(0,0,0,0.25)'
+    'html': {
+        fontFamily: fonts.font__default,
+        height: '100%',
+        width: '100%',
+        minHeight: '100%',
+        overflowX: 'hidden',
+    },
+    'body': {
+        height: '100%',
+        width: '100%',
+        minHeight: '100%',
+        minWidth: 250,
+        overflowX: 'hidden',
+    },
+    '#root': {
+        minHeight: '100%'
+    },
+    'a': {
+        color: 'black',
+        textDecoration: 'none',
+        ':hover': {
+            color: colors.urb__teal,
+            //letterSpacing: 1.2,
+            fontWeight: 500,
+            textDecoration: 'none',
+            textShadow: '1px 0px 10px rgba(0,0,0,0.25)'
+        },
+
+        transition: 'all 0.24s ease-in-out'
+    },
+    'large': {
+        fontSize: '400%',
+        fontWeight: 100,
+        letterSpacing: -5,
+
+        textShadow: '3px 3px 10px rgba(0, 0, 0, 0.28)',
+        textTransform: 'uppercase'
+    },
+    //Login and Reg form Styling
+    'form#authorization > button, input, label, small': {
+        fontStyle: 'italic',
+    },
+    'form#authorization > button, input, small': {
+        letterSpacing: -0.5,
+        width: '100%'
     },
 
-  transition: 'all 0.24s ease-in-out'
-  },
-
-
-  //SCROLLBAR black
-  '*': {
-    '::-webkit-scrollbar': {
-      width: 6,
-      backgroundColor: colors.urb__teal,
+    //SCROLLBAR black
+    '*': {
+        '::-webkit-scrollbar': {
+            width: 6,
+            backgroundColor: colors.urb__teal,
+        },
+        '::-webkit-scrollbar-thumb': {
+            backgroundColor: colors.urb__black,
+        },
     },
-    '::-webkit-scrollbar-thumb': {
-      backgroundColor: colors.urb__black,
-    },
-  },
 
 
   //TEXT SIZE AND BOLD
@@ -79,6 +99,10 @@ const preStyles = {
   '.fontP160': {fontSize: '160%' },
   '.fontP180': {fontSize: '180%' },
   '.fontP200':{fontSize: '200%'},
+  '.fontP250':{fontSize: '250%'},
+  '.fontP300':{fontSize: '300%'},
+  '.fontP350':{fontSize: '350%'},
+  '.fontP400':{fontSize: '400%'},
   //Bolding and such
   '.font100': {fontWeight: 100 },
   '.font200': {fontWeight: 200 },
@@ -90,6 +114,8 @@ const preStyles = {
   '.font800': {fontWeight: 800 },
   //italic
   '.italic': {fontStyle: 'italic'},
+  //UPPERCASE CSS
+  '.uppercase': {textTransform: 'uppercase'},
   //TEXT ALIGNING
   '.textCenter': {textAlign: 'center'},
   '.textLeft': {textAlign: 'left'},
@@ -132,6 +158,7 @@ const preStyles = {
 
   //WIDTH AND HEIGHTS
   //widths
+  '.fullWindowWidthHeight': {width: '100vw', height: '100vh'},
   '.fullWidthHeight': {width: '100%', height: '100%'},
   '.width50': {width: '50%'},
   '.width75': {width: '75%'},
@@ -150,6 +177,8 @@ const preStyles = {
 
   //EFFECTS
   '.boxShadow': { boxShadow: '0px 0px 8px 0.8px rgba(0,0,0,0.03)'},
+  '.textShadow': {textShadow: '0px 0px 10px rgba(0, 0, 0, 0.35)'},
+  '.textShadowRight': {textShadow: '3px 3px 10px rgba(0, 0, 0, 0.28)'},
 
   //FLEX PROPERTIES
   '.flex': {display: 'flex'},
