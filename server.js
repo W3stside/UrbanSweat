@@ -146,6 +146,8 @@ app.use(session({secret: utils.makeId(), store: new MongoStore({ url: mongooseCo
 
 // Initialize Passport and restore authentication state, if any, from the
 // passport.initialize();
+//Passport Middleware Integration (LOGIN and SESSIONS)
+app.use(passport.initialize());
 app.use(passport.session());
 
 // ====
