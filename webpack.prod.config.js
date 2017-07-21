@@ -7,9 +7,9 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
   },
-  entry: path.join(__dirname + '/app/index.js',
+  entry: path.join(__dirname + '/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '/'),
     filename: 'bundle.js',
     publicPath: '/'
   },
