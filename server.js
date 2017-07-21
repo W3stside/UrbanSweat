@@ -106,12 +106,12 @@ var path = require('path')
 app.use('/dist', express.static(path.join(__dirname, 'dist')));*/
 
 //Where to serve HTML site for React App - HOME PAGE
-app.get("/app/*", function(req, res) {
+app.get("/*", function(req, res) {
     //Check User in current session
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
-    console.log(__dirname);
+    console.log(`GET request successful, link = ${__dirname}/index.html`);
     res.sendFile(__dirname + '/index.html')
 });
 
