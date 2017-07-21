@@ -42,7 +42,7 @@ else if (process.env.NODE_ENV === 'production') {
     mongooseConnectionURI = process.env.MONGODB_URI;
     //Set static routes
     console.log('SERVER WANTS TO RENDER AT: ' + path.resolve(__dirname, 'app'))
-    //app.use('/app', express.static(path.resolve(__dirname, 'app')));
+    app.use(express.static(path.resolve(__dirname, '/static')));
 }
 
     //Express + express middleware
@@ -99,13 +99,13 @@ app.use('/models/categories', categories);
 //app.use('/', users);
 
 //Where to serve HTML site for React App - HOME PAGE
-app.get("/*", function(req, res) {
+app.get("*", function(req, res) {
     //Check User in current session
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
     console.log(`GET request successful, link = ${__dirname}/index.html`);
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(path.resolve(__dirname, 'static' 'index.html'))
 });
 
 //LOGIN STRATEGY - For when users login

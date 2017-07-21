@@ -9,7 +9,7 @@ module.exports = {
   },
   entry: "./index.js",
   output: {
-    path: __dirname,
+    path: path.resolve(__dirname, 'static')
     filename: "bundle.js",
     publicPath: "/assets/"
   },
@@ -27,7 +27,24 @@ module.exports = {
   ],
   module: {
     loaders: [
-      
+      {
+        test: /\.js$/,
+        loaders: [ 'babel' ],
+        exclude: /node_modules/,
+        include: __dirname
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
+      }
     ]
   }
 }
