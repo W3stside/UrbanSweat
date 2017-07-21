@@ -5,17 +5,15 @@ require('dotenv').config()
 
 //Start App
 var app = new(require('express'))(),
-    port = process.env.PORT || 8080;
+    port = process.env.PORT || 8080,
+    express = require('express'),
+    path = require('path');
 
-//Connect Mongo before running app
+//For cachining mongo uri later....
 var mongooseConnectionURI;
 
+//DEVELOPMENT
 if (process.env.NODE_ENV !== 'production') {
-
-/////////////////////////////////////////////////////////////
-////////////////  IF in DEV mode
-/////////////////////////////////////////////////////////////
-
     //Connect local MongoDB
     var localMongooseConnection = require('./app/models/localConnection');
     //Cache URI for rest of session
@@ -35,19 +33,18 @@ if (process.env.NODE_ENV !== 'production') {
         publicPath: config.output.publicPath
     }));
     app.use(webpackHotMiddleware(compiler));
-} else if (process.env.NODE_ENV === 'production') {
-
-/////////////////////////////////////////////////////////////
-////////////////  IF in PROD mode
-/////////////////////////////////////////////////////////////
-
+}
+//PRODUCTION
+else if (process.env.NODE_ENV === 'production') {
     //Connect local MongoDB
     var prodMongooseConnection = require('./app/models/connection');
     //Cache URI for rest of session
     mongooseConnectionURI = process.env.MONGODB_URI;
+    //Set static routes
+    app.use('/app', express.static(path.resolve(__dirname, 'app')));
 }
 
-    //Express middleware
+    //Express + express middleware
 var logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
@@ -99,11 +96,6 @@ app.use('/models/gymInstance', gymInstance);
 app.use('/models/categories', categories);
 //Login, Register here
 app.use('/', users);
-
-//TESTING FROM SO
-/*var express = require('express');
-var path = require('path')
-app.use('/dist', express.static(path.join(__dirname, 'dist')));*/
 
 //Where to serve HTML site for React App - HOME PAGE
 app.get("/*", function(req, res) {
