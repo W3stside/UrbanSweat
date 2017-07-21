@@ -1,13 +1,20 @@
 //SERVER Setup
+
+// ===
+// ===
+
 //User model for Passport + Mongo querying based on logins/regs
 var User = require('./app/models/usersModel'),
-//AUTH Packages
-session = require('express-session'),
-passport = require('passport'),
-LocalStrategy = require('passport-local').Strategy,
-FacebookStrategy = require('passport-facebook').Strategy,
-MongoStore = require('connect-mongo')(session),
-bcrypt = require('bcrypt');
+    //AUTH Packages
+    session = require('express-session'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    FacebookStrategy = require('passport-facebook').Strategy,
+    MongoStore = require('connect-mongo')(session),
+    bcrypt = require('bcrypt');
+
+// ===
+// ===
 
 //Set up .env
 require('dotenv').config()
@@ -18,7 +25,6 @@ require('dotenv').config()
 //CONNECT to MongoDB
 //For caching mongo uri later....
 var mongooseConnectionURI;
-
 //Development?
 if (process.env.NODE_ENV !== 'production') {
     //Connect local MongoDB
