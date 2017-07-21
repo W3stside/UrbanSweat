@@ -9,15 +9,17 @@ module.exports = {
   },
   entry: "./index.js",
   output: {
-    path: path.resolve(__dirname, 'static')
+    path: path.resolve(__dirname, 'static'),
     filename: "bundle.js",
     publicPath: "/assets/"
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: options.devtool && (options.devtool.indexOf("sourcemap") >= 0 || options.devtool.indexOf("source-map") >= 0)
+      minimize: true,
+      compress: {
+        warnings: false
+      }
     }),
     new webpack.DefinePlugin({
       'process.env': {
