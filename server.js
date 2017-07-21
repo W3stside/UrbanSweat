@@ -101,7 +101,8 @@ app.use('/models/categories', categories);
 app.use('/', users);
 
 //TESTING FROM SO
-//app.use('/dist', express.static(path.join(__dirname, 'dist')));
+var express = require('express');
+app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 //Where to serve HTML site for React App - HOME PAGE
 /*app.get("/*", function(req, res) {
