@@ -34,10 +34,11 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
+                include: /static/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['env'],
+                        presets: ['env', 'es2015', 'react'],
                         plugins: ['transform-runtime']
                     }
                 }
@@ -45,28 +46,21 @@ module.exports = {
             {
                 test: /\.jsx$/,
                 loader: "babel-loader", // Do not use "use" here
-            },    
+            },
             {
                 test: /\.(png|jpg)$/,
                 use: [
-                    {
-                        loader: 'url-loader?limit=8192'
-                    }
+                    {loader: 'url-loader?limit=8192'}
                 ]
             },
             {
                 test: /\.css$/,
-                use: [
-                    "style-loader",
-                    "css-loader"
-                ]
+                use: ["style-loader", "css-loader"]
             },
             {
                 test: /\.scss$/,
                 use: [
-                    {
-                        loader: 'style-loader!css-loader!sass-loader'
-                    }
+                    {loader: 'style-loader!css-loader!sass-loader'}
                 ]
             }
         ]
