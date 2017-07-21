@@ -108,7 +108,7 @@ app.get("/*", function(req, res) {
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
-    res.sendFile(__dirname + 'dist/index.html')
+    res.sendFile('./dist/index.html')
 });
 
 //LOGIN STRATEGY - For when users login
