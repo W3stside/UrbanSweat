@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.resolve('./app'),
     filename: 'bundle.js',
-    publicPath: '/assets/'
+    publicPath: '/app/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),

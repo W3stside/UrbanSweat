@@ -95,17 +95,17 @@ app.use('/models/gyms', gyms);
 app.use('/models/gymInstance', gymInstance);
 app.use('/models/categories', categories);
 //Login, Register here
-app.use('/', users);
+//app.use('/', users);
 
 //Where to serve HTML site for React App - HOME PAGE
-app.get("/*", function(req, res) {
+/*app.get("*", function(req, res) {
     //Check User in current session
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
     console.log(`GET request successful, link = ${__dirname}/index.html`);
     res.sendFile(__dirname + '/index.html')
-});
+});*/
 
 //LOGIN STRATEGY - For when users login
 passport.use(new LocalStrategy(
