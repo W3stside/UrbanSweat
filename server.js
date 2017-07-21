@@ -98,6 +98,7 @@ app.use('/models/categories', categories);
 //Login, Register here
 app.use('/', users);
 
+//Set Static folder for production
 app.use('/', express.static(path.resolve(__dirname, 'static')));
 
 //Where to serve HTML site for React App - HOME PAGE
