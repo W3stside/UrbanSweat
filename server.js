@@ -41,7 +41,7 @@ else if (process.env.NODE_ENV === 'production') {
     //Cache URI for rest of session
     mongooseConnectionURI = process.env.MONGODB_URI;
     //Set static routes
-    console.log('SERVER WANTS TO RENDER AT: ' + path.resolve(__dirname, 'app'))
+    console.log('SERVER WANTS TO RENDER AT: ' + path.resolve(__dirname))
     app.use(express.static(path.resolve(__dirname, '/static')));
 }
 
@@ -104,7 +104,7 @@ app.get("*", function(req, res) {
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
-    console.log(`GET request successful, link = ${__dirname}/index.html`);
+    console.log(`ATTEMPINT GET REQUEST AT = ${path.resolve(__dirname, 'static', 'index.html')}`);
     res.sendFile(path.resolve(__dirname, 'static', 'index.html'))
 });
 
