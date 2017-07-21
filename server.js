@@ -99,7 +99,7 @@ app.use('/models/categories', categories);
 //app.use('/', users);
 
 //Where to serve HTML site for React App - HOME PAGE
-app.get("*", function(req, res) {
+app.get("/*", function(req, res) {
     //Check User in current session
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
