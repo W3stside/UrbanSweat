@@ -32,20 +32,20 @@ module.exports = {
             // the 'transform-runtime' plugin tells babel to require the runtime
             // instead of inlining it.
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
-                include: /static/,
+                include: /app/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['env', 'es2015', 'react'],
-                        plugins: ['transform-runtime']
+                        presets: ['env', 'es2015', 'react']
+                        //plugins: ['transform-runtime']
                     }
                 }
             },
             {
                 test: /\.jsx$/,
-                loader: "babel-loader", // Do not use "use" here
+                loader: 'babel-loader', // Do not use "use" here
             },
             {
                 test: /\.(png|jpg)$/,
@@ -59,9 +59,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [
-                    {loader: 'style-loader!css-loader!sass-loader'}
-                ]
+                use: ['style-loader','css-loader','sass-loader']
             }
         ]
     }
