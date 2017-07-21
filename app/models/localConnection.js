@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-var dbURI = process.env.MONGODB_URI;
+var dbURI = `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`;
 
 mongoose.connect(dbURI)
   .then( () => {

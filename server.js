@@ -3,16 +3,24 @@
 //Set up .env
 require('dotenv').config()
 
-//Create new Express instance
-var app = new(require('express'))(),
-    port = process.env.PORT || 8080,
-    //Bring in Webpack
-    webpack = require('webpack');
+//Connect Mongo before running app
+var mongooseConnectionURI;
 
-//Check if we're currently running in a DEV environment
-/*app.configure('development', function(){
-    //DEVELOPMENT ENVIRONMENT
-    var webpack = require('webpack'),
+if (process.env.NODE_ENV !== 'production') {
+
+/////////////////////////////////////////////////////////////
+////////////////  IF in DEV mode
+/////////////////////////////////////////////////////////////
+
+    //Connect local MongoDB
+    var localMongooseConnection = require('./app/models/localConnection');
+    //Cache URI for rest of session
+    mongooseConnectionURI = `${process.env.DB_HOST}/${process.env.DB_NAME}`;
+    //Start App
+    var app = new(require('express'))(),
+        port = process.env.PORT || 8080,
+        //Bring in Webpack
+        webpack = require('webpack'),
         webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleware = require('webpack-hot-middleware'),
         //Which webpack config to use... should be dev as of now
@@ -26,23 +34,19 @@ var app = new(require('express'))(),
         publicPath: config.output.publicPath
     }));
     app.use(webpackHotMiddleware(compiler));
-});*/
-//IF in DEV mode
-if (process.env.NODE_ENV !== 'production') {
-    //DEVELOPMENT ENVIRONMENT
-    var webpackDevMiddleware = require('webpack-dev-middleware'),
-        webpackHotMiddleware = require('webpack-hot-middleware'),
-        //Which webpack config to use... should be dev as of now
-        config = require('./webpack.dev.config'),
-        //Config the compiler for Webpack
-        compiler = webpack(config);
+} else if (process.env.NODE_ENV === 'production') {
 
-    //Express + Webpack Middleware
-    app.use(webpackDevMiddleware(compiler, {
-        noInfo: true,
-        publicPath: config.output.publicPath
-    }));
-    app.use(webpackHotMiddleware(compiler));
+/////////////////////////////////////////////////////////////
+////////////////  IF in PROD mode
+/////////////////////////////////////////////////////////////
+
+    //Connect local MongoDB
+    var prodMongooseConnection = require('./app/models/connection');
+    //Cache URI for rest of session
+    mongooseConnectionURI = process.env.MONGODB_URI;
+    //Start App
+    var app = new(require('express'))(),
+        port = process.env.PORT || 8080;
 }
 
     //Express middleware
@@ -69,9 +73,6 @@ var logger = require('morgan'),
     //Mongoose
     mongoose = require('mongoose');
 
-//Connect that Database bish
-var mongooseConnect = require('./app/models/connection');
-
 //Express Middleware
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -83,7 +84,7 @@ app.use(cookieParser());
 //Express-Session start
 app.use(session({
   secret: utils.makeId(),
-  store: new MongoStore({url: `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`}),
+  store: new MongoStore({url: mongooseConnectionURI}),
   resave: false,
   saveUninitialized: false,
   //cookie: { secure: true }
