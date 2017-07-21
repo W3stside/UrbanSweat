@@ -24,7 +24,7 @@ export class SearchBar extends Component {
     nextProps !== currentProps ? SOMETHING : SOMETHING_ELSE;
   }*/
 
-  static propTypes = {
+  /*static propTypes = {
     cityIndex: React.PropTypes.number,
     className: React.PropTypes.string,
 
@@ -36,7 +36,7 @@ export class SearchBar extends Component {
 
     handleDataInput: React.PropTypes.func,
     value: React.PropTypes.string
-  }
+}*/
 
   render () {
     const styles = StyleSheet.create({
