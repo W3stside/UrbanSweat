@@ -28,28 +28,24 @@ module.exports = {
     })
   ],
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-            loader: 'babel-loader',
-            options: {
-                presets: ['env']
-            }
-        }
+        loaders: [ 'babel-loader' ],
+        exclude: /node_modules/,
+        include: __dirname
       },
       {
         test: /\.(png|jpg)$/,
-        use: {
-            loader: 'url-loader?limit=8192'
-        }
+        loader: 'url-loader?limit=8192'
       },
       {
         test: /\.css$/,
-        use: {
-            loader: 'style-loader!css-loader'    
-        }
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
       }
     ]
   }
