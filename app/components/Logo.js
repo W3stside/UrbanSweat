@@ -20,7 +20,7 @@ export default class Logo extends React.Component {
 }
 
 Logo.defaultProps = {
-  logo: require("../img/logo2.png"),
+  logo: require("../../assets/logo2.png"),
   styleLogo: {
     maxWidth: '60vh'
   }

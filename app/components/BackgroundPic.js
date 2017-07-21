@@ -11,7 +11,7 @@ BackgroundPic.propType = {
   image: React.PropTypes.string.isrequired
 }
 BackgroundPic.defaultProps = {
-  image: require("../img/berlin-stadion-min.jpg")
+  image: require("../../assets/berlin-stadion-min.jpg")
 }
 
 const styles = StyleSheet.create({
