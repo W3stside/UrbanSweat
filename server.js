@@ -50,7 +50,7 @@ else if (process.env.NODE_ENV === 'production') {
 // behalf, along with the user's profile.  The function must invoke `cb`
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'final_production') {
     console.log(process.env)
     //Implement Facebook login strategy for Production
     passport.use(new FacebookStrategy({
@@ -64,7 +64,7 @@ if (process.env.NODE_ENV === 'production') {
         });
       }
     ));
-} else if (process.env.NODE_ENV !== 'production') {
+} else if (process.env.NODE_ENV === 'production') {
     //LOGIN STRATEGY - For when users login
     passport.use(new LocalStrategy(
         function(username, password, done) {
