@@ -11,10 +11,10 @@ module.exports = {
     './src/index.js'
   ],
   output: {
-    path: `${__dirname}/dist`,
-    filename: 'bundle.js',
-    publicPath: '/static/'
-  },
+     path: path.join(__dirname, 'dist'),
+     filename: 'bundle.js',
+     publicPath: '/static/'
+   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
