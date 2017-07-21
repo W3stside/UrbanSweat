@@ -104,14 +104,14 @@ app.use('/', users);
 //app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 //Where to serve HTML site for React App - HOME PAGE
-app.get("/*", function(req, res) {
+/*app.get("/*", function(req, res) {
     //Check User in current session
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
     console.log(__dirname);
     res.sendFile(__dirname + '/index.html')
-});
+});*/
 
 //LOGIN STRATEGY - For when users login
 passport.use(new LocalStrategy(
