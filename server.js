@@ -1,4 +1,13 @@
 //SERVER Setup
+//User model for Passport + Mongo querying based on logins/regs
+var User = require('./app/models/usersModel'),
+//AUTH Packages
+session = require('express-session'),
+passport = require('passport'),
+LocalStrategy = require('passport-local').Strategy,
+FacebookStrategy = require('passport-facebook').Strategy,
+MongoStore = require('connect-mongo')(session),
+bcrypt = require('bcrypt');
 
 //Set up .env
 require('dotenv').config()
@@ -100,14 +109,6 @@ var app = new(require('express'))(),
     gymInstance = require('./app/routes/gymInstanceRoutes'),
     categories = require('./app/routes/categoryRoutes'),
     users = require('./app/routes/userRoutes'),
-    //MODELS
-    User = require('./app/models/usersModel'),
-    //AUTH Packages
-    session = require('express-session'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    MongoStore = require('connect-mongo')(session),
-    bcrypt = require('bcrypt'),
     //helper FNS
     utils = require('./utils/utils'),
     //Mongoose
