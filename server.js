@@ -51,9 +51,10 @@ else if (process.env.NODE_ENV === 'production') {
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
 if (process.env.NODE_ENV === 'production') {
+    console.log(process.env.FACEBOOK_APP_ID)
     //Implement Facebook login strategy for Production
     passport.use(new FacebookStrategy({
-        clientID: process.env.FACEBOOK_APP_ID,
+        clientID: JSON.stringify(process.env.FACEBOOK_APP_ID),
         clientSecret: process.env.FACEBOOK_APP_SECRET,
         callbackURL: `${__dirname}/auth/facebook/return`
       },
