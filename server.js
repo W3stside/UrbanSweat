@@ -102,6 +102,7 @@ app.use('/', users);
 
 //TESTING FROM SO
 var express = require('express');
+var path = require('path')
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 //Where to serve HTML site for React App - HOME PAGE
