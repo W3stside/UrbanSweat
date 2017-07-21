@@ -96,7 +96,7 @@ app.use('/models/gyms', gyms);
 app.use('/models/gymInstance', gymInstance);
 app.use('/models/categories', categories);
 //Login, Register here
-//app.use('/', users);
+app.use('/', users);
 
 app.use('/', express.static(path.resolve(__dirname, 'static')));
 
