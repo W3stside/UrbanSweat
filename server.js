@@ -105,7 +105,7 @@ app.get("*", function(req, res) {
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
     console.log(`ATTEMPINT GET REQUEST AT = ${path.resolve(__dirname, 'static', 'index.html')}`);
-    res.sendFile(path.resolve(__dirname, 'static', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'index.html'))
 });
 
 //LOGIN STRATEGY - For when users login
