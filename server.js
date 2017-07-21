@@ -104,7 +104,7 @@ app.get("/*", function(req, res) {
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
     console.log(`GET request successful, link = ${__dirname}/index.html`);
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + 'app/index.html')
 });
 
 //LOGIN STRATEGY - For when users login
