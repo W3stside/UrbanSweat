@@ -1,20 +1,24 @@
 var path = require('path')
 var webpack = require('webpack')
+console.log(path.join(__dirname, 'index.html'));
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   devServer: {
     historyApiFallback: true,
   },
-  entry: './app/index.js',
+  entry: path.join(__dirname + '/app/index.js',
   output: {
-    path: path.resolve('./app'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/app/'
+    publicPath: '/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: options.devtool && (options.devtool.indexOf("sourcemap") >= 0 || options.devtool.indexOf("source-map") >= 0)
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')

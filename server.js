@@ -41,6 +41,7 @@ else if (process.env.NODE_ENV === 'production') {
     //Cache URI for rest of session
     mongooseConnectionURI = process.env.MONGODB_URI;
     //Set static routes
+    console.log('SERVER WANTS TO RENDER AT: ' + path.resolve(__dirname, 'app'))
     app.use('/app', express.static(path.resolve(__dirname, 'app')));
 }
 
