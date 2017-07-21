@@ -10,34 +10,34 @@ import {persistStore, autoRehydrate} from 'redux-persist'
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 //Reducers
-import reducer from '../app/reducers';
+import reducer from './app/reducers';
 //Redux Provider
 import { Provider } from 'react-redux';
 
 //Styling
-import css from '../app/css/reactTransitions.css'
-import '../app/styles/default'
+import css from './app/css/reactTransitions.css'
+import './app/styles/default'
 
 //Components
-import App from '../app/components/containers/App';
-import CityChooser from '../app/components/CityChooser';
-import EnsureLoggedInContainer from '../app/components/containers/EnsureLoggedInContainer';
-import GymCatChooser from '../app/components/GymCatChooser';
-import GymChooser from '../app/components/GymChooser';
-import GymViewerPage from '../app/components/GymViewerPage';
-import Home from '../app/components/Home';
-import ProfileContainer from '../app/components/Profile/ProfileContainer';
-import Profile from '../app/components/Profile/Profile';
+import App from './app/components/containers/App';
+import CityChooser from './app/components/CityChooser';
+import EnsureLoggedInContainer from './app/components/containers/EnsureLoggedInContainer';
+import GymCatChooser from './app/components/GymCatChooser';
+import GymChooser from './app/components/GymChooser';
+import GymViewerPage from './app/components/GymViewerPage';
+import Home from './app/components/Home';
+import ProfileContainer from './app/components/Profile/ProfileContainer';
+import Profile from './app/components/Profile/Profile';
 
 //Still testing
-import RouteTransition from '../app/components/Containers/RouteTransition'
+import RouteTransition from './app/components/Containers/RouteTransition'
 
 //Auth Components
-import Login from '../app/components/Registration/Login';
-import Register from '../app/components/Registration/Register';
+import Login from './app/components/Registration/Login';
+import Register from './app/components/Registration/Register';
 
 //Whitelisted Reducer (Users)
-import users from '../app/reducers/userReducer'
+import users from './app/reducers/userReducer'
 
 const middleware = applyMiddleware( thunk, createLogger() );
 const store = createStore( reducer, undefined, compose(middleware, autoRehydrate()) );
