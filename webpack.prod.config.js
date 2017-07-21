@@ -7,11 +7,11 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
   },
-  entry: './app/index.js',
+  entry: "./index.js",
   output: {
-    path: path.resolve(__dirname, '../app/'),
-    filename: 'bundle.js',
-    publicPath: '/assets/'
+    path: __dirname,
+    filename: "bundle.js",
+    publicPath: "/assets/"
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
