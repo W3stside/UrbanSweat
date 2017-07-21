@@ -3,6 +3,10 @@
 //Set up .env
 require('dotenv').config()
 
+//Start App
+var app = new(require('express'))(),
+    port = process.env.PORT || 8080;
+
 //Connect Mongo before running app
 var mongooseConnectionURI;
 
@@ -17,10 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
     //Cache URI for rest of session
     mongooseConnectionURI = `${process.env.DB_HOST}/${process.env.DB_NAME}`;
     //Start App
-    var app = new(require('express'))(),
-        port = process.env.PORT || 8080,
-        //Bring in Webpack
-        webpack = require('webpack'),
+    var webpack = require('webpack'),
         webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleware = require('webpack-hot-middleware'),
         //Which webpack config to use... should be dev as of now
@@ -44,9 +45,6 @@ if (process.env.NODE_ENV !== 'production') {
     var prodMongooseConnection = require('./app/models/connection');
     //Cache URI for rest of session
     mongooseConnectionURI = process.env.MONGODB_URI;
-    //Start App
-    var app = new(require('express'))(),
-        port = process.env.PORT || 8080;
 }
 
     //Express middleware
@@ -103,17 +101,17 @@ app.use('/models/categories', categories);
 app.use('/', users);
 
 //TESTING FROM SO
-app.use('/dist', express.static(path.join(__dirname, 'dist')));
+//app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 //Where to serve HTML site for React App - HOME PAGE
-/*app.get("/*", function(req, res) {
+app.get("/*", function(req, res) {
     //Check User in current session
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
     console.log(__dirname);
     res.sendFile(__dirname + '/index.html')
-});*/
+});
 
 //LOGIN STRATEGY - For when users login
 passport.use(new LocalStrategy(
