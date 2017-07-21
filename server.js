@@ -98,16 +98,18 @@ app.use('/models/categories', categories);
 //Login, Register here
 //app.use('/', users);
 
+app.use('/', express.static(path.resolve(__dirname, 'static')));
+
 //Where to serve HTML site for React App - HOME PAGE
-/*app.get("*", function(req, res) {
+app.get("/*", function(req, res) {
     //Check User in current session
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
     console.log(`ATTEMPINT GET REQUEST AT = ${path.resolve(__dirname, 'static', 'index.html')}`);
     res.sendFile(path.resolve(__dirname, 'index.html'))
-});*/
-app.use('/', express.static(path.resolve(__dirname, 'static')));
+});
+
 //LOGIN STRATEGY - For when users login
 passport.use(new LocalStrategy(
     function(username, password, done) {
