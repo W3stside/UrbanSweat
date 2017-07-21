@@ -12,26 +12,28 @@ var passport = require('passport');
 var router = express.Router();
 
 //POST --> User LOGIN
-/*router.post('/login', passport.authenticate('local', {failureRedirect: '/login'}), function (req, res) {
-    //Send status to FrontEnd and let Router handle reDirect to save state
-    res.status(200).send(req.user);
-});*/
+if (process.env.NODE_ENV !== 'production') {
+    router.post('/login', function(req,res,next) {
+        passport.authenticate('local', function (err, userID, info) {
+            console.log(userID);
+            if (err) return next(err);
+            //Send reason for no user found or whatever happens thats NOT a server error
+            if(!userID) return res.send(info);
 
-router.post('/login', function(req,res,next) {
-    passport.authenticate('local', function (err, userID, info) {
-        console.log(userID);
-        if (err) return next(err);
-        //Send reason for no user found or whatever happens thats NOT a server error
-        if(!userID) return res.send(info);
+            //SUCCESS: Send status to FrontEnd and let Router handle reDirect to save state
+            req.login(userID, function (err) {
+                if(err) return next(err);
+                //if successful login
+                res.status(200).send(userID);
+            })
+        })(req, res, next);
+    });
+} else if (process.env.NODE_ENV === 'production') {
+    //Login using Facebook
+    router.post('/login', function(req,res,next) {
 
-        //SUCCESS: Send status to FrontEnd and let Router handle reDirect to save state
-        req.login(userID, function (err) {
-            if(err) return next(err);
-            //if successful login
-            res.status(200).send(userID);
-        })
-    })(req, res, next);
-});
+    });
+}
 
 //POST --> User Registration
 router.post('/register', function(req, res, next) {

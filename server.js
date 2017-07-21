@@ -3,53 +3,97 @@
 //Set up .env
 require('dotenv').config()
 
-//Start App
-var app = new(require('express'))(),
-    port = process.env.PORT || 8080,
-    express = require('express'),
-    path = require('path');
+// ===
+// ===
 
-//For cachining mongo uri later....
+//CONNECT to MongoDB
+//For caching mongo uri later....
 var mongooseConnectionURI;
 
-//DEVELOPMENT
+//Development?
 if (process.env.NODE_ENV !== 'production') {
     //Connect local MongoDB
     var localMongooseConnection = require('./app/models/localConnection');
     //Cache URI for rest of session
     mongooseConnectionURI = `${process.env.DB_HOST}/${process.env.DB_NAME}`;
-    //Start App
-    var webpack = require('webpack'),
-        webpackDevMiddleware = require('webpack-dev-middleware'),
-        webpackHotMiddleware = require('webpack-hot-middleware'),
-        //Which webpack config to use... should be dev as of now
-        config = require('./webpack.dev.config'),
-        //Config the compiler for Webpack
-        compiler = webpack(config);
-
-    //Express + Webpack Middleware
-    app.use(webpackDevMiddleware(compiler, {
-        noInfo: true,
-        publicPath: config.output.publicPath
-    }));
-    app.use(webpackHotMiddleware(compiler));
 }
 //PRODUCTION
 else if (process.env.NODE_ENV === 'production') {
-    //Connect local MongoDB
+    //Connect online MongoDB
     var prodMongooseConnection = require('./app/models/connection');
     //Cache URI for rest of session
     mongooseConnectionURI = process.env.MONGODB_URI;
-    //Set static routes
-    console.log('SERVER WANTS TO RENDER AT: ' + path.resolve(__dirname))
-
 }
 
+// ====
+// ====
+
+// Configure the Facebook strategy for use by Passport.
+//
+// OAuth 2.0-based strategies require a `verify` function which receives the
+// credential (`accessToken`) for accessing the Facebook API on the user's
+// behalf, along with the user's profile.  The function must invoke `cb`
+// with a user object, which will be set at `req.user` in route handlers after
+// authentication.
+if (process.env.NODE_ENV === 'production') {
+    //Implement Facebook login strategy for Production
+    passport.use(new FacebookStrategy({
+        clientID: process.env.FACEBOOK_APP_ID,
+        clientSecret: process.env.FACEBOOK_APP_SECRET,
+        callbackURL: `${__dirname}/auth/facebook/return`
+      },
+      function(accessToken, refreshToken, profile, cb) {
+        User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+          return cb(err, user);
+        });
+      }
+    ));
+} else if (process.env.NODE_ENV !== 'production') {
+    //LOGIN STRATEGY - For when users login
+    passport.use(new LocalStrategy(
+        function(username, password, done) {
+            //console.log(username);
+            //console.log(password);
+            User.findOne({username})
+            //Get User
+            .then(user => {
+                //CHECK USERNAME: if User is not found aka does not exist aka they got their username wrong
+                if(!user) {
+                    console.log(`No user with username ${username} found`)
+                    return done(null, false, {message: 'Incorrect username or password'})
+                };
+                console.log(`SUCCESS - User found with config: ${user}`);
+                //Otherwise if found then:
+                //CHECK PASSWORD: Compare passwords to check if good
+                bcrypt.compare(password, user.password)
+                    .then(passwordCheck => {
+                        //Validate Passwords
+                        if(!passwordCheck) {
+                            return done(null, false, {message: 'Incorrect username or password'})
+                        } else if (passwordCheck) {
+                            return done(null, {_id: user._id});
+                        }
+                    })
+                    .catch(err => {
+                        throw err;
+                    });
+            })
+            .catch( err => {
+                throw err;
+            })
+        }
+    ))
+}
+
+//Start App
+var app = new(require('express'))(),
+    port = process.env.PORT || 8080,
+    express = require('express'),
+    path = require('path'),
     //Express + express middleware
-var logger = require('morgan'),
+    logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
-
     //EXPRESS ROUTES
     cities = require('./app/routes/cityRoutes'),
     gyms = require('./app/routes/gymRoutes'),
@@ -69,37 +113,49 @@ var logger = require('morgan'),
     //Mongoose
     mongoose = require('mongoose');
 
-//Express Middleware
+// ====
+// ====
+
+//Middleware
+if (process.env.NODE_ENV !== 'production') {
+    var webpack = require('webpack'),
+        webpackDevMiddleware = require('webpack-dev-middleware'),
+        webpackHotMiddleware = require('webpack-hot-middleware'),
+        //Which webpack config to use... should be dev as of now
+        config = require('./webpack.dev.config'),
+        //Config the compiler for Webpack
+        compiler = webpack(config);
+    //Express + Webpack Middleware
+    app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+    app.use(webpackHotMiddleware(compiler));
+}
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 //Express-Session start
-app.use(session({
-  secret: utils.makeId(),
-  store: new MongoStore({url: mongooseConnectionURI}),
-  resave: false,
-  saveUninitialized: false,
-  //cookie: { secure: true }
-}))
+app.use(session({secret: utils.makeId(), store: new MongoStore({ url: mongooseConnectionURI }), resave: true, saveUninitialized: true }))
 
-//Passport Middleware Integration (LOGIN and SESSIONS)
-app.use(passport.initialize());
+// Initialize Passport and restore authentication state, if any, from the
+// passport.initialize();
 app.use(passport.session());
 
+// ====
+// ====
+
+//ROUTES here
 //db REST API routes
 app.use('/models/cities', cities);
 app.use('/models/gyms', gyms);
 app.use('/models/gymInstance', gymInstance);
 app.use('/models/categories', categories);
-//Login, Register here
+//Login, Register routes here
 app.use('/', users);
-
 //Set Static folder for production
 app.use('/', express.static(path.resolve(__dirname, 'static')));
+
+// ====
+// ====
 
 //Where to serve HTML site for React App - HOME PAGE
 app.get("/*", function(req, res) {
@@ -107,51 +163,17 @@ app.get("/*", function(req, res) {
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
     //serve main html file
-    console.log(`ATTEMPINT GET REQUEST AT = ${path.resolve(__dirname, 'static', 'index.html')}`);
     res.sendFile(path.resolve(__dirname, 'index.html'))
 });
 
-//LOGIN STRATEGY - For when users login
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        //console.log(username);
-        //console.log(password);
-        User.findOne({username})
-        //Get User
-        .then(user => {
-            //CHECK USERNAME: if User is not found aka does not exist aka they got their username wrong
-            if(!user) {
-                console.log(`No user with username ${username} found`)
-                return done(null, false, {message: 'Incorrect username or password'})
-            };
-            console.log(`SUCCESS - User found with config: ${user}`);
-            //Otherwise if found then:
-            //CHECK PASSWORD: Compare passwords to check if good
-            bcrypt.compare(password, user.password)
-                .then(passwordCheck => {
-                    //Validate Passwords
-                    if(!passwordCheck) {
-                        return done(null, false, {message: 'Incorrect username or password'})
-                    } else if (passwordCheck) {
-                        return done(null, {_id: user._id});
-                    }
-                })
-                .catch(err => {
-                    throw err;
-                });
-        })
-        .catch( err => {
-            throw err;
-        })
-    }
-))
+// ====
+// ====
 
 //Passport serialization and deserialization for persistent login sessions
 passport.serializeUser(function(userID, done) {
     console.log('SERIALIZING USER');
     done(null, userID);
 });
-
 //Once serialized - use below for subsequent requests
 passport.deserializeUser(function(userID, done) {
     console.log('DE-SERIALIZING USER');
@@ -159,6 +181,9 @@ passport.deserializeUser(function(userID, done) {
         done(err, userID);
     });
 });
+
+// ====
+// ====
 
 app.listen(port, function(error) {
     if (error) {
