@@ -64,7 +64,7 @@ componentWillUnmount() {
     if (fetchingCategories) {
       return (
         <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%'}}>
-          <img src="http://31.media.tumblr.com/0c855ac97b211311541a2fad6b3042be/tumblr_nfi14mS6qx1stn28do1_1280.gif" style={{height: '100%', width: '100%'}}/>
+          <img src="../assets/loading.gif" style={{height: '100%', width: '100%'}}/>
         </div>
     )}
     //Main content
