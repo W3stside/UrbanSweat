@@ -42,7 +42,7 @@ else if (process.env.NODE_ENV === 'production') {
     mongooseConnectionURI = process.env.MONGODB_URI;
     //Set static routes
     console.log('SERVER WANTS TO RENDER AT: ' + path.resolve(__dirname))
-    app.use('/static', express.static(path.resolve(__dirname, 'static')));
+
 }
 
     //Express + express middleware
@@ -107,7 +107,7 @@ app.use('/models/categories', categories);
     console.log(`ATTEMPINT GET REQUEST AT = ${path.resolve(__dirname, 'static', 'index.html')}`);
     res.sendFile(path.resolve(__dirname, 'index.html'))
 });*/
-
+app.use('/', express.static(path.resolve(__dirname, 'static')));
 //LOGIN STRATEGY - For when users login
 passport.use(new LocalStrategy(
     function(username, password, done) {
