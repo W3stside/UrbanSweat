@@ -27,26 +27,33 @@ module.exports = {
       }
     })
   ],
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loaders: 'babel-loader',
-        exclude: /node_modules/,
-        include: __dirname
-      },
-      {
-        test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=8192'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader'
-      }
-    ]
-  }
+    module: {
+        rules: [
+            // the 'transform-runtime' plugin tells babel to require the runtime
+            // instead of inlining it.
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env'],
+                        plugins: ['transform-runtime']
+                    }
+                }
+            },
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader?limit=8192'
+            },
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader'
+            },
+            {
+                test: /\.scss$/,
+                loader: 'style-loader!css-loader!sass-loader'
+            }
+        ]
+    }
 }
