@@ -69,6 +69,15 @@ const userReducer = (state = initialState, action) => {
                 registering: false,
                 registered: true
             }
+
+        case 'BAD_USER_REGISTRATION':
+            return {
+                ...state,
+                registering: false,
+                registered: false,
+                alertMessage: action.payload
+            }
+
         case 'ERROR_USER_REGISTRATION':
             return {
                 ...state,
@@ -147,7 +156,11 @@ const userReducer = (state = initialState, action) => {
                     last_name: null,
                     email: null,
                     username: null,
-                    password: null
+                    password: null,
+                    reEnter_password: {
+                        password: null,
+                        match: true
+                    }
                 }
             }
 

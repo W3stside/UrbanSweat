@@ -29,10 +29,9 @@ const preStyles = {
         overflowX: 'hidden',
     },
     'body': {
-        height: '100%',
-        width: '100%',
-        minHeight: '100%',
-        minWidth: 250,
+        height: '100%', width: '100%',
+        minHeight: '100%', minWidth: 250,
+        margin: 0,
         overflowX: 'hidden',
     },
     '#root': {

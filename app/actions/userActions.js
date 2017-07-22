@@ -7,7 +7,7 @@ export function loginUser(userLoginData) {
             type: 'START_USER_LOGIN',
         });
         //#STEP 2: Async post to the backend
-        axios.post(`${__dirname}/login`, userLoginData)
+        axios.post('/login', userLoginData)
             //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
             .then(resp => {
                 //if SUCCESSFUL login...
@@ -45,25 +45,27 @@ export function addUser(userData) {
             type: 'START_USER_REGISTRATION',
         });
         //#STEP 2: Async post to the backend
-        axios.post(`${__dirname}/register`, userData)
-            //#STEP 4: Stop async load gif and CLEAR userInfo state
-            .then(resp => {
-                dispatch({
-                    type: 'CLEAR_USER_INFO'
-                })
-            })
+        axios.post('/register', userData)
             //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
             .then(resp => {
                 dispatch({
                     type: 'END_USER_REGISTRATION',
                 })
             })
+            //#STEP 4: Stop async load gif and CLEAR userInfo state
+            .then( () => {
+                dispatch({
+                    type: 'CLEAR_USER_INFO'
+                })
+            })
             //#STEP 3b: IF ERROR, end gif and post error
             .catch(error => {
+                console.log(error)
                 dispatch({
                     type: 'ERROR_USER_REGISTRATION',
                     payload: error
                 })
+
             })
     }
 }

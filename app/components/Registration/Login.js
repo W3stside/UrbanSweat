@@ -11,6 +11,9 @@ import {css, StyleSheet} from 'aphrodite'
 // === ROUTER
 import { browserHistory } from 'react-router';
 
+// === COMPONENTS
+import LoadingGif from '../LoadingGif';
+
 class Login extends Component {
 
     handleFormSubmit (e) {
@@ -29,11 +32,8 @@ class Login extends Component {
 
         //onSubmission, show this, else show form
         if (users.isLoggingIn) {
-          return (
-            <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%'}}>
-              <img src="../../assets/loading.gif" style={{height: '100%', width: '100%'}}/>
-            </div>
-        )}
+          return <LoadingGif />
+        }
 
         //Input field warnings
         const inputWarning = (field) => {
@@ -49,15 +49,16 @@ class Login extends Component {
 
         return (
             <div className="flex colWrap aCenter jCenter fullWindowWidthHeight">
-                <div className="marginAuto padding25 boxShadow">
+                <div className="marginAuto padding25 boxShadow" style={{width: '65%'}}>
                     <form id="authorization" method="post" onSubmit={this.handleFormSubmit.bind(this)}>
                         {/*Username*/}
-                        <div className="flex colWrap aStart jCenter">
+                        <div className="flex colWrap aStart jCenter padding15">
                             <label htmlFor="username"><large>Username</large></label>
                             <input
                                 onChange={ (input) => {addUsername(input.target.value)}}
                                 type="username"
                                 placeholder="Username"
+                                style={{height: 22, padding: 5}}
                             />
                             <small className="padding5 margin5TB">
                                 <strong className={css(inputWarning('username') ? styles.green : styles.red)}>{inputWarning('username') ? "A-OK!" : "Username must be at least 1 character"}</strong>
@@ -67,16 +68,15 @@ class Login extends Component {
                         </div>
                         <hr/>
                         {/*Password*/}
-                        <div className="flex colWrap aStart jCenter">
+                        <div className="flex colWrap aStart jCenter padding15">
                             <label htmlFor="password"><large>Password</large></label>
                             <input
                                 onChange={ (input) => {addPassword(input.target.value)}}
                                 type="password"
                                 placeholder="Password"
+                                style={{height: 22, padding: 5}}
                             />
                         </div>
-
-                        <br/>
 
                         <div className="flex colWrap aCenter jCenter">
                             <input type="submit" value="Join us!"/>

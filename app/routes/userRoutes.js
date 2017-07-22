@@ -44,25 +44,38 @@ router.post('/register', function(req, res, next) {
         last_name = req.body.last_name,
         email = req.body.email,
         password = req.body.password;
-    //hash that shit
-    bcrypt.hash(password, saltRounds, function(err, hash) {
-        if (err) throw err;
-        // Store hash in your password DB.
-        // create User here
-        User.create({username, first_name, last_name, email, password: hash})
-            //send RESPONSE back to confirm
-            .then(userInfo => {
-                const userID = userInfo._id;
-                //Pass passport login method current Users _id
-                req.login(userID, function (err) {
-                    //redirect to home/root
-                    res.redirect('/');
-                })
-            })
-            .catch(err => {
-                return next(err);
-            })
-    });
+
+    //Check that there isn't already that email registered
+    User.findOne({email})
+        .then(resp => {
+            resp && resp.email ? console.log('REGISTERED EMAIL FOUND') : null;
+            //Stop flow since EMAIL already regged
+            if (resp && resp.email) {
+                Promise.reject(res.status(401).end('USER ALREADY REGISTERED'));
+            }
+            return false;
+        })
+        .then(() => {
+            //hash that shit
+            bcrypt.hash(password, saltRounds, function(err, hash) {
+                // Store hash in your password DB.
+                // create User here
+                User.create({username, first_name, last_name, email, password: hash})
+                    //send RESPONSE back to confirm
+                    .then(userInfo => {
+                        const userID = userInfo._id;
+                        //Pass passport login method current Users _id
+                        req.login(userID, function (err) {
+                            //redirect to home/root
+                            res.redirect('/');
+                        })
+                    })
+
+            });
+        })
+        .catch(err => {
+            return next(err);
+        })
 })
 
 module.exports = router;

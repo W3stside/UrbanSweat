@@ -16,11 +16,12 @@ module.exports = {
         publicPath: ''
     },
     plugins: [
-        new (webpack.optimize.OccurenceOrderPlugin || webpack.optimize.OccurrenceOrderPlugin)(preferEntry),
+        new (webpack.optimize.OccurenceOrderPlugin || webpack.optimize.OccurrenceOrderPlugin)(),
         new webpack.HotModuleReplacementPlugin(),
     ],
     module: {
-        rules: [{
+        rules: [
+            /*{
                 test: /\.js$/,
                 enforce: "pre",
                 use: [{
@@ -41,7 +42,7 @@ module.exports = {
                 }],
                 exclude: /node_modules/,
                 // more options in the optional jshint object
-            },
+            },*/
             {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,

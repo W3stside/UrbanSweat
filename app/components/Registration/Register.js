@@ -11,6 +11,9 @@ import {css, StyleSheet} from 'aphrodite'
 // === ROUTER
 import { browserHistory } from 'react-router';
 
+// === COMPONENTS
+import LoadingGif from '../LoadingGif';
+
 class Register extends Component {
 
     handleFormSubmit (e) {
@@ -34,11 +37,8 @@ class Register extends Component {
 
         //onSubmission, show this, else show form
         if (users.registering) {
-          return (
-            <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%'}}>
-              <img src="../assets/loading.gif" style={{height: '100%', width: '100%'}}/>
-            </div>
-        )}
+            return <LoadingGif />
+        }
 
         //Input field warnings
         const inputWarning = (field) => {
@@ -54,10 +54,14 @@ class Register extends Component {
 
         return (
             <div className="flex colWrap aCenter jCenter fullWindowWidthHeight">
-                <div className="marginAuto padding25 boxShadow">
+                <div className="marginAuto padding25 boxShadow" style={{width: '60%'}}>
                     <form id="authorization" method="post" onSubmit={this.handleFormSubmit.bind(this)}>
+
+                        {/*ERROR? MESSAGE DISPLAYED HERE FROM SERVER*/}
+                        <label className={css(styles.red)}>{users.error && users.error.response && users.error.response.status === 401 ? users.error.response.data : null}</label>
+
                         {/*First Name*/}
-                        <div className="flex colWrap aStart jCenter">
+                        <div className="flex colWrap aStart jCenter padding15">
                             <label htmlFor="first_name" >First Name</label>
                             <input
                                 onChange={ (input) => {addFirstName(input.target.value)}}
@@ -70,7 +74,7 @@ class Register extends Component {
                         </div>
                         <hr/>
                         {/*Last Name*/}
-                        <div className="flex colWrap aStart jCenter">
+                        <div className="flex colWrap aStart jCenter padding15">
                             <label htmlFor="last_name">Last Name</label>
                             <input
                                 onChange={ (input) => {addLastName(input.target.value)}}
@@ -83,7 +87,7 @@ class Register extends Component {
                         </div>
                         <hr/>
                         {/*Email*/}
-                        <div className="flex colWrap aStart jCenter">
+                        <div className="flex colWrap aStart jCenter padding15">
                             <label htmlFor="email">Email Address</label>
                             <input
                                 onChange={ (input) => {addEmail(input.target.value)}}
@@ -93,7 +97,7 @@ class Register extends Component {
                         </div>
                         <hr/>
                         {/*Username*/}
-                        <div className="flex colWrap aStart jCenter">
+                        <div className="flex colWrap aStart jCenter padding15">
                             <label htmlFor="username">Username</label>
                             <input
                                 onChange={ (input) => {addUsername(input.target.value)}}
@@ -106,7 +110,7 @@ class Register extends Component {
                         </div>
                         <hr/>
                         {/*Password*/}
-                        <div className="flex colWrap aStart jCenter">
+                        <div className="flex colWrap aStart jCenter padding15">
                             <label htmlFor="password">Password</label>
                             <input
                                 onChange={ (input) => {addPassword(input.target.value)}}
@@ -114,9 +118,9 @@ class Register extends Component {
                                 placeholder="Password"
                             />
                         </div>
-                        <br/>
+                        <hr/>
                         {/*Re-Enter Password*/}
-                        <div className="flex colWrap aStart jCenter">
+                        <div className="flex colWrap aStart jCenter padding15">
                             <label htmlFor="reenter_password">Re - Enter Password</label>
                             <input
                                 onChange={ (input) => {addReEnterPassword(input.target.value)}}
@@ -129,7 +133,7 @@ class Register extends Component {
                         </div>
                         <hr/>
 
-                        <div className="flex colWrap aCenter jCenter">
+                        <div className="flex colWrap aCenter jCenter padding15">
                             <input type="submit" value="Join us!"/>
                         </div>
 
