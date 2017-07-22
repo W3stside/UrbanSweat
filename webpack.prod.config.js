@@ -1,9 +1,9 @@
-var path = require('path')
-var webpack = require('webpack')
-console.log(path.join(__dirname, 'index.html'));
+const path = require('path')
+const webpack = require('webpack')
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map', //cheap eval does NOT work in prod
   devServer: {
     historyApiFallback: true,
   },
@@ -56,12 +56,18 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader"]
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
             },
             {
                 test: /\.scss$/,
                 use: ['style-loader','css-loader','sass-loader']
             }
         ]
-    }
+    },
+    plugins: [
+        new ExtractTextPlugin("styles.css"),
+    ]
 }
