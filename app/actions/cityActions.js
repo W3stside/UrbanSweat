@@ -9,7 +9,7 @@ export function fetchCity(id = '') {
             type: 'FETCH_CITIES_PENDING'
         })
         console.log(`GET request from ${baseURL}/models/cities/loadCats/${id}`)
-        axios.get(`${baseURL}/models/cities/loadCats/${id}`)
+        axios.get(`/models/cities/loadCats/${id}`)
             .then((resp) => {
                 setTimeout(() => {
                     dispatch({
