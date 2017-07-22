@@ -64,12 +64,12 @@ if (process.env.NODE_ENV === 'final_production') {
         });
       }
     ));
-} else if (process.env.NODE_ENV !== 'production') {
+} else {
     //LOGIN STRATEGY - For when users login
     passport.use(new LocalStrategy(
         function(username, password, done) {
-            //console.log(username);
-            //console.log(password);
+            console.log(username);
+            console.log(password);
             User.findOne({username})
             //Get User
             .then(user => {

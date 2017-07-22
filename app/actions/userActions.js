@@ -10,6 +10,7 @@ export function loginUser(userLoginData) {
         axios.post('https://urbansweat.herokuapp.com/login', userLoginData)
             //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
             .then(resp => {
+                console.log(resp)
                 //if SUCCESSFUL login...
                 if (resp.data._id) {
                     dispatch({
