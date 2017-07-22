@@ -18,8 +18,8 @@ const Actions = {
     fetchCityById: cityActions.fetchCityById,
     handleDataInput: AllActions.handleDataInput,
     handleCategoryChoice: categoryActions.handleCategoryChoice,
+    resetCategories: categoryActions.resetCategories,
     handleMenuClick: hamburgerMenuActions.handleMenuClick,
-
     updateFilteredArrByCat: filteredDataActions.updateFilteredArrByCat,
     updateGymInstanceByCityByCat: gymInstanceActions.updateGymInstanceByCityByCat
 }
@@ -59,12 +59,14 @@ componentWillUnmount() {
 }
 
   render () {
-    const {categoriesByCity, catDataInput, catClickStatus, categoriesSelected, currentFilteredDataArray, gymInstancesByCity, fetchingCities, fetchingCategories, fetchingGymInstances, handleCategoryChoice} = this.props;
+    const {categoriesByCity, catDataInput, catClickStatus, categoriesSelected, resetCategories, currentFilteredDataArray, gymInstancesByCity, fetchingCities, fetchingCategories, fetchingGymInstances, handleCategoryChoice} = this.props;
     //ASync conditional - if currently fetching data, render spinner
-    if (fetchingCategories) {
+    if (fetchingCategories || fetchingCities) {
       return (
-        <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%'}}>
-          <img src="../assets/loading.gif" style={{height: '100%', width: '100%'}}/>
+        <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'white'}}>
+          <div className="flex aCenter jCenter fullWidthHeight">
+              <img src="../assets/loading.gif" style={{maxHeight: '100%'}}/>
+          </div>
         </div>
     )}
     //Main content
@@ -83,6 +85,7 @@ componentWillUnmount() {
           {/*CatSelecta Column/Row*/}
           <CategorySelector
             categoriesSelected={categoriesSelected}
+            resetCategories={resetCategories}
             categoriesByCity={categoriesByCity}
             catClickStatus={catClickStatus}
             handleCategoryChoice={this.props.handleCategoryChoice}

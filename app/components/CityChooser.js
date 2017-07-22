@@ -1,49 +1,60 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import { StyleSheet, css } from 'aphrodite'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import { StyleSheet, css } from 'aphrodite';
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 //import actions and create 1 actions object
-import * as cityActions from '../actions/cityActions'
-import * as AllActions from '../actions/Actions'
-import * as hamburgerMenuActions from '../actions/hamburgerMenuActions'
+import * as cityActions from '../actions/cityActions';
+import * as AllActions from '../actions/Actions';
+import * as hamburgerMenuActions from '../actions/hamburgerMenuActions';
 const Actions = {
   fetchCity: cityActions.fetchCity,
   handleDataInput: AllActions.handleDataInput,
   handleMenuClick: hamburgerMenuActions.handleMenuClick,
 }
 
-import {Link} from 'react-router'
+import {Link} from 'react-router';
 
-import CitySearchBarContent from './CitySearchBarContent'
-import FlexColumnContainer from './FlexColumnContainer'
-import HamburgerMenu from './HamburgerMenu'
-import Logo from './Logo'
-import UIUnmounter from './Containers/UIUnmounter'
+import CitySearchBarContent from './CitySearchBarContent';
+import FlexColumnContainer from './FlexColumnContainer';
+import HamburgerMenu from './HamburgerMenu';
+import Logo from './Logo';
+import UIUnmounter from './Containers/UIUnmounter';
 
 //data
 //import { Gyms } from '../data/gyms/gym'
 class CityChooser extends Component {
 
   componentDidMount() {
-    //load in cities from DB
+    //ACTION load in cities from DB
     this.props.fetchCity()
   }
+
   componentWillUnmount () {
-    //reset dataInput in form search bar to nothing
+    //ACTION reset dataInput in form search bar to nothing
     this.props.handleDataInput('');
   }
   render () {
-    const {cities, fetchingCities} = this.props;
-    const citySquares = fetchingCities
+    const {cities, fetched, fetchingCities} = this.props;
+    /*const citySquares = fetchingCities
       //if cities array has any cities in it:
-      ? <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%'}}>
-          <img src="../assets/loading.gif" style={{height: '100%', width: '100%'}}/>
-        </div>
-      : <CitySearchBarContent dbData={cities}/>;
-      //show loading bar or spinner or whatever
-
+      ? <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'white'}}>
+          <div className="flex aCenter jCenter fullWidthHeight">
+              <img src={require("../assets/loading.gif")} style={{maxHeight: '100%'}}/>
+          </div>
+      </div>
+      : <CitySearchBarContent dbData={cities}/>;*/
+    //show loading bar or spinner or whatever
+    if (fetchingCities) {
+        return (
+            <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'white'}}>
+                <div className="flex aCenter jCenter fullWidthHeight">
+                    <img src={require("../assets/loading.gif")} style={{maxHeight: '100%'}}/>
+                </div>
+            </div>
+        )
+    }
     return (
       <FlexColumnContainer>
 
@@ -61,7 +72,7 @@ class CityChooser extends Component {
           </div>
         </div>
 
-        {citySquares}
+        {cities.length > 1 ? <CitySearchBarContent dbData={cities}/> : null}
 
       </FlexColumnContainer>
     );

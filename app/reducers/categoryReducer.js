@@ -52,6 +52,12 @@ const categoryReducer = (state = initialState, action) => {
                     })(action.payload.cat) //end furst fn
             }
 
+        case 'RESET_CATEGORIES':
+                return {
+                    ...state,
+                    categoriesSelected: []
+                }
+
         default:
             return state;
     }

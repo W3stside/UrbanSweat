@@ -32,3 +32,9 @@ export function handleCategoryChoice(cat) {
         }
     }
 }
+
+export function resetCategories() {
+    return {
+        type: 'RESET_CATEGORIES'
+    }
+}

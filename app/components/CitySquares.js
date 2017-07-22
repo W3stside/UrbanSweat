@@ -26,6 +26,7 @@ class CitySquares extends Component {
     handleFilteredData(data) {
         this.props.handleFilteredDataAction(data);
     }
+
     // === SET default ELEM style
     getDefaultStyles() {
         //pull in cities from State Object

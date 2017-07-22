@@ -30,6 +30,15 @@ const cityReducer = (state = initialState, action) => {
                 cities: action.payload
             }
             break;
+
+        case "FETCH_CITIES_RESET":
+            return {
+                ...state,
+                fetching: false,
+                fetched: false
+            }
+            break;
+
         default:
             return state;
     }

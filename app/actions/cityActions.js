@@ -40,3 +40,9 @@ export function fetchCityById(id = 'all') {
             })
     }
 }
+
+export function resetCity() {
+    return {
+        type: 'FETCH_CITIES_RESET'
+    }
+}

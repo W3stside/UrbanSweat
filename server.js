@@ -28,9 +28,10 @@ var mongooseConnectionURI;
 //Development?
 if (process.env.NODE_ENV !== 'production') {
     //Connect local MongoDB
+    console.log('Connecting to MongoDB....')
     var localMongooseConnection = require('./app/models/localConnection');
     //Cache URI for rest of session
-    mongooseConnectionURI = `${process.env.DB_HOST}/${process.env.DB_NAME}`;
+    mongooseConnectionURI = `mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`;
 }
 //PRODUCTION
 else if (process.env.NODE_ENV === 'production') {
@@ -51,7 +52,6 @@ else if (process.env.NODE_ENV === 'production') {
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
 if (process.env.NODE_ENV === 'final_production') {
-    console.log(process.env)
     //Implement Facebook login strategy for Production
     passport.use(new FacebookStrategy({
         clientID: JSON.stringify(process.env.FACEBOOK_APP_ID),
@@ -64,7 +64,7 @@ if (process.env.NODE_ENV === 'final_production') {
         });
       }
     ));
-} else if (process.env.NODE_ENV === 'production') {
+} else if (process.env.NODE_ENV !== 'production') {
     //LOGIN STRATEGY - For when users login
     passport.use(new LocalStrategy(
         function(username, password, done) {

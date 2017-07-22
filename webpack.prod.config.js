@@ -14,13 +14,14 @@ module.exports = {
     publicPath: ""
   },
   plugins: [
+    new webpack.optimize.DedupePlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    /*new webpack.optimize.UglifyJsPlugin({
+    new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
         warnings: false
       }
-  }),*/
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
@@ -48,7 +49,7 @@ module.exports = {
                 loader: 'babel-loader', // Do not use "use" here
             },
             {
-                test: /\.(png|jpg)$/,
+                test: /\.(png|jpg|gif)$/,
                 use: [
                     {loader: 'url-loader?limit=8192'}
                 ]
