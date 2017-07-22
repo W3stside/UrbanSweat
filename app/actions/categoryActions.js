@@ -9,7 +9,7 @@ export function fetchCategoriesByCity(id = 'all') {
             type: 'FETCH_CATEGORIES_ARRAY_PENDING',
             payload: true,
         })
-        axios.get(`${baseURL}/models/cities/loadCatsArray/${id}` )
+        axios.get(`/models/cities/loadCatsArray/${id}` )
             .then((resp) => {
                 setTimeout(() => {
                     dispatch({

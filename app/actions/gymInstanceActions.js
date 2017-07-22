@@ -8,7 +8,7 @@ export function fetchGymInstance(id = 'all') {
         dispatch({
             type: 'FETCH_GYM_INSTANCE_PENDING'
         })
-        axios.get(`${baseURL}/models/gymInstance/fetchGymAndCategories/${id}`)
+        axios.get(`/models/gymInstance/fetchGymAndCategories/${id}`)
             .then((resp) => {
                 dispatch({
                     type: 'FETCH_GYM_INSTANCE_FULFILLED',
@@ -29,7 +29,7 @@ export function fetchGymInstancesByCity(id = 'all') {
         dispatch({
             type: 'FETCH_GYM_INSTANCE_BY_CITY_PENDING'
         })
-        axios.get(`${baseURL}/models/gymInstance/fetchGymInstancesByCity/${id}`)
+        axios.get(`/models/gymInstance/fetchGymInstancesByCity/${id}`)
             .then((resp) => {
                 dispatch({
                     type: 'FETCH_GYM_INSTANCE_BY_CITY_FULFILLED',

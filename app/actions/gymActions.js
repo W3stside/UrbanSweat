@@ -8,7 +8,7 @@ export function fetchGym(city_id = '') {
         dispatch({
             type: 'FETCH_GYMS_PENDING'
         })
-        axios.get(`${baseURL}/models/gyms/${city_id}`)
+        axios.get(`/models/gyms/${city_id}`)
             .then((resp) => {
                 dispatch({
                     type: 'FETCH_GYMS_FULFILLED',

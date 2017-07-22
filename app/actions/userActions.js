@@ -1,7 +1,5 @@
 import axios from 'axios'
 var baseURL;
-//Set baseURL based on NODE_ENV
-process.env.NODE_ENV !== 'production' ? baseURL = 'http://localhost:3007' : 'https://urbansweat.herokuapp.com';
 
 export function loginUser(userLoginData) {
     return function (dispatch) {
@@ -10,7 +8,7 @@ export function loginUser(userLoginData) {
             type: 'START_USER_LOGIN',
         });
         //#STEP 2: Async post to the backend
-        axios.post(`${baseURL}/login`, userLoginData)
+        axios.post(`/login`, userLoginData)
             //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
             .then(resp => {
                 console.log(resp)
@@ -49,7 +47,7 @@ export function addUser(userData) {
             type: 'START_USER_REGISTRATION',
         });
         //#STEP 2: Async post to the backend
-        axios.post(`${baseURL}/register`, userData)
+        axios.post(`/register`, userData)
             //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
             .then(resp => {
                 dispatch({
