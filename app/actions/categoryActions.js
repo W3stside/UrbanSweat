@@ -1,4 +1,7 @@
 import axios from 'axios'
+var baseURL;
+//Set baseURL based on NODE_ENV
+process.env.NODE_ENV !== 'production' ? baseURL = 'http://localhost:3007' : 'https://urbansweat.herokuapp.com';
 
 export function fetchCategoriesByCity(id = 'all') {
     return function(dispatch) {
@@ -6,7 +9,7 @@ export function fetchCategoriesByCity(id = 'all') {
             type: 'FETCH_CATEGORIES_ARRAY_PENDING',
             payload: true,
         })
-        axios.get('http://localhost:3007/models/cities/loadCatsArray/' + id)
+        axios.get(`${baseURL}/models/cities/loadCatsArray/${id}` )
             .then((resp) => {
                 setTimeout(() => {
                     dispatch({
