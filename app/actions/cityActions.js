@@ -3,11 +3,12 @@ var baseURL;
 //Set baseURL based on NODE_ENV
 process.env.NODE_ENV !== 'production' ? baseURL = 'http://localhost:3007' : 'https://urbansweat.herokuapp.com';
 
-export function fetchCity(id = 'all') {
+export function fetchCity(id = '') {
     return function(dispatch) {
         dispatch({
             type: 'FETCH_CITIES_PENDING'
         })
+        console.log(`GET request from ${baseURL}/models/cities/loadCats/${id}`)
         axios.get(`${baseURL}/models/cities/loadCats/${id}`)
             .then((resp) => {
                 setTimeout(() => {
