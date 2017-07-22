@@ -7,7 +7,7 @@ export function loginUser(userLoginData) {
             type: 'START_USER_LOGIN',
         });
         //#STEP 2: Async post to the backend
-        axios.post('/login', userLoginData)
+        axios.post('https://urbansweat.herokuapp.com/login', userLoginData)
             //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
             .then(resp => {
                 //if SUCCESSFUL login...
@@ -45,7 +45,7 @@ export function addUser(userData) {
             type: 'START_USER_REGISTRATION',
         });
         //#STEP 2: Async post to the backend
-        axios.post('/register', userData)
+        axios.post('https://urbansweat.herokuapp.com/register', userData)
             //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
             .then(resp => {
                 dispatch({
