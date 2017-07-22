@@ -9,7 +9,7 @@ export function fetchCity(id = 'all') {
             type: 'FETCH_CITIES_PENDING'
         })
         console.log(`GET request to ${baseURL}/models/cities/loadCats/${id}`)
-        axios.get(`https://urbansweat.herokuapp.com/models/cities/loadCats/${id}`)
+        axios.get(`/models/cities/loadCats/${id}`)
             .then((resp) => {
                 setTimeout(() => {
                     dispatch({
