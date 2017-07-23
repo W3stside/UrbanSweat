@@ -140,7 +140,7 @@ if (process.env.NODE_ENV !== 'production') {
 } else if (process.env.NODE_ENV === 'production') {
     //Set "/static/" in the file system as root for serving static files - e.g webpack bundles here so... you probably want to serve... from there... brochacho.
     //Can set initial argument as "Virtual path" e.g app.use('/potatoes', express.static(path.resolve(__dirname, 'static'))); --> http://localhost:8000/potatoes/picturesOfCatsForGrandma.jpeg
-    app.use('/static', express.static(path.resolve(__dirname, 'static')));
+    app.use('/', express.static(path.resolve(__dirname, 'static')));
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //

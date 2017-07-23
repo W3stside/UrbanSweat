@@ -11,7 +11,7 @@ module.exports = {
   entry: "./index.js",
   output: {
     //WHERE TO OUTPUT FILES FROM WEBPACK - /static/
-    path: path.resolve(__dirname, '/static'),
+    path: path.resolve(__dirname, 'static'),
     filename: "bundle.js",
     //WHERE PUBLIC ASSETS ARE SERVED FROM -- RELATIVE TO "PATH" ABOVE ... E.G PUBLICPATH NOW = /static/assets/.....
     publicPath: "/assets/"
