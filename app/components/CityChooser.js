@@ -48,7 +48,7 @@ class CityChooser extends Component {
     //show loading bar or spinner or whatever
     if (fetchingCities) {
         return (
-            <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'white'}}>
+            <div style={{position: 'fixed', top: 0, left: 0, minWidth: '100vw', minHeight: '100vh', backgroundColor: 'white'}}>
                 <div className="flex aCenter jCenter fullWidthHeight">
                     <img src={require("../assets/loading.gif")} style={{maxHeight: '100%'}}/>
                 </div>
@@ -58,10 +58,10 @@ class CityChooser extends Component {
     return (
       <FlexColumnContainer>
 
-        <div className={css(styles.fullWidth)}>
-          <div className={css(styles.fullWidth)}>
+        <div className="textCenter width100">
+          <div className="textCenter width100">
             {/*Top half content: Logo and Hamburger Menus*/}
-            <div className={css(styles.padding_0)}>
+            <div className={"flex aCenter jCenter padding0 width100 " + css(styles.transition2s)}>
                 <UIUnmounter>
                     <HamburgerMenu />
                 </UIUnmounter>
@@ -104,10 +104,8 @@ function mapActionCreatorsToProps (dispatch) {
 
 const styles = StyleSheet.create({
 
-  padding_0: {
-    padding: '0',
+  transition2s: {
     transition: 'all 2s linear',
-    width: '100%'
   },
   searchBar: {
     ':focus': {
@@ -122,10 +120,6 @@ const styles = StyleSheet.create({
     outline: 'none !important',
     textAlign: 'center',
     textTransform: 'lowercase'
-  },
-  fullWidth: {
-    textAlign: 'center',
-    width: '100%'
   },
   mtAutoFull: {
     marginTop: 'auto',
@@ -145,7 +139,7 @@ const styles = StyleSheet.create({
     height: '45vh',
     overflow: 'hidden',
     '@media (max-width: 850px)': {
-      marginTop: 60
+      //marginTop: 60
     },
     transition: 'all 0.5s linear'
   }

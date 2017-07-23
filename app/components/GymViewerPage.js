@@ -29,6 +29,7 @@ import CategorySelector from './CategorySelector'
 import GymContent from './GymLowerHalfContent'
 import HamburgerMenu from './HamburgerMenu'
 import Logo from './Logo'
+import LoadingGif from './LoadingGif'
 
 // === APHRODITE CSS
 import { StyleSheet, css } from 'aphrodite';
@@ -62,13 +63,8 @@ componentWillUnmount() {
     const {categoriesByCity, catDataInput, catClickStatus, categoriesSelected, resetCategories, currentFilteredDataArray, gymInstancesByCity, fetchingCities, fetchingCategories, fetchingGymInstances, handleCategoryChoice} = this.props;
     //ASync conditional - if currently fetching data, render spinner
     if (fetchingCategories || fetchingCities) {
-      return (
-        <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'white'}}>
-          <div className="flex aCenter jCenter fullWidthHeight">
-              <img src="../assets/loading.gif" style={{maxHeight: '100%'}}/>
-          </div>
-        </div>
-    )}
+      return <LoadingGif />
+    }
     //Main content
     return (
       <div className="flex colNoWrap fullWidthHeight">
@@ -104,148 +100,6 @@ componentWillUnmount() {
     );
   }
 }
-
-const styles = StyleSheet.create({
-    border: {
-        border: '0px solid black'
-    },
-    fontDef: {
-        color: 'ghostwhite',
-        font: 'italic bold 250% "Helvetica"',
-    },
-    flexContainer: {
-        display: '-webkit-flex',
-        display: '-moz-flex',
-        display: '-o-flex',
-        display: 'flex',
-        //margin: '0 auto',
-        position: 'relative'
-    },
-
-    inlineFlexContainer: {
-        display: '-webkit-inline-flex',
-        display: '-moz-inline-flex',
-        display: '-o-inline-flex',
-        display: 'inline-flex',
-        margin: '0 auto',
-        position: 'relative',
-        overflow: 'hidden'
-    },
-    centerFlexContainer: {
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    flex10: {
-        flex: '1 1 10%',
-        minHeight: 200,
-        position: 'relative'
-    },
-    flex15: {
-        flex: '1 1 15%'
-    },
-    flex20: {
-        flex: '1 1 20%'
-    },
-    flex25: {
-        flex: '1 1 25%'
-    },
-    flex75: {
-        flex: '1 1 75%'
-    },
-    flex90: {
-        flex: '1 1 90%'
-    },
-    rowWrap: {
-        flexFlow: 'row wrap'
-    },
-
-    colWrap: {
-        flexFlow: 'column wrap'
-    },
-    colNoWrap: {
-        flexFlow: 'column nowrap'
-    },
-    alignChildrenCenter: {
-        alignItems: 'center'
-    },
-
-    alignChildrenTop: {
-        alignItems: 'flex-start'
-    },
-
-    justifyCenter: {
-        justifyContent: 'center'
-    },
-
-    flex1: {
-        flex: '1'
-    },
-    marginTop50: {
-        marginTop: 50
-    },
-    fullWidthHeight: {
-        height: '100%',
-        width: '100%'
-    },
-    fullHeight: {
-        height: '100%',
-    },
-    flexItemFullWidth: {
-        width: '100%'
-    },
-    stickRight: {
-        marginLeft: 'auto',
-    },
-    minWidth: {
-        minWidth: 500
-    },
-    searchBarForm: {
-        ':focus': {
-            border: '6px solid #a7ffd5'
-        },
-    },
-    defaultFont: {
-        color: 'black',
-        font: 'italic 150% "Helvetica"',
-        textAlign: 'center'
-    },
-    header: {
-        textShadow: '0px 0px 8px black'
-    },
-    blackBG: {
-        backgroundColor: 'white',
-        padding: '2%',
-        textAlign: 'center'
-    },
-    catSelecta: {
-        ':first_child': {
-            marginTop: 50,
-        }
-    },
-    catDivs: {
-        ':hover': {
-            boxShadow: '0px 0px 5px rgba(0,0,0,0.25)',
-        },
-        ':active': {
-            boxShadow: '0px 0px 8px rgba(255,0,0,0.5)',
-        },
-        cursor: 'pointer',
-        minHeight: 120,
-        maxHeight: 120,
-        overflow: 'hidden'
-    },
-    scrollBarThinBlack: {
-        '::-webkit-scrollbar': {
-            width: 6,
-            backgroundColor: 'transparent',
-        },
-        '::-webkit-scrollbar-thumb': {
-            backgroundColor: 'transparent',
-        },
-    }
-})
 
 // === Pass STATE from STORE as PROPS
 function mapStateToProps(state) {

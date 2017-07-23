@@ -44,6 +44,10 @@ persistStore(store, {whitelist: ['users']}, () => {
     console.log('Rehydration complete');
 });
 
+
+//Check ENV and log
+!PRODUCTION ? console.log('CURRENTLY IN DEVELOPMENT MODE') : null; 
+
 //Top level render
 render((
 <Provider store={store}>

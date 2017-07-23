@@ -130,11 +130,12 @@ if (process.env.NODE_ENV !== 'production') {
         webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleware = require('webpack-hot-middleware'),
         //Which webpack config to use... should be dev as of now
-        config = require('./webpack.dev.config'),
+        config = require('./webpack.dev.config.js'),
         //Config the compiler for Webpack
         compiler = webpack(config);
     //Express + Webpack Middleware
     app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+    console.log(`IMPORTANT: publicPath = ${config.output.publicPath}`)
     app.use(webpackHotMiddleware(compiler));
 }
 app.use(logger('dev'));

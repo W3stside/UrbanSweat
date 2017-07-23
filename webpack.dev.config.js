@@ -13,11 +13,15 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: ''
+        publicPath: "/assets/"
     },
+    //watch: true,
     plugins: [
-        new (webpack.optimize.OccurenceOrderPlugin || webpack.optimize.OccurrenceOrderPlugin)(),
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.DefinePlugin({
+          PRODUCTION: JSON.stringify(false)
+        })
     ],
     module: {
         rules: [

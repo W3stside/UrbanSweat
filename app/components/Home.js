@@ -14,9 +14,9 @@ import { bindActionCreators } from 'redux'
 
 const Home = ({users}) => {
 
-    var bgImgStyle = {minWidth: '100%', height: 'auto', position: 'absolute', bottom: 0};
-    var bgPic = require("../img/grey-berlin-arch.jpg");
-    var logo = require("../img/logo2.png");
+    var bgImgStyle = {minWidth: '100%', minHeight: '100%', position: 'absolute', bottom: 0};
+    var bgPic = require("../assets/grey-berlin-arch.jpg");
+    var logo = require("../assets/logo2.png");
 
     const dynamicHomeLinks =
         //Check state if user logged in? If so then do not render login and join links
@@ -34,14 +34,16 @@ const Home = ({users}) => {
             </div> );
 
     return (
-        <div style={{width: '100%'}}>
+        <div className="flex aCenter jCenter fullWidthHeight" style={{minHeight: '100vh'}}>
             <BackgroundPic styleBG={bgImgStyle} image={bgPic} />
-            <div className="container-fluid">
-                <div className="flex rowWrap textCenter">
-                    <div className="flex xsP6 smP4 aCenter jCenter">
+            <div className="container-fluid width100">
+                <div className="flex rowWrap aCenter jCenter textCenter">
+                    <div className="flex xsP12 smP6 aCenter jCenter" style={{maxWidth: 500}}>
                         <Logo logo={logo}/>
                     </div>
-                    {dynamicHomeLinks}
+                    <div id="homeLinks" className="flex rowWrap aCenter jCenter xsP12 smP6">
+                        {dynamicHomeLinks}
+                    </div>
                 </div>
                 <div className="row text-center">
 

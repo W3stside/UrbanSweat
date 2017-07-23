@@ -1,6 +1,7 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map', //cheap eval does NOT work in prod
@@ -11,21 +12,19 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'static'),
     filename: "bundle.js",
-    publicPath: ""
+    publicPath: "/assets/"
   },
   plugins: [
-    new webpack.optimize.DedupePlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compress: {
-        warnings: false
-      }
+    new UglifyJSPlugin({
+        minimize: true,
+        compress: {
+            warnings: false
+        },
+        sourceMap: true,
     }),
     new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
+      'process.env.ENV': JSON.stringify('production')
     })
   ],
     module: {
@@ -58,7 +57,8 @@ module.exports = {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader?sourceMap",
-                    use: "css-loader?sourceMap"
+                    use: "css-loader?sourceMap",
+                    publicPath: "/static"
                 })
             },
             {

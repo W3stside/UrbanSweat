@@ -121,6 +121,7 @@ const preStyles = {
   '.textRight': {textAlign: 'right'},
 
   //PADDING AND MARGINS
+  '.padding0': {padding: 0},
   '.padding5': {padding: 5},
   '.padding5LR': {paddingLeft: 5, paddingRight: 5},
   '.padding5TB': {paddingTop: 5, paddingBottom: 5},
