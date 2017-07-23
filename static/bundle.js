@@ -4787,11 +4787,8 @@ var styles = _aphrodite.StyleSheet.create({
     zIndex: '-99999'
   },
   bgPic: {
-    minWidth: '100%', height: 'auto',
-    filter: 'brightness(80%)',
-    '@media (max-width: 550px)': {
-      height: '100%'
-    }
+    minWidth: '100%', minHeight: '100%',
+    filter: 'brightness(80%)'
   }
 });
 
@@ -39695,7 +39692,7 @@ var preStyles = {
     },
     'body': {
         height: '100%', width: '100%',
-        minHeight: '100%', minWidth: 250,
+        minHeight: '100%', minWidth: 300,
         margin: 0,
         overflowX: 'hidden'
     },

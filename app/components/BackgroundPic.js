@@ -22,11 +22,8 @@ const styles = StyleSheet.create({
     zIndex: '-99999'
   },
   bgPic: {
-    minWidth: '100%', height: 'auto',
+    minWidth: '100%', minHeight: '100%',
     filter: 'brightness(80%)',
-    '@media (max-width: 550px)': {
-      height: '100%'
-    }
   }
 })
 

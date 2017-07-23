@@ -30,7 +30,7 @@ const preStyles = {
     },
     'body': {
         height: '100%', width: '100%',
-        minHeight: '100%', minWidth: 250,
+        minHeight: '100%', minWidth: 300,
         margin: 0,
         overflowX: 'hidden',
     },
