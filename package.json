@@ -69,7 +69,7 @@
     },
     "scripts": {
         "build": "webpack -p --config webpack.prod.config.js --progress --colors",
-        "start": "SET NODE_ENV=development && node server.js",
+        "start": "node server.js",
         "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register",
         "test:watch": "npm test -- --watch"
     },
