@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
-
+//REDUX
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //import actions and create 1 actions object
@@ -13,17 +13,16 @@ const Actions = {
   handleDataInput: AllActions.handleDataInput,
   handleMenuClick: hamburgerMenuActions.handleMenuClick,
 }
-
+//ROUTER Links
 import {Link} from 'react-router';
-
+//COMPONENTS
 import CitySearchBarContent from './CitySearchBarContent';
 import FlexColumnContainer from './FlexColumnContainer';
 import HamburgerMenu from './HamburgerMenu';
 import Logo from './Logo';
+import LoadingGif from './LoadingGif';
 import UIUnmounter from './Containers/UIUnmounter';
 
-//data
-//import { Gyms } from '../data/gyms/gym'
 class CityChooser extends Component {
 
   componentDidMount() {
@@ -37,55 +36,34 @@ class CityChooser extends Component {
   }
   render () {
     const {cities, fetched, fetchingCities} = this.props;
-    /*const citySquares = fetchingCities
-      //if cities array has any cities in it:
-      ? <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'white'}}>
-          <div className="flex aCenter jCenter fullWidthHeight">
-              <img src={require("../assets/loading.gif")} style={{maxHeight: '100%'}}/>
-          </div>
-      </div>
-      : <CitySearchBarContent dbData={cities}/>;*/
+
     //show loading bar or spinner or whatever
-    if (fetchingCities) {
-        return (
-            <div style={{position: 'fixed', top: 0, left: 0, minWidth: '100vw', minHeight: '100vh', backgroundColor: 'white'}}>
-                <div className="flex aCenter jCenter fullWidthHeight">
-                    <img src={require("../assets/loading.gif")} style={{maxHeight: '100%'}}/>
-                </div>
-            </div>
-        )
-    }
+    if (fetchingCities) return <LoadingGif />
+
     return (
       <FlexColumnContainer>
 
         <div className="textCenter width100">
           <div className="textCenter width100">
             {/*Top half content: Logo and Hamburger Menus*/}
-            <div className={"flex aCenter jCenter padding0 width100 " + css(styles.transition2s)}>
+            <div className={`flex aCenter jCenter padding0 width100 ${css(styles.transition2s)}`}>
                 <UIUnmounter>
                     <HamburgerMenu />
                 </UIUnmounter>
-               <Logo
-                className={css(styles.threeQuarters)}
-               />
+                <div className="flex aCenter jCenter" style={{maxWidth: 450}}>
+                    <Logo className={css(styles.threeQuarters)}/>
+                </div>
             </div>
           </div>
         </div>
 
+        {/*Make sure NOT render CitySearchBar if aSync is nay finito or... an array for that matter.*/}
         {cities.length > 1 ? <CitySearchBarContent dbData={cities}/> : null}
 
       </FlexColumnContainer>
     );
   }
 }
-
-/*<SearchBar
-  dataToFilter={cities && cities.length ? cities : null}
-  placeholder='find your new gym'
-  className={css(styles.searchBar)}
- >
-    <CitySquares/>
-</SearchBar>*/
 
 ////////////////////////////////
 //State and Action Mapping

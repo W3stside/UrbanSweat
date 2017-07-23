@@ -1,9 +1,6 @@
 //SERVER Setup
 
-// ===
-// ===
-
-//User model for Passport + Mongo querying based on logins/regs
+    //Import User model for Passport + Mongo querying based on logins/regs
 var User = require('./app/models/usersModel'),
     //AUTH Packages
     session = require('express-session'),
@@ -13,17 +10,17 @@ var User = require('./app/models/usersModel'),
     MongoStore = require('connect-mongo')(session),
     bcrypt = require('bcrypt');
 
-// ===
-// ===
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + Plug in .ENV file for whatever that does. jk i actually know what it does
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-//Set up .env
+//Plug in .ENV file for whatever that does. jk i actually know what it does
 require('dotenv').config()
 
-// ===
-// ===
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + CONNECT to MongoDB && cache mongo uri later....
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-//CONNECT to MongoDB
-//For caching mongo uri later....
 var mongooseConnectionURI;
 //Development?
 if (process.env.NODE_ENV !== 'production') {
@@ -41,16 +38,16 @@ else if (process.env.NODE_ENV === 'production') {
     mongooseConnectionURI = process.env.MONGODB_URI;
 }
 
-// ====
-// ====
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + Configure the Strategy for use by Passport.
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-// Configure the Facebook strategy for use by Passport.
-//
 // OAuth 2.0-based strategies require a `verify` function which receives the
 // credential (`accessToken`) for accessing the Facebook API on the user's
 // behalf, along with the user's profile.  The function must invoke `cb`
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
+
 if (process.env.NODE_ENV === 'final_production') {
     //Implement Facebook login strategy for Production
     passport.use(new FacebookStrategy({
@@ -101,8 +98,11 @@ if (process.env.NODE_ENV === 'final_production') {
     ))
 }
 
-//Start App
-var app = new(require('express'))(),
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + Start App + bring in middleware and routes
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+
+var app = new (require('express'))(),
     port = process.env.PORT || 8080,
     express = require('express'),
     path = require('path'),
@@ -121,10 +121,11 @@ var app = new(require('express'))(),
     //Mongoose
     mongoose = require('mongoose');
 
-// ====
-// ====
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + DEV OR PROD - MODE START POINT
+// + Conditionally set app starting points....
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-//Middleware
 if (process.env.NODE_ENV !== 'production') {
     var webpack = require('webpack'),
         webpackDevMiddleware = require('webpack-dev-middleware'),
@@ -135,9 +136,17 @@ if (process.env.NODE_ENV !== 'production') {
         compiler = webpack(config);
     //Express + Webpack Middleware
     app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-    console.log(`IMPORTANT: publicPath = ${config.output.publicPath}`)
     app.use(webpackHotMiddleware(compiler));
+} else if (process.env.NODE_ENV === 'production') {
+    //Set "/static/" in the file system as root for serving static files - e.g webpack bundles here so... you probably want to serve... from there... brochacho.
+    //Can set initial argument as "Virtual path" e.g app.use('/potatoes', express.static(path.resolve(__dirname, 'static'))); --> http://localhost:8000/potatoes/picturesOfCatsForGrandma.jpeg
+    app.use(express.static(path.resolve(__dirname, 'static')));
 }
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + Express Middleware
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -145,30 +154,30 @@ app.use(cookieParser());
 //Express-Session start
 app.use(session({secret: utils.makeId(), store: new MongoStore({ url: mongooseConnectionURI }), resave: true, saveUninitialized: true }))
 
-// Initialize Passport and restore authentication state, if any, from the
-// passport.initialize();
-//Passport Middleware Integration (LOGIN and SESSIONS)
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + Initialize Passport and restore authentication state, if any, from the Strategies and userRoutes
+// + Passport Middleware Integration (LOGIN and SESSIONS)
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-// ====
-// ====
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + ROUTES here
+// + db REST API routes
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-//ROUTES here
-//db REST API routes
 app.use('/models/cities', cities);
 app.use('/models/gyms', gyms);
 app.use('/models/gymInstance', gymInstance);
 app.use('/models/categories', categories);
 //Login, Register routes here
 app.use('/', users);
-//Set Static folder for production
-app.use('/', express.static(path.resolve(__dirname, 'static')));
 
-// ====
-// ====
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + Where to serve HTML site for React App - HOME PAGE
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-//Where to serve HTML site for React App - HOME PAGE
 app.get("/*", function(req, res) {
     //Check User in current session
     console.log(`Current USER = ${req.user}`);
@@ -177,10 +186,10 @@ app.get("/*", function(req, res) {
     res.sendFile(path.resolve(__dirname, 'index.html'))
 });
 
-// ====
-// ====
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + Passport serialization and deserialization for persistent login sessions
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-//Passport serialization and deserialization for persistent login sessions
 passport.serializeUser(function(userID, done) {
     console.log('SERIALIZING USER');
     done(null, userID);
@@ -193,8 +202,9 @@ passport.deserializeUser(function(userID, done) {
     });
 });
 
-// ====
-// ====
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + tell app to LISTEN
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
 app.listen(port, function(error) {
     if (error) {

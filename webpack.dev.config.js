@@ -2,23 +2,32 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
+    //SOURCE MAP for dev only - not usable in prod. Points errors to correct place in file structure from dev tools in chrome for examplay
     devtool: 'cheap-module-eval-source-map',
     devServer: {
         historyApiFallback: true,
     },
     entry: [
+        //'webpack/hot/dev-server',
+        //USE webpacks hot middleware as a server entry point for hot-loading modules (no need to refresh entire page just chunks... FAST and COOOOL!)
         'webpack-hot-middleware/client',
-        './index.js'
+        //Obvious file entry point
+        `./index.js`
     ],
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        //RELATIVE output path of where you want webpack bundles to go e.g "/" + config.output.publicPath (below) = http://localhost:8000/assets/
+        path: '/',
+        //NAME of outputted webpack BUNDLE ... get it?
         filename: 'bundle.js',
-        publicPath: "/assets/"
+        //where bundle will be served... corresponds to script tag in html...
+        publicPath: "http://localhost:3007/assets/"
     },
     //watch: true,
     plugins: [
+        //Enables HMR
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        //Define global vars during compile for logging etc
         new webpack.DefinePlugin({
           PRODUCTION: JSON.stringify(false)
         })

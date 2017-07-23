@@ -10,12 +10,15 @@ module.exports = {
   },
   entry: "./index.js",
   output: {
+    //WHERE TO OUTPUT FILES FROM WEBPACK - /static/
     path: path.resolve(__dirname, 'static'),
     filename: "bundle.js",
+    //WHERE PUBLIC ASSETS ARE SERVED FROM -- RELATIVE TO "PATH" ABOVE ... E.G PUBLICPATH NOW = /static/assets/.....
     publicPath: "/assets/"
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    //MINIFY AND MAKE UGLY... LIKE ME >> T_T >> x_x
     new UglifyJSPlugin({
         minimize: true,
         compress: {
@@ -23,6 +26,7 @@ module.exports = {
         },
         sourceMap: true,
     }),
+    //SET ENV
     new webpack.DefinePlugin({
       'process.env.ENV': JSON.stringify('production')
     })
