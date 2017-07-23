@@ -20,7 +20,7 @@ module.exports = {
         //NAME of outputted webpack BUNDLE ... get it?
         filename: 'bundle.js',
         //where bundle will be served... corresponds to script tag in html...
-        publicPath: "http://localhost:3007/assets/"
+        publicPath: "/"
     },
     //watch: true,
     plugins: [

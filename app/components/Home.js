@@ -38,7 +38,7 @@ const Home = ({users}) => {
             <BackgroundPic styleBG={bgImgStyle} image={bgPic} />
             <div className="container-fluid width100">
                 <div className="flex rowWrap aCenter jCenter textCenter">
-                    <div className="flex xsP12 smP6 aCenter jCenter" style={{maxWidth: 500}}>
+                    <div className="flex xsP12 smP6 aCenter jCenter" style={{height: 500, width: 500}}>
                         <Logo logo={logo}/>
                     </div>
                     <div id="homeLinks" className="flex rowWrap aCenter jCenter xsP12 smP6">

@@ -16,7 +16,7 @@ class CategorySelector extends Component {
       *
       *
       */
-    
+
     componentWillUnmount() {
         //Reset Chosen categories
         this.props.resetCategories();
@@ -46,7 +46,7 @@ class CategorySelector extends Component {
         );
 
         return (
-          <div id="catSelectaWrapper" className={"flex xsP3 smP3 mdP3 colNoWrap height100 overflowAuto" + css(styles.scrollBarThinBlack)}>
+          <div id="catSelectaWrapper" className={`flex xsP3 smP3 mdP3 colNoWrap height100 ${css(styles.scrollBarThinBlack)}`}>
             {/*Whatever Category the user clicks on in calSelecta, add to the div below*/}
             <div className="flex rowWrap aCenter jCenter padding15 width100" id="selectedCats" style={{minHeight: 97, maxHeight: 97}}>
               {catChooserToRender()}
@@ -56,7 +56,7 @@ class CategorySelector extends Component {
               {categoriesByCity.map( (cat, index) => {
                 return (
                   <div
-                  className={null} key={index} className={css(styles.catDivs) + " flex colNoWrap jCenter aCenter height100 smP6 mdP3 lgP1 margin15"}
+                  className={null} key={index} className={`${css(styles.catDivs)} flex colNoWrap jCenter aCenter height100 xsP12 smP6 mdP3 lgP1 margin15`}
                   style={{borderRadius: 50}}
                   onClick={ () => {handleCategoryChoice(cat)}}
                   >

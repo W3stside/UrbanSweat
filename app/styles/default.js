@@ -35,6 +35,7 @@ const preStyles = {
         overflowX: 'hidden',
     },
     '#root': {
+        //height: '100%',
         minHeight: '100%'
     },
     'a': {
@@ -71,7 +72,7 @@ const preStyles = {
     '*': {
         '::-webkit-scrollbar': {
             width: 6,
-            backgroundColor: colors.urb__teal,
+            backgroundColor: '#fff',
         },
         '::-webkit-scrollbar-thumb': {
             backgroundColor: colors.urb__black,
@@ -177,6 +178,7 @@ const preStyles = {
 
   //EFFECTS
   '.boxShadow': { boxShadow: '0px 0px 8px 0.8px rgba(0,0,0,0.03)'},
+  '.boxShadow2': { boxShadow: '0px 5px 18px 5px rgba(0,0,0,0.1)'},
   '.textShadow': {textShadow: '0px 0px 10px rgba(0, 0, 0, 0.35)'},
   '.textShadowRight': {textShadow: '3px 3px 10px rgba(0, 0, 0, 0.28)'},
 

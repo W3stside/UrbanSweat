@@ -26,7 +26,7 @@ const Actions = {
 // === COMPONENTS
 import BackgroundPic from './BackgroundPic'
 import CategorySelector from './CategorySelector'
-import GymContent from './GymLowerHalfContent'
+import GymContent from './GymContent'
 import HamburgerMenu from './HamburgerMenu'
 import Logo from './Logo'
 import LoadingGif from './LoadingGif'
@@ -48,7 +48,7 @@ class GymViewerPage extends React.Component {
             this.props.fetchCityById(this.props.routeParams.id)
         })
         .catch((err) => {
-            console.log(err)
+            throw err;
         })
 }
 
@@ -72,9 +72,9 @@ componentWillUnmount() {
           <div className="flex rowNoWrap aStart jCenter mdP2 fullWidthHeight overflowHidden" style={{position: 'relative'}}>
                 <HamburgerMenu />
                 <BackgroundPic image={this.props.currentCity.bgImageURL}/>
-                <div className="flex rowNoWrap jCenter aCenter height100">
-                  <Logo styleLogo={{maxWidth: '30vh'}}/>
-                  <h1 style={{font: 'bold italic 320% "Helvetica"', color: 'white', marginLeft: -40}}> x {this.props.routeParams.id.toUpperCase()} </h1>
+                <div className="flex rowWrap jCenter aCenter height100">
+                  <Logo customClassName={"xsP12 mdP2"} styleLogo={{maxWidth: '30vh'}}/>
+                  <h1 className="flex aCenter jCenter xsP12" style={{font: 'bold italic 320% "Helvetica"', color: 'white'}}>{this.props.routeParams.id.toUpperCase()} </h1>
                 </div>
           </div >
 
@@ -90,12 +90,14 @@ componentWillUnmount() {
             />
 
           {/*Bottom 100% section*/}
-          <GymContent
-            currentFilteredDataArray={currentFilteredDataArray}
-            catDataInput={catDataInput}
-            handleCategoryChoice={handleCategoryChoice}
-            gymInstancesByCity={gymInstancesByCity}
-            />
+          <div className="flex rowWrap aCenter jCenter boxShadow2 margin25 padding25" id="gymBottomContent">
+              <GymContent
+                currentFilteredDataArray={currentFilteredDataArray}
+                catDataInput={catDataInput}
+                handleCategoryChoice={handleCategoryChoice}
+                gymInstancesByCity={gymInstancesByCity}
+                />
+            </div>
       </div> //end main div
     );
   }
