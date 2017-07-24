@@ -66,8 +66,8 @@ class Register extends Component {
         }
 
         return (
-            <div className="flex colWrap aCenter jCenter" style={{minHeight: '100vh'}}>
-                <div className="padding25 margin25TB boxShadow" style={{width: '60%'}}>
+            <div className="flex colWrap aCenter jCenter" style={{minHeight: '100vh', width: '45%'}}>
+                <div className="fullWidthHeight padding25 margin25TB boxShadow">
                     <form id="authorization" method="post" onSubmit={this.handleFormSubmit.bind(this)}>
 
                         {/*ERROR? MESSAGE DISPLAYED HERE FROM SERVER*/}

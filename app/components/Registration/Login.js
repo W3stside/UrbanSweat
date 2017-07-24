@@ -49,8 +49,8 @@ class Login extends Component {
         }
 
         return (
-            <div className="flex colWrap aCenter jCenter fullWindowWidthHeight">
-                <div className="marginAuto padding25 boxShadow" style={{width: '65%'}}>
+            <div className="flex colWrap aCenter jCenter" style={{minHeight: '100vh', width: '65%'}}>
+                <div className="fullWidthHeight marginAuto padding25 boxShadow">
                     <form id="authorization" method="post" onSubmit={this.handleFormSubmit.bind(this)}>
                         {/*Username*/}
                         <div className="flex colWrap aStart jCenter padding15">
