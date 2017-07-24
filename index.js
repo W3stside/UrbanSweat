@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+
+//ROUTER 3.0
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+//babel-polyfill
 import "babel-polyfill";
 //Redux imports
 import { compose, applyMiddleware, createStore } from 'redux';

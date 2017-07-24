@@ -46,6 +46,19 @@ class Register extends Component {
             return false;
         }
 
+        const warningByField = (field, amt) => {
+            if(users.userInfo[field] === null) return null;
+            if(users.userInfo[field].length >= amt) return <strong className={ `${css(styles.green)} padding5` }>Looks good</strong>;
+            if(users.userInfo[field] !== null && users.userInfo[field].length < amt) return <strong className={ `${css(styles.red)} padding5` }>Must be longer than {amt} character(s)</strong>;
+        }
+
+        //Email validator
+        const validateEmail = (email) => {
+            var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            //.test() searches for specified regexp ... returns boolean
+            return re.test(email)
+        };
+
         //Password match warning
         const passwordWarning = () => {
             if(users.userInfo.reEnter_password.match && users.userInfo.reEnter_password.password && users.userInfo.reEnter_password.password.length > 0) return true;
@@ -53,13 +66,13 @@ class Register extends Component {
         }
 
         return (
-            <div className="flex colWrap aCenter jCenter fullWindowWidthHeight">
-                <div className="marginAuto padding25 boxShadow" style={{width: '60%'}}>
+            <div className="flex colWrap aCenter jCenter" style={{minHeight: '100vh'}}>
+                <div className="padding25 margin25TB boxShadow" style={{width: '60%'}}>
                     <form id="authorization" method="post" onSubmit={this.handleFormSubmit.bind(this)}>
 
                         {/*ERROR? MESSAGE DISPLAYED HERE FROM SERVER*/}
                         <label className={css(styles.red)}>{users.error && users.error.response && users.error.response.status === 401 ? users.error.response.data : null}</label>
-
+                        <large>Registration</large>
                         {/*First Name*/}
                         <div className="flex colWrap aStart jCenter padding15">
                             <label htmlFor="first_name" >First Name</label>
@@ -68,8 +81,8 @@ class Register extends Component {
                                 type="first_name"
                                 placeholder="Please enter your first name"
                             />
-                            <small className={css(inputWarning('first_name') ? styles.green : styles.red) + " padding5 margin5TB"}>
-                                <strong>{inputWarning('first_name') ? "A-OK!" : "First name must be at least 1 letter"}</strong>
+                            <small className="padding5 margin5TB">
+                                {warningByField('first_name', 1)}
                             </small>
                         </div>
                         <hr/>
@@ -81,8 +94,8 @@ class Register extends Component {
                                 type="last_name"
                                 placeholder="Please enter your last name"
                             />
-                            <small className={css(inputWarning('last_name') ? styles.green : styles.red) + " padding5 margin5TB"}>
-                                <strong>{inputWarning('last_name') ? "A-OK!" : "Last name must be at least 1 letter"}</strong>
+                            <small className="padding5 margin5TB">
+                                {warningByField('last_name', 1)}
                             </small>
                         </div>
                         <hr/>
@@ -94,6 +107,9 @@ class Register extends Component {
                                 type="email"
                                 placeholder="Enter email"
                             />
+                            <small className="padding5 margin5TB">
+                                {validateEmail(users.userInfo.email) ? <strong className={`${css(styles.green)} padding5`}>Looks good</strong> : <strong className={`${css(styles.red)} padding5`}>Please enter a valid email</strong>}
+                            </small>
                         </div>
                         <hr/>
                         {/*Username*/}
@@ -104,8 +120,8 @@ class Register extends Component {
                                 type="username"
                                 placeholder="Username"
                             />
-                            <small className={css(inputWarning('username') ? styles.green : styles.red) + " padding5 margin5TB"}>
-                                <strong>{inputWarning('username') ? "A-OK!" : "Username must be at least 1 character"}</strong>
+                            <small className="padding5 margin5TB">
+                                {warningByField('username', 1)}
                             </small>
                         </div>
                         <hr/>
@@ -127,8 +143,8 @@ class Register extends Component {
                                 type="password"
                                 placeholder="Re-Enter Password"
                             />
-                            <small className={css(passwordWarning() ? styles.green : styles.red) + " padding5 margin5TB"}>
-                                <strong>{passwordWarning() ? "A-OK!" : "Passwords do not match!"}</strong>
+                            <small className="padding5 margin5TB">
+                                {passwordWarning() ? null : <strong className={`${css(styles.red)} padding5`}>Passwords do not match</strong>}
                             </small>
                         </div>
                         <hr/>
@@ -157,9 +173,11 @@ function mapActionCreatorsToProps (dispatch) {
 const styles = StyleSheet.create({
     green: {
         backgroundColor: 'rgba(10,190,0,0.5)',
+        display: 'inline-block'
     },
     red: {
         backgroundColor: 'rgba(200,10,0,0.5)',
+        display: 'inline-block'
     }
 })
 export default connect(mapStateToProps, mapActionCreatorsToProps)(Register)

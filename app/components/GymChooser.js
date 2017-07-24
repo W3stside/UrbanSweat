@@ -3,7 +3,7 @@ import {StyleSheet,css} from 'aphrodite';
 
 //Components
 import BigHeader from './BigHeader'
-import FlexColumnContainer from './FlexColumnContainer'
+import FlexColumnContainer from './Containers/FlexColumnContainer'
 import GymNameSquares from './GymNameSquares'
 import HamburgerMenu from './HamburgerMenu'
 import Logo from './Logo'

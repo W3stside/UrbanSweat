@@ -12,11 +12,13 @@ var userSchema = new Schema({
         type: String,
         required: true,
 
-        min: 1
+        min: [1, 'First name must be at least 1 letter'],
     },
     last_name: {
         type: String,
         required: true,
+
+        min: [1, 'Last name must be at least 1 letter'],
     },
     email: {
         type: String,
@@ -33,11 +35,16 @@ var userSchema = new Schema({
     },
     username: {
         type: String,
-        required: true
+        required: true,
+
+        min: [1, 'Username must be at least 1 character'],
+        trim: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
+
+        min: [8, 'Password must be at least 8 characters']
     },
 });
 

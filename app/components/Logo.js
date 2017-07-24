@@ -2,11 +2,6 @@ import React, { Component } from 'react'
 
 export default class Logo extends React.Component {
 
-  static propTypes () {
-    logo: React.PropTypes.string
-    styleLogo: React.PropTypes.string
-  }
-
   render () {
     return (
       <div

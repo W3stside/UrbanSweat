@@ -1,4 +1,6 @@
 import React from 'react'
+import {StyleSheet,css} from 'aphrodite';
+
 //COMPONENTS
 import BackgroundPic from './BackgroundPic'
 import Links from './Links'
@@ -17,6 +19,14 @@ const Home = ({users}) => {
     var bgImgStyle = {minWidth: '100%', minHeight: '100%', position: 'absolute', bottom: 0};
     var bgPic = require("../assets/grey-berlin-arch.jpg");
     var logo = require("../assets/logo2.png");
+    const styles = StyleSheet.create({
+        homeBGPic: {
+          position: 'absolute', left: 0, top: 0,
+          minWidth: '100%', minHeight: '100%',
+          overflow: 'hidden',
+          zIndex: '-99999'
+        }
+    })
 
     const dynamicHomeLinks =
         //Check state if user logged in? If so then do not render login and join links
@@ -35,7 +45,7 @@ const Home = ({users}) => {
 
     return (
         <div className="flex aCenter jCenter fullWidthHeight" style={{minHeight: '100vh'}}>
-            <BackgroundPic styleBG={bgImgStyle} image={bgPic} />
+            <BackgroundPic customAphrodite={styles.homeBGPic} styleBG={bgImgStyle} image={bgPic} />
             <div className="container-fluid width100">
                 <div className="flex rowWrap aCenter jCenter textCenter">
                     <div className="flex xsP12 smP6 aCenter jCenter" style={{height: 500, width: 500}}>

@@ -37,7 +37,8 @@ class Login extends Component {
 
         //Input field warnings
         const inputWarning = (field) => {
-            if(users.userInfo[field] && users.userInfo[field].length > 0) return true;
+            if(users.userInfo[field] && users.userInfo[field].length > 0 ) return true;
+
             return false;
         }
 
@@ -61,7 +62,7 @@ class Login extends Component {
                                 style={{height: 22, padding: 5}}
                             />
                             <small className="padding5 margin5TB">
-                                <strong className={css(inputWarning('username') ? styles.green : styles.red)}>{inputWarning('username') ? "A-OK!" : "Username must be at least 1 character"}</strong>
+                                <strong className={css(inputWarning('username') ? null : styles.red)}>{inputWarning('username') ? "" : "Username must be at least 1 character"}</strong>
                                 <br/>
                                 <strong className={css(styles.red)}>{users.alertMessage ? users.alertMessage : null}</strong>
                             </small>

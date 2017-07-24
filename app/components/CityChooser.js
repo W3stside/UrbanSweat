@@ -17,7 +17,7 @@ const Actions = {
 import {Link} from 'react-router';
 //COMPONENTS
 import CitySearchBarContent from './CitySearchBarContent';
-import FlexColumnContainer from './FlexColumnContainer';
+//import FlexColumnContainer from './Containers/FlexColumnContainer';
 import HamburgerMenu from './HamburgerMenu';
 import Logo from './Logo';
 import LoadingGif from './LoadingGif';
@@ -41,7 +41,7 @@ class CityChooser extends Component {
     if (fetchingCities) return <LoadingGif />
 
     return (
-      <FlexColumnContainer>
+      <div className="flex colNoWrap fullWindowWidthHeight">
 
         <div className="textCenter width100">
           <div className="textCenter width100">
@@ -60,7 +60,7 @@ class CityChooser extends Component {
         {/*Make sure NOT render CitySearchBar if aSync is nay finito or... an array for that matter.*/}
         {cities.length > 1 ? <CitySearchBarContent dbData={cities}/> : null}
 
-      </FlexColumnContainer>
+      </div>
     );
   }
 }

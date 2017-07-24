@@ -240,7 +240,6 @@ const styles = StyleSheet.create({
         /*minHeight: 320, maxHeight: 320,*/ width: '100%',
         position: 'relative',
         overflow: 'hidden',
-        padding: '10% 0',
         ':hover': {
             backgroundColor: 'rgba(0,0,0,0.4)',
             transition: 'background-color 0.5s ease-in-out'

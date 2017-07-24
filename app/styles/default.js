@@ -35,7 +35,7 @@ const preStyles = {
         overflowX: 'hidden',
     },
     '#root': {
-        //height: '100%',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
         minHeight: '100%'
     },
     'a': {
@@ -52,7 +52,7 @@ const preStyles = {
         transition: 'all 0.24s ease-in-out'
     },
     'large': {
-        fontSize: '400%',
+        fontSize: 'calc(2vw + 2vh + 1vmin)',
         fontWeight: 100,
         letterSpacing: -5,
 

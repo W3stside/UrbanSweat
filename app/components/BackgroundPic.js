@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import {StyleSheet,css} from 'aphrodite';
 
-const BackgroundPic = ({image, styleBG}) => (
-  <div className={css(styles.bgPicContainer)}>
+const BackgroundPic = ({image, styleBG, customAphrodite}) => (
+  /*<div className={css(styles.bgPicContainer)}>*/
+  <div className={css(customAphrodite)}>
     <img src={image} className={css(styles.bgPic)} style={styleBG}/>
   </div>
 );
-
-BackgroundPic.propType = {
-  image: React.PropTypes.string.isrequired
-}
-BackgroundPic.defaultProps = {
-  image: require("../assets/berlin-stadion-min.jpg")
-}
 
 const styles = StyleSheet.create({
   bgPicContainer: {
@@ -26,5 +20,13 @@ const styles = StyleSheet.create({
     filter: 'brightness(80%)',
   }
 })
+
+BackgroundPic.propType = {
+  image: React.PropTypes.string.isrequired
+}
+BackgroundPic.defaultProps = {
+  image: require("../assets/berlin-stadion-min.jpg"),
+  customAphrodite: styles.bgPicContainer
+}
 
 export default BackgroundPic;

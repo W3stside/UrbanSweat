@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { StyleSheet, css } from 'aphrodite';
 //Components
 import BigHeader from './BigHeader'
-import FlexColumnContainer from './FlexColumnContainer'
+import FlexColumnContainer from './Containers/FlexColumnContainer'
 import GymSquares from './GymSquares'
 import HamburgerMenu from './HamburgerMenu'
 import Logo from './Logo'
