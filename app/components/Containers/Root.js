@@ -1,3 +1,11 @@
+/*
+TO USE only if react hot reloader is working
+ROOT.js is set as the top level to app and is passed to index.js
+index.js is where the HotLoader AppContainer will wrap to pass in hot reload
+CURRENT USE: none - bugged with Router 2
+*/
+
+
 //REACT
 import React, { Component } from 'react';
 import { render } from 'react-dom';

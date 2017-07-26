@@ -25,8 +25,8 @@ import './app/styles/default'
 import App from './app/components/containers/App';
 import CityChooser from './app/components/CityChooser';
 import EnsureLoggedInContainer from './app/components/containers/EnsureLoggedInContainer';
-import GymCatChooser from './app/components/GymCatChooser';
-import GymChooser from './app/components/GymChooser';
+//import GymCatChooser from './app/components/GymCatChooser';
+//import GymChooser from './app/components/GymChooser';
 import GymViewerPage from './app/components/GymViewerPage';
 import Home from './app/components/Home';
 import ProfileContainer from './app/components/Profile/ProfileContainer';
