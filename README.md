@@ -33,4 +33,5 @@ Urban Sweat is the way forward - Pick your city, narrow by categories or just se
     <li>Flesh out aSync functions for map</li>
     <li>Grab gMaps api key and test</li>
   </ul>
+  <li>Root.js not being used for Hot Realod ? REMOVE : keep </li>  
 </ul>
