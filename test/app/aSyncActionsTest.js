@@ -83,17 +83,31 @@ describe('POST FALSE userInfo and Login', () => {
 //////////////////////////
 // === Registration
 /////////////////////////
-
+//var User = require('../../app/models/usersModel');
 //GOOD REGISTER
-// describe('POST PASSING userInfo and REGISTER', () => {
-//     it('It should return a non-empty Object with a property of "_id" - signifying LOGIN OKAY', () => {
-//         let dummyUInfo = {
-//             username: "david_admin",
-//             password: "admin",
-//         };
-//         let promise = Promise.resolve(axios.post(`http://localhost:3007/users/login`, dummyUInfo))
-//             .then( resp => resp.data )
-//             .catch( err => { throw err });
-//         return expect(promise).to.eventually.be.an("object").and.to.have.a.property('_id')
-//     })
-// });
+describe('DELETE User before trying to add', () => {
+
+    before(function(done) {
+        axios.delete("http://localhost:3007/users/free@willy.com")
+            .then( resp => done() )
+            .catch( err => { throw err })
+    });
+
+    describe('POST PASSING userInfo and REGISTER', () => {
+        it('It should return a non-empty Object with a property of "_id" - signifying REGISTER OKAY', () => {
+            let dummyUInfo = {
+                first_name: "Willy",
+                last_name: "Free",
+                email: "free@willy.com",
+                username: "FreeWilly",
+                password: "free"
+            };
+            let promise = Promise.resolve(axios.post(`http://localhost:3007/users/register`, dummyUInfo))
+                .then( resp => {
+                    return resp.data;
+                })
+                .catch( err => { throw err });
+            return expect(promise).to.eventually.be.an("object").and.to.have.a.property('_id');
+        })
+    });
+});

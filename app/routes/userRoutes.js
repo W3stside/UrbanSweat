@@ -77,6 +77,7 @@ router.post('/register', function(req, res, next) {
                     //send RESPONSE back to confirm
                     .then(userInfo => {
                         const userID = userInfo._id;
+                        res.send(userInfo);
                         //Pass passport login method current Users _id
                         req.login(userID, function (err) {
                             //redirect to home/root
@@ -92,13 +93,14 @@ router.post('/register', function(req, res, next) {
 })
 
 //DELETE --> Find and Delete User by ID
-router.delete('/:id', function (req, res, next) {
-    User.findByIdAndRemove(req.params.id, req.body, function(resp, err) {
-        if(err) return next(err);
-        //no error?
-        console.log(resp);
-        res.json(resp);
-    })
+router.delete('/:email', function (req, res, next) {
+    User.findOneAndRemove({email: req.params.email})
+        .then( resp => {
+            return res.json(resp)
+        })
+        .catch( err => {
+            return next(err);
+        })
 })
 
 
