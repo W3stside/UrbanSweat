@@ -10,6 +10,8 @@ import {StyleSheet,css} from 'aphrodite';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as citySquaresActions from '../actions/citySquaresActions'
+//utils
+import utils from '../../utils/utils'
 //Components
 import HoverStateContainer from './HoverStateContainer'
 import Header from './Header'
@@ -72,7 +74,7 @@ class CitySquares extends Component {
                         opacity: spring(1, presets.gentle),
                         flexGrow: spring(1, presets.gentle),
                         flexShrink: spring(1, presets.gentle),
-                        flexBasis: spring(300, presets.gentle),
+                        flexBasis: spring(utils.rdmNum(200,700), presets.gentle),
                         //height: spring(337, presets.gentle),
                     }
                 }
@@ -108,7 +110,7 @@ class CitySquares extends Component {
         var hideShowList = css(styles.defaultFlex, this.props.dataInput ? styles.showList : styles.hideList);
 
         return (
-            <div id = "citySquareWrapper" className = {css(styles.defaultFlex)}>
+            <div id = "citySquareWrapper" className="flex rowWrap aCenter jCenter width100">
                 <TransitionMotion
                 defaultStyles = {this.getDefaultStyles()}
                 styles = {this.getStyles(this.props.dataInputTypeToFilter)}
@@ -122,10 +124,10 @@ class CitySquares extends Component {
                                     <div
                                     key = {key}
                                     style = {style}
-                                    className = {css(styles.csDefault, styles.hoverCSS)}>
-                                        <div style = {{width: '100%', cursor: 'pointer', minHeight: 330, maxHeight: 330}} onClick = {this.handleClick.bind(this, this.props.clickStatus, index, name.toLowerCase())}>
+                                    className = {`flex overflowHidden ${css(styles.hoverCSS)}`}>
+                                        <div style = {{width: '100%', cursor: 'pointer', minHeight: 430, maxHeight: 430}} onClick = {this.handleClick.bind(this, this.props.clickStatus, index, name.toLowerCase())}>
                                             <HoverStateContainer style = {styles.citySquareContainerStyle}>
-                                                <BackgroundPic image = {data.bgImageURL}/>
+                                                <BackgroundPic image={data.bgImageURL}/>
                                                 <Header name = {name.toUpperCase()} style = {styles.smallCityChooserHeader}/>
                                                 {this.props.renderMovingOptions ? <MovingOptions index = {index} categories = {data.categories} style = {styles.movingOptionsStyle}/> : <div/>}
                                             </HoverStateContainer>
@@ -190,15 +192,6 @@ const styles = StyleSheet.create({
     hoverCSS: {
 
     },
-    citySquareRight: {
-        display: 'flex',
-        alignSelf: 'flex-start',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        width: '0%',
-
-        transition: 'all 1.2s ease-in-out',
-    },
     citySquareLeft: {
         display: 'flex',
         flex: '1 0 33%',
@@ -252,7 +245,7 @@ const styles = StyleSheet.create({
         color: 'white',
         paddingLeft: '0',
         margin: '0',
-        fontSize: '140%',
+        fontSize: '100%',
         fontStyle: 'italic',
         lineHeight: '1'
     }

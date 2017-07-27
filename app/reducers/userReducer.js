@@ -21,7 +21,8 @@ const initialState = {
         reEnter_password: {
             password: null,
             match: true
-        }
+        },
+        profileImg: require("../assets/logo2.png")
     }
 }
 
@@ -152,15 +153,12 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userInfo: {
-                    first_name: null,
-                    last_name: null,
-                    email: null,
-                    username: null,
+                    ...state.userInfo,
                     password: null,
                     reEnter_password: {
                         password: null,
                         match: true
-                    }
+                    },
                 }
             }
 

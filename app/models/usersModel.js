@@ -46,6 +46,9 @@ var userSchema = new Schema({
 
         min: [8, 'Password must be at least 8 characters']
     },
+    profileImg: {
+        
+    }
 });
 
 //PW validator

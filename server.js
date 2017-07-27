@@ -1,6 +1,12 @@
 //SERVER Setup
 
-    //Import User model for Passport + Mongo querying based on logins/regs
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// + Plug in .ENV file for whatever that does. jk i actually know what it does
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+
+require('dotenv').config()
+
+//Import User model for Passport + Mongo querying based on logins/regs
 var User = require('./app/models/usersModel'),
     //AUTH Packages
     session = require('express-session'),
@@ -9,13 +15,6 @@ var User = require('./app/models/usersModel'),
     FacebookStrategy = require('passport-facebook').Strategy,
     MongoStore = require('connect-mongo')(session),
     bcrypt = require('bcrypt');
-
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
-// + Plug in .ENV file for whatever that does. jk i actually know what it does
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
-
-//Plug in .ENV file for whatever that does. jk i actually know what it does
-require('dotenv').config()
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 // + CONNECT to MongoDB && cache mongo uri later....

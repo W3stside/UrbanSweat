@@ -11,7 +11,6 @@ export function loginUser(userLoginData) {
         axios.post(`/login`, userLoginData)
             //#STEP 3a: Wait for response back from Express - if bueno THEN fire End User Registration and stop async load
             .then(resp => {
-                console.log(resp)
                 //if SUCCESSFUL login...
                 if (resp.data._id) {
                     dispatch({
@@ -62,7 +61,6 @@ export function addUser(userData) {
             })
             //#STEP 3b: IF ERROR, end gif and post error
             .catch(error => {
-                console.log(error)
                 dispatch({
                     type: 'ERROR_USER_REGISTRATION',
                     payload: error
