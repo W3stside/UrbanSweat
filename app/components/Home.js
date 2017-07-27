@@ -37,8 +37,8 @@ const Home = ({users}) => {
                 <Links name="CONTACT" url="/Contact" className="italic font400 fontP200 padding10"/>
             </div>)
         : ( <div className="flex xsP6 smP4 aCenter jCenter">
-                <Links name="JOIN" url="/register" className="italic font400 fontP200 padding10"/>
-                <Links name="LOGIN" url="/login" className="italic font400 fontP200 padding10"/>
+                <Links name="JOIN" url="/users/register" className="italic font400 fontP200 padding10"/>
+                <Links name="LOGIN" url="/users/login" className="italic font400 fontP200 padding10"/>
                 <Links name="ABOUT" url="/about" className="italic font400 fontP200 padding10"/>
                 <Links name="CONTACT" url="/contact" className="italic font400 fontP200 padding10"/>
             </div> );

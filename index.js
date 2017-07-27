@@ -58,8 +58,8 @@ render((
         <Route path="/" component={App}>
             {/* add the routes here */}
             <IndexRoute component={Home}/>
-            <Route path="/login" component={Login}/>
-            <Route path="/register" component={Register}/>
+            <Route path="/users/login" component={Login}/>
+            <Route path="/users/register" component={Register}/>
 
             {/*LoggedIn only routes*/}
             <Route component={EnsureLoggedInContainer}>

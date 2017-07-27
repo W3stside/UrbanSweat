@@ -171,7 +171,7 @@ app.use('/models/gyms', gyms);
 app.use('/models/gymInstance', gymInstance);
 app.use('/models/categories', categories);
 //Login, Register routes here
-app.use('/', users);
+app.use('/users', users);
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 // + Where to serve HTML site for React App - HOME PAGE

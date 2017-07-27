@@ -60,7 +60,7 @@ describe('POST TRUE userInfo and Login', () => {
             username: process.env.ADMIN_LOGIN_USERNAME,
             password: process.env.ADMIN_LOGIN_PASSWORD,
         };
-        let promise = Promise.resolve(axios.post(`http://localhost:3007/login`, dummyUInfo))
+        let promise = Promise.resolve(axios.post(`http://localhost:3007/users/login`, dummyUInfo))
             .then( resp => resp.data )
             .catch( err => { throw err });
         return expect(promise).to.eventually.be.an("object").and.to.have.a.property('_id');
@@ -73,7 +73,7 @@ describe('POST FALSE userInfo and Login', () => {
             username: "badUser",
             password: "badPass",
         };
-        let promise = Promise.resolve(axios.post(`http://localhost:3007/login`, dummyUInfo))
+        let promise = Promise.resolve(axios.post(`http://localhost:3007/users/login`, dummyUInfo))
             .then( resp => resp.data )
             .catch( err => { throw err });
         return expect(promise).to.eventually.be.an("object").and.to.have.a.property('message');
@@ -91,7 +91,7 @@ describe('POST FALSE userInfo and Login', () => {
 //             username: "david_admin",
 //             password: "admin",
 //         };
-//         let promise = Promise.resolve(axios.post(`http://localhost:3007/login`, dummyUInfo))
+//         let promise = Promise.resolve(axios.post(`http://localhost:3007/users/login`, dummyUInfo))
 //             .then( resp => resp.data )
 //             .catch( err => { throw err });
 //         return expect(promise).to.eventually.be.an("object").and.to.have.a.property('_id')

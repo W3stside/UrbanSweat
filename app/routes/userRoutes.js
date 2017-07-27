@@ -4,6 +4,7 @@ var User = require('../models/usersModel');
 
 //Password encryption/hashing
 var bcrypt = require('bcrypt');
+//MAKE IT SO SUPER SALTY!!!
 const saltRounds = 10;
 
 //import passport session management
@@ -44,7 +45,7 @@ if (process.env.NODE_ENV !== 'production') {
                 res.status(200).send(userID);
             })
         })(req, res, next);
-    });    
+    });
 }
 
 //POST --> User Registration
@@ -89,5 +90,16 @@ router.post('/register', function(req, res, next) {
             return next(err);
         })
 })
+
+//DELETE --> Find and Delete User by ID
+router.delete('/:id', function (req, res, next) {
+    User.findByIdAndRemove(req.params.id, req.body, function(resp, err) {
+        if(err) return next(err);
+        //no error?
+        console.log(resp);
+        res.json(resp);
+    })
+})
+
 
 module.exports = router;
