@@ -1,4 +1,4 @@
-// + Plug in .ENV file for whatever that does. jk i actually know what it does
+// + Plug in .ENV file for those super secrets ψ(｀∇´)ψ
 require('dotenv').config()
 
 import chai, {expect} from 'chai'
@@ -54,7 +54,7 @@ describe('GET gymInstances by SPECIFIC City', () => {
 ////////////////////////////////////////////////////////
 
 //GOOD LOGIN
-describe('POST TRUE userInfo and Login', () => {
+describe.skip('POST TRUE userInfo and Login', () => {
     it('It should return a non-empty Object with a property of "_id" - signifying LOGIN OKAY', () => {
         let dummyUInfo = {
             username: process.env.ADMIN_LOGIN_USERNAME,
@@ -67,7 +67,7 @@ describe('POST TRUE userInfo and Login', () => {
     })
 });
 //BAD LOGIN
-describe('POST FALSE userInfo and Login', () => {
+describe.skip('POST FALSE userInfo and Login', () => {
     it('It should return a non-empty Object with an ERROR MESSAGE - signifying LOGIN BAD', () => {
         let dummyUInfo = {
             username: "badUser",
@@ -85,7 +85,7 @@ describe('POST FALSE userInfo and Login', () => {
 /////////////////////////
 //var User = require('../../app/models/usersModel');
 //GOOD REGISTER
-describe('DELETE User before trying to add', () => {
+describe.skip('DELETE User before trying to add', () => {
 
     before(function(done) {
         axios.delete("http://localhost:3007/users/free@willy.com")
@@ -110,4 +110,15 @@ describe('DELETE User before trying to add', () => {
             return expect(promise).to.eventually.be.an("object").and.to.have.a.property('_id');
         })
     });
+});
+
+// == Gym async
+describe('GET all Categories by City ID', () => {
+    it('It should return a non-empty Array', () => {
+
+        let promise = Promise.resolve(axios.get(`http://localhost:3007/models/cities/loadCatsArray/paris`))
+            .then( resp => resp.data )
+            .catch( err => { throw err });
+        return expect(promise).to.eventually.be.an("array");
+    })
 });

@@ -1,5 +1,4 @@
 import axios from 'axios'
-var baseURL;
 
 export function fetchCity(id = 'all') {
     return function(dispatch) {

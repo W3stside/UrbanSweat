@@ -22,7 +22,7 @@ class EnsureLoggedInContainer extends Component {
             //fire userAction that saves current URL for redirection AFTER login
             saveRedirectURL(location.pathname)
             //Redirect user back to login ...or whatever page, really.
-            browserHistory.push('/login')
+            browserHistory.push('/users/login')
         }
     }
 

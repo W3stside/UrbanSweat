@@ -1,23 +1,44 @@
-//REACT Imports
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-//APHRODITE
 import { StyleSheet, css } from 'aphrodite';
+//REDUX
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+//import actions and create 1 actions object
+import * as cityActions from '../actions/cityActions';
+import * as AllActions from '../actions/Actions';
+import * as hamburgerMenuActions from '../actions/hamburgerMenuActions';
+const Actions = {
+  fetchCity: cityActions.fetchCity,
+  handleDataInput: AllActions.handleDataInput,
+  handleMenuClick: hamburgerMenuActions.handleMenuClick,
+}
 //ROUTER Links
 import {Link} from 'react-router';
 //COMPONENTS
 import CitySearchBarContent from './CitySearchBarContent';
+//import FlexColumnContainer from './Containers/FlexColumnContainer';
 import HamburgerMenu from './HamburgerMenu';
 import Logo from './Logo';
 import LoadingGif from './LoadingGif';
 import UIUnmounter from './Containers/UIUnmounter';
 
-const CityChooser = (props) => {
+class CityChooser extends Component {
 
-    const {cities, fetched, fetching} = props.cities;
+  componentDidMount() {
+    //ACTION load in cities from DB
+    this.props.fetchCity()
+  }
+
+  componentWillUnmount () {
+    //ACTION reset dataInput in form search bar to nothing
+    this.props.handleDataInput('');
+  }
+  render () {
+    const {cities, fetched, fetchingCities} = this.props;
 
     //show loading bar or spinner or whatever
-    if (fetching) return <LoadingGif />
+    if (fetchingCities) return <LoadingGif />
 
     return (
       <div className="flex colNoWrap fullWindowWidthHeight">
@@ -41,9 +62,26 @@ const CityChooser = (props) => {
 
       </div>
     );
+  }
+}
+
+////////////////////////////////
+//State and Action Mapping
+///////////////////////////////
+
+function mapStateToProps (state) {
+  return {
+    cities: state.cities.cities,
+    fetchingCities: state.cities.fetching,
+  }
+}
+
+function mapActionCreatorsToProps (dispatch) {
+  return bindActionCreators(Actions, dispatch);
 }
 
 const styles = StyleSheet.create({
+
   transition2s: {
     transition: 'all 2s linear',
   },
@@ -85,4 +123,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CityChooser;
+export default connect( mapStateToProps, mapActionCreatorsToProps )(CityChooser);

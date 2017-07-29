@@ -23,10 +23,8 @@ import './app/styles/default'
 
 //Components
 import App from './app/components/containers/App';
-import CityChooser from './app/components/CityChooser';
+import CityChooserContainer from './app/components/Containers/CityChooserContainer';
 import EnsureLoggedInContainer from './app/components/containers/EnsureLoggedInContainer';
-//import GymCatChooser from './app/components/GymCatChooser';
-//import GymChooser from './app/components/GymChooser';
 import GymViewerPage from './app/components/GymViewerPage';
 import Home from './app/components/Home';
 import ProfileContainer from './app/components/Profile/ProfileContainer';
@@ -64,7 +62,7 @@ render((
             {/*LoggedIn only routes*/}
             <Route component={EnsureLoggedInContainer}>
                 <Route path="/Profile" component={Profile}/>
-                <Route path="/FindYourSpot" component={CityChooser}/>
+                <Route path="/FindYourSpot" component={CityChooserContainer}/>
                 <Route path="/GymView/:id" component={GymViewerPage}/>
             </Route>
         </Route>

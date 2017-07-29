@@ -3,7 +3,7 @@ import {StyleSheet,css} from 'aphrodite';
 
 const BackgroundPic = ({image, styleBG, customAphrodite}) => (
   /*<div className={css(styles.bgPicContainer)}>*/
-  <div className={css(customAphrodite)}>
+  <div className={`flex aCenter jCenter ${css(customAphrodite)}`}>
     <img src={image} className={css(styles.bgPic)} style={styleBG}/>
   </div>
 );

@@ -15,13 +15,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 const Home = ({users}) => {
-
+    //Randomly set 0 or 1 to choose bgPic
+    let randNum = Math.round(Math.random());
+    //Props passed to BackgroundPic - style prop
     var bgImgStyle = {minWidth: '100%', minHeight: '100%', position: 'absolute', bottom: 0};
-    var bgPic = require("../assets/grey-berlin-arch.jpg");
+    var bgPic = [require("../assets/grey-berlin-arch.jpg"), "https://bit.ly/2lgvotN"];
     var logo = require("../assets/logo2.png");
     const styles = StyleSheet.create({
         homeBGPic: {
-          position: 'absolute', left: 0, top: 0,
+          position: 'absolute', left: 0, bottom: 0,
           minWidth: '100%', minHeight: '100%',
           overflow: 'hidden',
           zIndex: '-99999'
@@ -45,7 +47,7 @@ const Home = ({users}) => {
 
     return (
         <div className="flex aCenter jCenter fullWidthHeight" style={{minHeight: '100vh'}}>
-            <BackgroundPic customAphrodite={styles.homeBGPic} styleBG={bgImgStyle} image={bgPic} />
+            <BackgroundPic customAphrodite={styles.homeBGPic} styleBG={bgImgStyle} image={bgPic[randNum]} />
             <div className="container-fluid width100">
                 <div className="flex rowWrap aCenter jCenter textCenter">
                     <div className="flex xsP12 smP6 aCenter jCenter" style={{height: 500, width: 500}}>

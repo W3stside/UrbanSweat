@@ -1,7 +1,4 @@
 import axios from 'axios'
-var baseURL;
-//Set baseURL based on NODE_ENV
-process.env.NODE_ENV !== 'production' ? baseURL = 'http://localhost:3007' : 'https://urbansweat.herokuapp.com';
 
 export function fetchGym(city_id = '') {
     return function(dispatch) {
