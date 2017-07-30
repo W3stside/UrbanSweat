@@ -32,6 +32,7 @@ import Profile from './app/components/Profile/Profile';
 
 //Still testing
 import RouteTransition from './app/components/Containers/RouteTransition'
+import Map from './app/components/Map/Map'
 
 //Auth Components
 import Login from './app/components/Registration/Login';
@@ -58,6 +59,8 @@ render((
             <IndexRoute component={Home}/>
             <Route path="/users/login" component={Login}/>
             <Route path="/users/register" component={Register}/>
+
+            <Route path="/map" component={Map}/>
 
             {/*LoggedIn only routes*/}
             <Route component={EnsureLoggedInContainer}>

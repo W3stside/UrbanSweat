@@ -29,6 +29,10 @@ class CitySquares extends Component {
         this.props.handleFilteredDataAction(data);
     }
 
+    ////////////////////////////////////////////////////
+    ///////// === REACT MOTION config
+    ////////////////////////////////////////////////////
+
     // === SET default ELEM style
     getDefaultStyles() {
         //pull in cities from State Object
@@ -74,7 +78,7 @@ class CitySquares extends Component {
                         opacity: spring(1, presets.gentle),
                         flexGrow: spring(1, presets.gentle),
                         flexShrink: spring(1, presets.gentle),
-                        flexBasis: spring(utils.rdmNum(200,700), presets.gentle),
+                        flexBasis: spring(utils.rdmNum(275,700), presets.gentle),
                         //height: spring(337, presets.gentle),
                     }
                 }

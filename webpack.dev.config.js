@@ -15,7 +15,7 @@ module.exports = {
         `./index.js`
     ],
     output: {
-        //RELATIVE output path of where you want webpack bundles to go e.g "/" + config.output.publicPath (below) = http://localhost:8000/assets/
+        //RELATIVE output path of where you want webpack bundles to go e.g "/" + config.output.publicPath (below) = http://localhost:8000/
         path: '/',
         //NAME of outputted webpack BUNDLE ... get it?
         filename: 'bundle.js',
@@ -29,7 +29,10 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(),
         //Define global vars during compile for logging etc
         new webpack.DefinePlugin({
-          PRODUCTION: JSON.stringify(false)
+            'process.env': {
+                PRODUCTION: JSON.stringify(false),
+                GOOGLE_API_KEY: JSON.stringify(process.env.GOOGLE_API_KEY)
+            }
         })
     ],
     module: {

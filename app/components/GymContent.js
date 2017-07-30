@@ -69,7 +69,7 @@ const GymContent = (props) => {
         </div>
       </div>
 
-      <div id="gymDetails" className="flex smP12 mdP6 colNoWrap overflowXHidden">
+      <div id="gymDetails" className="flex smP12 colNoWrap overflowXHidden" style={{flex: '1 700px'}}>
         <GymDetails
             categoriesByCity={categoriesByCity}
             categoriesSelected={categoriesSelected}

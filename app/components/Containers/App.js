@@ -43,9 +43,15 @@ class App extends Component {
         //Handle first login
         //if(firstLogIn) browserHistory.push('/')
         //if user logs IN - redirect to last URL
-        if (isLoggingIn) browserHistory.push(redirectURL);
+        if (isLoggingIn) {
+            if (redirectURL !== "/") {
+                browserHistory.push(redirectURL);
+                return;
+            }
+            return;
+        };
         //If user logs OUT
-        if (isLoggingOut) browserHistory.push('/');
+        //if (isLoggingOut) browserHistory.push('/');
     }
 
     render() {
