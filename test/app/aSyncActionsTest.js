@@ -125,16 +125,22 @@ describe('GET all Categories by City ID', () => {
 
 // === GMaps get city long and later
 describe('QUERY Google Maps API for GEOCODING details', () => {
-    it('It should return an OBJECT', () => {
+    it('It should return STATUS: OK and geometry: [OBJECT]', () => {
         let GMAPS_ADDRESS = '10+Marienstrasse,+Mitte,+Berlin'
         let promise = Promise.resolve(axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${GMAPS_ADDRESS}&key=${process.env.GOOGLE_API_KEY}`))
             .then(resp => {
-                console.log(resp.data.results[0].geometry.location)
-                return resp.data.results[0].geometry.location
+                const finalResult = {
+                    geo: resp.data.results[0].geometry,
+                    status: resp.data.status
+                }
+
+                return finalResult;
             })
             .catch(err => {
                 throw err
             })
-        return expect(promise).to.eventually.be.an('object');
+        return ( expect(promise).to.eventually.be.an('object').and.to.have.a.property('status').to.equal('OK')
+              && expect(promise).to.eventually.be.an('object').and.to.have.a.property('geo').to.be.an('object')
+          );
     })
 })
