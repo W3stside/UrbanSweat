@@ -1,8 +1,8 @@
-# URBAN SWEAT - FIND YOUR SPOT
+# URBAN SWEAT - FIND YOUR SPOT 
 
-## WIP ReactJS project.
+*WIP React project.*
 
-Company idea: <em>find the gym/workout spot that best fits you in whatever city you're in.</em>
+#### Company idea: <em>find the gym/workout spot that best fits you in whatever city you're in.</em>
 
 Travel alot? Love to stay in shape? It sucks finding gyms in every new city you move to and it certainly isn't cool to pay full rates when staying for short stints.
 
