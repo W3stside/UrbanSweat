@@ -39,14 +39,12 @@ class App extends Component {
         const isLoggingIn = !prevProps.loggedIn && loggedIn;
         const isLoggingOut = prevProps.loggedIn && !loggedIn;
 
-        //Handle first login
-        //if(firstLogIn) browserHistory.push('/')
         //if user logs IN - redirect to last URL
         if (isLoggingIn) {
-            if (redirectURL !== "/") {
-                browserHistory.push(redirectURL);
-                return;
-            }
+            // if (redirectURL !== "/") {
+            browserHistory.push(redirectURL);
+            //     return;
+            // }
             return;
         };
         //If user logs OUT
