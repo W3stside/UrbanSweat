@@ -38,7 +38,14 @@ import Map from './app/components/Map/Map'
 import Login from './app/components/Registration/Login';
 import Register from './app/components/Registration/Register';
 
-const middleware = applyMiddleware( thunk, createLogger() );
+var middleware;
+
+if (process.env.NODE_ENV === 'production') {
+    middleware = applyMiddleware( thunk );
+} else {
+    middleware = applyMiddleware( thunk, createLogger() );
+}
+
 const store = createStore( reducer, undefined, compose(middleware, autoRehydrate()) );
 
 //Start persistence
