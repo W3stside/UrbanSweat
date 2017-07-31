@@ -35,10 +35,9 @@ const enhance =
               //ACTION reset dataInput in form search bar to nothing
               this.props.Actions.handleDataInput('');
             }
-        }),
-        pure
+        })
     );
 
-const CityChooserContainer = enhance(CityChooser);    
+const CityChooserContainer = enhance(CityChooser);
 
 export default CityChooserContainer;

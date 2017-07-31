@@ -7,7 +7,6 @@ import React, {Component} from 'react'
 // === REDUX
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as userActions from '../../actions/userActions'
 //Redux-Persist Initial State setter from LocalStorage
 import {getStoredState} from 'redux-persist'
 
@@ -24,7 +23,7 @@ class App extends Component {
         getStoredState( {}, (err, state) => {
             if(err) throw err;
 
-            if(state.loggedIn) {
+            if(state.users.loggedIn) {
                 dispatch({
                     type: 'END_USER_LOGIN'
                 })
@@ -51,11 +50,11 @@ class App extends Component {
             return;
         };
         //If user logs OUT
-        //if (isLoggingOut) browserHistory.push('/');
+        if (isLoggingOut) browserHistory.push('/');
     }
 
     render() {
-        return this.props.children;
+            return this.props.children;
     }
 }
 
@@ -66,8 +65,4 @@ function mapStateToProps(state) {
     }
 }
 
-function mapActionCreatorsToProps(dispatch) {
-    return bindActionCreators(userActions, dispatch);
-}
-
-export default connect(mapStateToProps, mapActionCreatorsToProps)(App);
+export default connect(mapStateToProps)(App);

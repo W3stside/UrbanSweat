@@ -39,7 +39,7 @@ const preStyles = {
         minHeight: '100%'
     },
     'a': {
-        color: 'black',
+        color: colors.urb__black,
         textDecoration: 'none',
         ':hover': {
             color: colors.urb__teal,
@@ -58,6 +58,20 @@ const preStyles = {
 
         textShadow: '3px 3px 10px rgba(0, 0, 0, 0.28)',
         textTransform: 'uppercase'
+    },
+    'button': {
+        backgroundColor: colors.urb__black, color: colors.urb__fontColor,
+        letterSpacing: -1.5,
+
+        cursor: 'pointer',
+
+        border: 0, margin: 5, padding: 15,
+        ':hover': {
+            boxShadow: '0px 5px 18px 5px rgba(0,0,0,0.1)'
+        },
+        ':first-child': {
+            marginLeft: 15
+        }
     },
     //Login and Reg form Styling
     'form#authorization > button, input, label, small': {

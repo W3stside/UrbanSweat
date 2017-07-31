@@ -6,18 +6,21 @@ import { bindActionCreators } from 'redux';
 //import actions and create 1 actions object
 //import * as cityActions from '../actions/cityActions';
 
-function CallDatabaseContainer(WrappedComponent, actionCreator) {
-    return class extends Component {
+const fetchFromDB = request => WrappedComponent =>
+    class extends Component {
 
         componentDidMount() {
-            actionCreator(action);
+            //Will log this.props
+            request(this.props);
         }
 
         render() {
-            console.log(actionCreator)
             return <WrappedComponent {...props}/>
         }
     }
-}
 
-export default CallDatabaseContainer;
+const enhancedFetcher = dbFetchContainer( (props) => { console.log(props) } )
+
+const dbFetchContainer = enhancedFetcher(Component)
+
+export default dbFetchContainer;    

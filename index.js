@@ -25,7 +25,7 @@ import './app/styles/default'
 import App from './app/components/containers/App';
 import CityChooserContainer from './app/components/Containers/CityChooserContainer';
 import EnsureLoggedInContainer from './app/components/containers/EnsureLoggedInContainer';
-import GymViewerPage from './app/components/GymViewerPage';
+import GymViewContainer from './app/components/Containers/GymViewContainer';
 import Home from './app/components/Home';
 import ProfileContainer from './app/components/Profile/ProfileContainer';
 import Profile from './app/components/Profile/Profile';
@@ -66,7 +66,7 @@ render((
             <Route component={EnsureLoggedInContainer}>
                 <Route path="/Profile" component={Profile}/>
                 <Route path="/FindYourSpot" component={CityChooserContainer}/>
-                <Route path="/GymView/:id" component={GymViewerPage}/>
+                <Route path="/GymView/:id" component={GymViewContainer}/>
             </Route>
         </Route>
     </Router>
