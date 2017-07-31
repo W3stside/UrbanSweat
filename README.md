@@ -25,10 +25,16 @@ Urban Sweat is the way forward - Pick your city, narrow by categories or just se
 
 + ~~Switch Promise chains for db calls to Promise.all~~
 + Consider converting all asyncActions to direct Promise returns instead of Promise.resolve(...)
-+ Design Profile page and start layout code H5 In Progress
-+ Design Map page for locating gyms by map H5 In Progress 
++ Design Profile page and start layout code
+  + Build out Presentational Components
+  + Build out Smart Components / HoC
+  + Wire it up
++ Design Map page for locating gyms by map
   + Flesh out aSync functions for map
   + ~~Grab gMaps api key and test~~
+  + ~~Build out Presentational Components~~
+  + Build out Smart Components / HoC
+  + Wire it up
   
 + Root.js not being used for Hot Reload ? REMOVE : keep
 + Refactor "HoverStateContainer" into HoC or just functional component
