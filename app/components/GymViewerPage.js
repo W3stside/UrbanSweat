@@ -30,7 +30,7 @@ const GymViewerPage = (
         routeParams,
         updateFilteredArrByCat,
         updateGymInstanceByCityByCat
-    }, props) => {
+    }) => {
 
     //ASync conditional - if currently fetching data, render spinner
     if (fetchingCategories || fetchingCities) {
