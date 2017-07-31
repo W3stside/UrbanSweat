@@ -25,13 +25,13 @@ Urban Sweat is the way forward - Pick your city, narrow by categories or just se
 
 <h3> TODO </h3>
 <ul>
-<li><p>Switch Promise chains for db calls to Promise.all <h5><-- DONE</h5></p></li>
+<li>Switch Promise chains for db calls to Promise.all <-- DONE</li>
 <li>Consider converting all asyncActions to direct Promise returns instead of Promise.resolve(...)</li>
-<li>Design Profile page and start layout code</li><h5><-- In Progress</h5>
-<li>Design Map page for locating gyms by map</li><h5><-- In Progress</h5>
+<li>Design Profile page and start layout code <-- In Progress</li>
+<li>Design Map page for locating gyms by map <-- In Progress</li>
   <ul>
     <li>Flesh out aSync functions for map</li>
-    <li>Grab gMaps api key and test</li><h5><-- DONE</h5>
+    <li>Grab gMaps api key and test <-- DONE</li>
   </ul>
   <li>Root.js not being used for Hot Realod ? REMOVE : keep </li>  
   <li>Refactor "HoverStateContainer" into HoC or just functional component</li>  
