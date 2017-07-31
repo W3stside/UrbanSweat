@@ -25,7 +25,7 @@ Urban Sweat is the way forward - Pick your city, narrow by categories or just se
 
 <h3> TODO </h3>
 <ul>
-<li>Switch Promise chains for db calls to Promise.all <h3><-- DONE</h3></li>
+<li><span>Switch Promise chains for db calls to Promise.all <h3><-- DONE</h3></span></li>
 <li>Consider converting all asyncActions to direct Promise returns instead of Promise.resolve(...)</li>
 <li>Design Profile page and start layout code</li><h3><-- In Progress</h3>
 <li>Design Map page for locating gyms by map</li><h3><-- In Progress</h3>
