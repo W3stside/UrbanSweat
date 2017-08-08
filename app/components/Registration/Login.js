@@ -54,6 +54,14 @@ class Login extends Component {
                     <form id="authorization" method="post" onSubmit={this.handleFormSubmit.bind(this)}>
                         {/*Username*/}
                         <div className="flex colWrap aStart jCenter padding15">
+                            <small className="padding5 margin5TB">
+                                <strong className={css(styles.green)}>Please use
+                                    <ul>
+                                        <ol>Username: test</ol>
+                                        <ol>Password: test</ol>
+                                    </ul>
+                                </strong>
+                            </small>
                             <label htmlFor="username"><large>Username</large></label>
                             <input
                                 onChange={ (input) => {addUsername(input.target.value)}}

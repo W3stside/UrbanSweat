@@ -20,26 +20,26 @@ export default class HoverStateContainer extends Component {
   }
 
   _handleMouseEnter() {
-    this.setState (
-      {
-        hoverState: true
-      }
-    );
+    // this.setState (
+    //   {
+    //     hoverState: true
+    //   }
+    // );
   }
 
   _handleMouseLeave () {
-    this.setState (
-      {
-        hoverState: false
-      }
-    );
+    // this.setState (
+    //   {
+    //     hoverState: false
+    //   }
+    // );
   }
 
   render() {
 
     var childrenWithProps = React.Children.map( this.props.children ,
       ( child ) => React.cloneElement( child , {
-        hoverState: this.state.hoverState
+        // hoverState: this.state.hoverState
       })
     );
 

@@ -18,9 +18,12 @@ const Home = ({users}) => {
     //Randomly set 0 or 1 to choose bgPic
     let randNum = Math.round(Math.random());
     //Props passed to BackgroundPic - style prop
-    var bgImgStyle = {minWidth: '100%', minHeight: '100%', position: 'absolute', bottom: 0};
-    var bgPic = [require("../assets/grey-berlin-arch.jpg"), "https://bit.ly/2lgvotN"];
-    var logo = require("../assets/logo2.png");
+    var bgImgStyle = {minWidth: '100%', minHeight: '100%', position: 'absolute', bottom: 0},
+        homeImg1 = require("../assets/grey-berlin-arch.jpg"),
+        homeImg2 = require("../assets/urban-home-teal.jpg"),
+        //Create array of both Home Imgs to choose from
+        bgPic = [homeImg1, homeImg2],
+        logo = require("../assets/logo2.png");
     const styles = StyleSheet.create({
         homeBGPic: {
           position: 'absolute', left: 0, bottom: 0,

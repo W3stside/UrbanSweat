@@ -59,7 +59,7 @@ const preStyles = {
         textShadow: '3px 3px 10px rgba(0, 0, 0, 0.28)',
         textTransform: 'uppercase'
     },
-    'button': {
+    'button, .button': {
         backgroundColor: colors.urb__black, color: colors.urb__fontColor,
         letterSpacing: -1.5,
 
@@ -302,7 +302,3 @@ const styles = extended.StyleSheet.create({
 });
 
 export default extended.css(styles.globals);
-
-//html: {width: 100%; height: 100%; overflow-x: hidden;
-//Body: {margin: 0 auto; min-width: 250px; width: 100%; height: 100%;}
-//#root{ width: 100%; height: 100%}

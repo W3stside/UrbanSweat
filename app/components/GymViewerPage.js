@@ -6,6 +6,7 @@ import Button from './Button'
 import CategorySelector from './CategorySelector'
 import GymContent from './GymContent'
 import HamburgerMenu from './HamburgerMenu'
+import Links from './Links'
 import Logo from './Logo'
 import LoadingGif from './LoadingGif'
 
@@ -30,13 +31,13 @@ const GymViewerPage = (
         routeParams,
         updateFilteredArrByCat,
         updateGymInstanceByCityByCat
-    }) => {
+    }, props) => {
 
     //ASync conditional - if currently fetching data, render spinner
     if (fetchingCategories || fetchingCities) {
       return <LoadingGif />
     }
-
+    console.log(props)
     //Main content
     return (
       <div className="flex colNoWrap fullWidthHeight">
@@ -47,7 +48,12 @@ const GymViewerPage = (
                 <div className="flex rowWrap jCenter aCenter height100">
                   <Logo customClassName={"xsP12 mdP2"} styleLogo={{maxWidth: '30vh'}}/>
                   <h1 className="flex aCenter jCenter xsP12" style={{font: 'bold italic 320% "Helvetica"', color: 'white'}}>{routeParams.id.toUpperCase()} </h1>
-                  <Button className="font18 transition"/> <Button className="font18 transition"/>
+                  {/*<Button className="font18 transition"/> <Button className="font18 transition"/>*/}
+                  <Links
+                        className={"button"}
+                        name={"MAP"}
+                        url={`${routeParams}/maps`}
+                        />
                 </div>
           </div >
 
