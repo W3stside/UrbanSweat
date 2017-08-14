@@ -101,9 +101,9 @@ if (process.env.NODE_ENV === 'final_production') {
 // + Start App + bring in middleware and routes
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-var app = new (require('express'))(),
+var express = require('express'),
+    app = express(),
     port = process.env.PORT || 8080,
-    express = require('express'),
     path = require('path'),
     //Express + express middleware
     logger = require('morgan'),
@@ -177,7 +177,7 @@ app.use('/users', users);
 // + Where to serve HTML site for React App - HOME PAGE
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-app.get("/*", function(req, res) {
+app.get("/*", (req, res) => {
     //Check User in current session
     console.log(`Current USER = ${req.user}`);
     console.log(`USER AUTHED? ${req.isAuthenticated()}`);
@@ -205,7 +205,7 @@ passport.deserializeUser(function(userID, done) {
 // + tell app to LISTEN
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-app.listen(port, function(error) {
+app.listen(port, error => {
     if (error) {
         console.error(error)
     } else {
