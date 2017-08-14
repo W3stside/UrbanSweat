@@ -53,6 +53,139 @@ This will fire tests from ./test and configure using test-config.js file
 
 > TDD uses `chai`, `mocha`, `enzyme`, `sinon`, `redux-mockstore`, and `nock`.
 
+``FRONTEND REDUX``
+
+### ACTIONS - sync & async 
+> sync actionCreator for text input using curried 'thunk' format
+```javascript
+/**
+ * Redux actionCreator that fires when handling text inputs (input fields, forms etc)
+ * @param  {string} type action type
+ * @param  {string} input event.target.value from input nodes//components
+ * @return {object}       object with TYPE and PAYLOAD for Reducer to handle
+*/
+export const handleTextInput = type => field => input => {
+    return {
+        type,
+        payload: {
+            input,
+            field
+        }
+    };
+};
+```
+> async actionCreator for HTTP requests
+```javascript
+/* eslint no-console: 0 */
+// axios HTTP requester
+import axios from 'axios'
+// CONSTANTS
+import * as types from './types'
+
+/**
+ * aSync is a CURRIED function
+ * @param  {object}     type OBJECT with action TYPES e.g type.start = USERS_ASYNC_WORKING from constants
+ * @param  {object}     config HTTP config
+ * @param  {function}   dispatch dispatch function for firing actions (thunk)
+*/
+export const aSync = method => (url, data) => dispatch => {
+    // Set state to aSyncWorking
+    dispatch({
+        type: types.USERS_ASYNC_WORKING
+    })
+    // HTTP verb
+    return axios({
+        method,
+        url,
+        data
+    })
+    // RESPONSE data
+    .then(res => dispatch({
+        type: types.USERS_ASYNC_DONE,
+        payload: res.data
+    }))
+    // ERROR handling
+    .catch(err => dispatch({
+        type: types.USERS_ASYNC_ERROR,
+        payload: err
+    }))
+}
+```
+### CONSTANTS
+> Used to replace string based action types to prevent accidents - creates a structured less error prone approach
+```javascript
+// /////////////
+// /// SYNC
+// ////////////
+
+// Users
+export const USERS_TEXT_INPUT      = 'USERS_TEXT_INPUT'
+
+// //////////////
+// /// ASYNC
+// /////////////
+
+// Users
+export const USERS_ASYNC_WORKING  = 'USERS_ASYNC_WORKING'
+export const USERS_ASYNC_DONE     = 'USERS_ASYNC_DONE'
+export const USERS_ASYNC_ERROR    = 'USERS_ASYNC_ERROR'
+
+```
+### REDUCERS
+> Using ES6 computed Object keys in conjunction with actionCreators that accept Object key names as an argument in curryable format (see sync actions)
+```javascript
+import * as types from '../actions/types';
+
+/**
+ * initialState passed to Reducer below
+ * @type {Object}
+ */
+const initialState = {
+    // USER DATA
+    userData: {
+        name: '',
+        id: '',
+        email: '',
+        password: '',
+    },
+    // ASYNC action states
+    aSyncWorking: false,
+    aSyncFinished: false,
+    // USER AUTH states
+    loggedIn: false,
+    registered: false,
+    fetched: false,
+    // DATA
+    users: [],
+    // ERRORS
+    errors: null
+};
+
+/**
+ * Users Reducer - handles Users slice of State object
+ * @param  {object} [state=initialState] initialState - see top
+ * @param  {object} action               returned from relevant actionCreator
+ * @return {object}                      returns a MERGED (non-mutated) new Store object with NEW STATE
+ */
+const usersReducer = (state = initialState, action) => {
+    switch(action.type) {
+        case types.USERS_TEXT_INPUT:
+            return {
+                ...state,
+                userData: {
+                    ...state.userData,
+                    [action.payload.field]: action.payload.input
+                },
+            };
+
+        default:
+            return state;
+    }
+};
+
+export default usersReducer;
+```
+
 ``TESTING``
 
 #### COMPONENTS
@@ -95,11 +228,14 @@ import * as t from '../../../app/actions/types'
  
 describe('actions', () => {
     it('USERS_TEXT_INPUT action should add Input', () => {
+        // Caching actionCreator args
         const type = t.USERS_TEXT_INPUT;
         const input = 'poop';
         const field = 'NAME';
+        
         // Custom curried Action
         const UserNameInput = actions.handleTextInput(type)(field);
+        
         const expectedAction = {
             type: 'USERS_TEXT_INPUT',
             payload: {
@@ -107,12 +243,14 @@ describe('actions', () => {
                 field: 'NAME',
             }
         };
+        
         console.log(UserNameInput(input));
         expect(actions.handleTextInput(type)(field)(input)).to.eql(expectedAction);
     });
 });
 ```
 #### ASYNC Actions w/Nock + Axios
+> use ``nock()`` like a typical HTTP client to fake HTTP calls on your API endroutes
 ```javascript
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -275,9 +413,11 @@ describe('async actions', () => {
 });
 ```
 #### REDUCERS
+> Create fake initialState object and create tests akin to using a real Reducer in the app.
+> Look at each ``it()`` block and notice how first we initiate State by passing ``undefined`` then in subsequent blocks
+test on the reducer by firing actions and writing test expectations
 ```javascript
 import {expect} from 'chai'
-
 // TEST RELATED IMPORTS
 import reducer from '../../../app/reducers/usersReducer'
 import * as types from '../../../app/actions/types'
@@ -307,13 +447,14 @@ const state = {
 // reducer( initialState, action ) => ...
 
 describe('USERS reducer', () => {
+
     it('should return the initial state', () => {
-        
         // Pass in undefined when initializing to pass in initialState
         expect( reducer(undefined, {}) ).to.eql(state)
     });
 
     it('should handle TEXT_INPUT', () => {
+        // TEXT_INPUT Test 1
         expect(
             reducer(state, {
                 type: types.USERS_TEXT_INPUT,
@@ -331,7 +472,7 @@ describe('USERS reducer', () => {
                 password: '',
             }
         })
-
+        // TEXT_INPUT Test 2 
         expect( reducer(
             // State
             {
